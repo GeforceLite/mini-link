@@ -7,7 +7,7 @@
 - JDK 17
 - SpringBoot 3.3.0
 - MySQL 8.0.16
-- Redis 
+- Redis 6.0.4
 - Redisson
 - MyBatisPlus
 - Kafka
@@ -16,6 +16,7 @@
 - Minio
 - Flink
 - ClickHouse
+- Maven 3.6.3
 - SpringCloud Alibaba
     - Nacos
     - Gateway

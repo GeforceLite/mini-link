@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: prod-env
+  namespace: mini-link-namespace
   labels:
     app: backend-label
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: backend-label

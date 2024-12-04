@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: prod-env
+  namespace: mini-link-namespace
   labels:
     app: backend-label
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 镜像仓库内网IP:9999/minilink/mini:1.0
+          image: 镜像仓库内网IP:9999/test/backend-project:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
