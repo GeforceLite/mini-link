@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MiniLinkSdkApplication {
+public class MiniLinkApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MiniLinkSdkApplication.class, args);
+        SpringApplication.run(MiniLinkApiApplication.class, args);
     }
 
 }

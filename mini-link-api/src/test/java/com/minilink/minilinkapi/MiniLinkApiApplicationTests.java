@@ -1,10 +1,10 @@
-package com.minilink.minilinksdk;
+package com.minilink.minilinkapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MiniLinkSdkApplicationTests {
+class MiniLinkApiApplicationTests {
 
     @Test
     void contextLoads() {
