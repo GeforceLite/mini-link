@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/link")
 public class ShortLinkController {
-
     @ApiOperation("生成短链接")
-    @PostMapping("/create/{longLink}")
-    public void generateShortLink(@PathVariable String longLink) {
+    @PostMapping("/createShortLink/{longLink}")
+    public void createShort(@PathVariable String longLink) {
 
     }
 
