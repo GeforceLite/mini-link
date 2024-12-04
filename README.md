@@ -2,7 +2,7 @@
 
 # 🚀技术架构
 
-## 后端
+## 服务端
 
 - JDK 17
 - SpringBoot 3.3.0
@@ -13,6 +13,9 @@
 - Kafka
 - ShardingJDBC
 - XXL-JOB
+- Minio
+- Flink
+- ClickHouse
 - SpringCloud Alibaba
     - Nacos
     - Gateway
@@ -25,19 +28,23 @@
 - HTML
 - CSS
 - JavaScript
-- Vue 3
 - TypeScript
+- Vue 3
 - ElementPlus
+- Axios
 - Node.js
 
 ## 运维
 
 - Docker
 - Kubernetes
+- Gitlab
 - Harbor
 - Jenkins
-- IngressNginx
-- SSL证书
+- Ingress-Nginx
+- Prometheus
+- Grafana
+- EFK日志
 
 # ✋加入我们
 

@@ -1,9 +1,7 @@
 package com.minilink.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: 徐志斌
@@ -14,19 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/link")
 public class ShortLinkController {
-    /**
-     * 生成短链接
-     */
-    @PostMapping("/generateShortUrl")
-    public void generateShortLink() {
+
+    @ApiOperation("生成短链接")
+    @PostMapping("/create/{longLink}")
+    public void generateShortLink(@PathVariable String longLink) {
 
     }
 
-    /**
-     * 查询长链接
-     */
-    @GetMapping("/getLongUrl")
-    public void getLongUrl() {
+    @ApiOperation("查询长链接")
+    @GetMapping("/getLongLink/{shortLink}")
+    public void getLongLink(@PathVariable String shortLink) {
+
+    }
+
+    @ApiOperation("链接跳转（短链接 ——> 原链接）")
+    @GetMapping("/route/{shortLink}")
+    public void route(@PathVariable String shortLink) {
 
     }
 }
