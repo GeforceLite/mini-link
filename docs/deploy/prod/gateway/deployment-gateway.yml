@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 镜像仓库内网IP:9999/minilink/mini:1.0
+          image: 镜像仓库内网IP:9999/minilink/mini-link-gateway:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

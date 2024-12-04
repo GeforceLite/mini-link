@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-ingress
+  name: mini-link-ingress
   namespace: mini-link-namespace
 spec:
   ingressClassName: nginx
   rules:
-    - host: minilink.com
+    - host: mini.link.com
       http:
         paths:
-          # 前端 Service
+          # 前端项目 Service
           - path: /
             pathType: Prefix
             backend:
@@ -18,7 +18,7 @@ spec:
                 port:
                   number: 80
 
-          # api服务作为开发者调用可以暴露
+          # API 服务暴露给开发者调用
           - path: /api
             pathType: Prefix
             backend:

@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: frontend-service
-  namespace: prod-env
+  namespace: mini-link-namespace
   labels:
     app: frontend-label
 spec:

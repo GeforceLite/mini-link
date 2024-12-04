@@ -1,5 +1,5 @@
 FROM openjdk:17
 MAINTAINER 徐志斌
 ADD springboot.jar /springboot.jar
-EXPOSE 8888
+EXPOSE 80
 ENTRYPOINT ["java", "-jar", "springboot.jar"]

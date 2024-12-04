@@ -1,5 +1,5 @@
 FROM openjdk:17
 MAINTAINER 徐志斌
-ADD springboot.jar /springboot.jar
+ADD mini-link-gateway.jar /mini-link-gateway.jar
 EXPOSE 8888
 ENTRYPOINT ["java", "-jar", "springboot.jar"]
