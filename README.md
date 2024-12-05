@@ -1,22 +1,25 @@
 # ✨系统介绍
 
+
 # 🚀技术架构
 
 ## 服务端
 
 - JDK 17
 - SpringBoot 3.3.0
-- MySQL 8.0.16
-- Redis 6.0.4
+- MySQL
+- Redis
 - Redisson
 - MyBatisPlus
 - Kafka
-- ShardingJDBC
-- XXL-JOB
 - Minio
+- ShardingSphere
+- XXL-JOB
+- ElasticSearch
+- HDFS
 - Flink
 - ClickHouse
-- Maven 3.6.3
+- Maven
 - SpringCloud Alibaba
     - Nacos
     - Gateway
@@ -37,6 +40,7 @@
 
 ## 运维
 
+- 阿里云ECS CentOS 7.9
 - Docker
 - Kubernetes
 - Gitlab
@@ -45,6 +49,7 @@
 - Ingress-Nginx
 - Prometheus
 - Grafana
+- Rancher
 - EFK日志
 
 # ✋加入我们

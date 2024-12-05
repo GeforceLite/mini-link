@@ -5,7 +5,7 @@ server:
 spring:
   application:
     name: mini-link-core
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: localhost:8848
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

@@ -19,7 +19,7 @@ public enum BizCodeEnum {
      * 短链分组
      */
     GROUP_REPEAT(23001, "分组名重复"),
-    GROUP_OPER_FAIL(23503, "分组名操作失败"),
+    GROUP_OPERATION_FAIL(23503, "分组名操作失败"),
     GROUP_NOT_EXIST(23404, "分组不存在"),
 
     /**
@@ -36,7 +36,7 @@ public enum BizCodeEnum {
     ACCOUNT_REPEAT(250001, "账号已经存在"),
     ACCOUNT_UNREGISTER(250002, "账号不存在"),
     ACCOUNT_PWD_ERROR(250003, "账号或密码错误"),
-    ACCOUNT_UNLOGIN(250004, "账号未登录"),
+    ACCOUNT_NO_LOGIN(250004, "账号未登录"),
 
     /**
      * 短链
@@ -67,12 +67,12 @@ public enum BizCodeEnum {
 
 
     @Getter
-    private String message;
+    private String msg;
     @Getter
     private int code;
 
-    BizCodeEnum(int code, String message) {
+    BizCodeEnum(int code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 }
