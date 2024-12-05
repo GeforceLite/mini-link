@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.后续移到前端项目.io/v1
 kind: Ingress
 metadata:
   name: mini-link-ingress
