@@ -19,6 +19,7 @@
         <module>mini-link-api</module>
         <module>mini-link-common</module>
         <module>mini-link-core</module>
+        <module>mini-link-data</module>
         <module>mini-link-gateway</module>
         <module>mini-link-user</module>
     </modules>

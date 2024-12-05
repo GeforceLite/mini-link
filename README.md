@@ -1,8 +1,8 @@
 # ✨系统介绍
 
 
-# 🚀技术架构
-
+# 🚀项目架构
+## 模块划分
 ## 服务端
 
 - JDK 17
@@ -37,10 +37,12 @@
 - ElementPlus
 - Axios
 - Node.js
+- Echarts
+- js-cookie
 
 ## 运维
 
-- 阿里云ECS CentOS 7.9
+- CentOS 7.9
 - Docker
 - Kubernetes
 - Gitlab
