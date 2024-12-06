@@ -90,6 +90,6 @@ public class MyBatisPlusGenerator {
                             .serviceImpl("/templates/serviceImpl.java")
                             .build();
                 }).execute();
-        System.out.println("代码生成器执行成功！");
+        System.out.println("=========================代码生成器执行成功！=========================");
     }
 }

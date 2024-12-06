@@ -2,6 +2,7 @@ package com.minilink.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.minilink.pojo.po.MiniLinkUser;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
