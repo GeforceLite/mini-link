@@ -1,4 +1,4 @@
-apiVersion: networking.后续移到前端项目.io/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mini-link-ingress
@@ -14,15 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: frontend-service
+                name: mini-link-frontend-service
                 port:
                   number: 80
-
-          # API 服务暴露给开发者调用
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-service
-                port:
-                  number: 8080

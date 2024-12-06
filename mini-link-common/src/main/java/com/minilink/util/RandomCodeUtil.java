@@ -1,4 +1,4 @@
-package com.minilink.util.resp;
+package com.minilink.util;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class RandomCodeUtil {
      * @return 生成内容
      */
     public static String generate(int length, int type) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder code = new StringBuilder();
         Random random = new Random();
         String charSet = "";
         switch (type) {
@@ -38,8 +38,8 @@ public class RandomCodeUtil {
                 return "Invalid type";
         }
         for (int i = 0; i < length; i++) {
-            sb.append(charSet.charAt(random.nextInt(charSet.length())));
+            code.append(charSet.charAt(random.nextInt(charSet.length())));
         }
-        return sb.toString();
+        return code.toString();
     }
 }
