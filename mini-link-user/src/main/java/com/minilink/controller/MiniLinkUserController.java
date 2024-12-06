@@ -20,6 +20,8 @@ public class MiniLinkUserController {
 
     @RequestMapping("/test")
     public String test() {
+        long startTime = System.currentTimeMillis();
+        System.out.println((System.currentTimeMillis() - startTime) / 1000 + "");
         return "SUCCESS";
     }
 }
