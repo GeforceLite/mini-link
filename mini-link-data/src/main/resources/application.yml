@@ -1,10 +1,10 @@
 server:
   port: 9001
   servlet:
-    context-path: /api/core
+    context-path: /api/data
 spring:
   application:
-    name: mini-link-core
+    name: mini-link-data
   cloud:
     nacos:
       discovery:
