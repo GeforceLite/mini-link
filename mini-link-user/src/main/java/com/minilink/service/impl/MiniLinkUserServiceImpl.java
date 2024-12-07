@@ -6,10 +6,7 @@ import com.minilink.constant.RedisConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.service.MiniLinkUserService;
-import com.minilink.util.HttpServletUtil;
-import com.minilink.util.IpUtil;
-import com.minilink.util.Md5Util;
-import com.minilink.util.RandomCodeUtil;
+import com.minilink.util.*;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,6 +34,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MiniLinkUserServiceImpl implements MiniLinkUserService {
     @Autowired
+    private EmailUtil emailUtil;
+    @Autowired
     private Producer captchaProducer;
     @Autowired
     private RedisTemplate redisTemplate;
@@ -61,17 +60,15 @@ public class MiniLinkUserServiceImpl implements MiniLinkUserService {
 
     @Override
     public void sendEmail(String email) {
-        // 邮件发送按钮 60s 防刷
         String emailCheckKey = (String) redisTemplate.opsForValue().get(RedisConstant.EMAIL_CHECK_KEY + email);
         if (!StringUtils.isBlank(emailCheckKey)) {
             throw new BizException(BizCodeEnum.OPS_REPEAT);
         }
-
         String checkKey = RedisConstant.EMAIL_CHECK_KEY + email;
         redisTemplate.opsForValue().set(checkKey, "email send check", 60, TimeUnit.SECONDS);
-
-        // 发送邮件，缓存验证码
         String code = RandomCodeUtil.generate(4, 1);
-
+        String emailKey = RedisConstant.EMAIL_CODE_KEY + email;
+        redisTemplate.opsForValue().set(emailKey, code, 3, TimeUnit.MINUTES);
+        emailUtil.sendTextMail(email, "subject", "您正在注册账号，验证码：" + code);
     }
 }

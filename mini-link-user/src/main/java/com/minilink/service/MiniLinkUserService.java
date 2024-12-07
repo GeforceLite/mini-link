@@ -1,5 +1,7 @@
 package com.minilink.service;
 
+import jakarta.mail.MessagingException;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -22,5 +24,5 @@ public interface MiniLinkUserService {
      *
      * @param email 邮箱
      */
-    void sendEmail(String email);
+    void sendEmail(String email) throws MessagingException;
 }

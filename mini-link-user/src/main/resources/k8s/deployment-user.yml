@@ -16,11 +16,11 @@ spec:
         app: mini-link-user-label
     spec:
       containers:
-        - name: backend
-          image: 镜像仓库内网IP:9999/minilink/backend-project:1.0
+        - name: mini-link-user
+          image: 镜像仓库内网IP:9999/minilink/mini-link-user:1.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 9002
           resources:
             requests:
               memory: 300Mi

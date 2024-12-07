@@ -23,3 +23,15 @@ spring:
           max-idle: 100
           max-active: 100
           max-wait: 20000
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1262254123@qq.com
+    password: ocebnufztunlbagc
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory

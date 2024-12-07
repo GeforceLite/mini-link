@@ -1,10 +1,9 @@
 package com.minilink.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.minilink.constant.RedisConstant;
 import com.minilink.service.MiniLinkUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +36,8 @@ public class AssistController {
     }
 
     @ApiOperation(value = "发送邮件")
-    @PostMapping("/email/{email}")
-    public void sendEmail(@PathVariable String email) {
+    @GetMapping("/email/{email}")
+    public void sendEmail(@PathVariable String email) throws MessagingException {
         userService.sendEmail(email);
     }
 }

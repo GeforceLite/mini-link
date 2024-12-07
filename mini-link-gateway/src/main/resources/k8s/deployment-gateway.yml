@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: mini-link-gateway-deployment
   namespace: mini-link-namespace
   labels:
-    app: backend-label
+    app: mini-link-gateway-label
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: backend-label
+      app: mini-link-gateway-label
   template:
     metadata:
       labels:
-        app: backend-label
+        app: mini-link-gateway-label
     spec:
       containers:
-        - name: backend
+        - name: mini-link-gateway
           image: 镜像仓库内网IP:9999/minilink/mini-link-gateway:1.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 9000
           resources:
             requests:
               memory: 300Mi
