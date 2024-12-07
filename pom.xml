@@ -31,6 +31,7 @@
         <mysql.version>8.0.16</mysql.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <captcha.version>1.1.0</captcha.version>
+        <springdoc.version>2.1.0</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +84,11 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>kaptcha-spring-boot-starter</artifactId>
                 <version>${captcha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

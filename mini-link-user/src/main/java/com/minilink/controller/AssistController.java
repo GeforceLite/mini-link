@@ -1,10 +1,9 @@
 package com.minilink.controller;
 
 import com.minilink.service.MiniLinkUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,20 +21,19 @@ import java.security.NoSuchAlgorithmException;
  * @author 徐志斌
  * @since 2024-12-06
  */
-@Slf4j
-@Api(tags = "账号协助")
+@Tag(name = "账号协助")
 @RestController
 public class AssistController {
     @Autowired
     private MiniLinkUserService userService;
 
-    @ApiOperation(value = "图片验证码")
+    @Operation(summary = "图片验证码")
     @GetMapping("/captcha")
     public void captcha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         userService.captcha();
     }
 
-    @ApiOperation(value = "发送邮件")
+    @Operation(summary = "发送邮件")
     @PostMapping("/email/{email}")
     public void sendEmail(@PathVariable String email) throws MessagingException {
         userService.sendEmail(email);

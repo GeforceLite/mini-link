@@ -1,6 +1,6 @@
 package com.minilink.controller;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  * @Description: AccountController
  */
-@Api(tags = "账号信息")
+@Tag(name = "账号信息")
 @RestController
 public class AccountController {
 
