@@ -5,7 +5,7 @@ import com.google.code.kaptcha.Producer;
 import com.minilink.constant.RedisConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
-import com.minilink.service.MiniLinkUserService;
+import com.minilink.service.UserAssistService;
 import com.minilink.util.*;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -32,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-public class MiniLinkUserServiceImpl implements MiniLinkUserService {
+public class UserAssistServiceImpl implements UserAssistService {
     @Autowired
     private EmailUtil emailUtil;
     @Autowired
@@ -70,5 +71,10 @@ public class MiniLinkUserServiceImpl implements MiniLinkUserService {
         String emailKey = RedisConstant.EMAIL_CODE_KEY + email;
         redisTemplate.opsForValue().set(emailKey, code, 3, TimeUnit.MINUTES);
         emailUtil.sendTextMail(email, "subject", "您正在注册账号，验证码：" + code);
+    }
+
+    @Override
+    public void uploadAvatar(MultipartFile avatarFile) {
+
     }
 }

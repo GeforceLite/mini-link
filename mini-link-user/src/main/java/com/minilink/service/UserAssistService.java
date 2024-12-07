@@ -1,6 +1,7 @@
 package com.minilink.service;
 
 import jakarta.mail.MessagingException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * @author 徐志斌
  * @since 2024-12-06
  */
-public interface MiniLinkUserService {
+public interface UserAssistService {
     /**
      * 图片验证码
      */
@@ -25,4 +26,11 @@ public interface MiniLinkUserService {
      * @param email 邮箱
      */
     void sendEmail(String email) throws MessagingException;
+
+    /**
+     * 上传头像
+     *
+     * @param avatarFile 头像文件
+     */
+    void uploadAvatar(MultipartFile avatarFile);
 }
