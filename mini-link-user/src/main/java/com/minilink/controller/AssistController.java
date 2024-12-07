@@ -36,7 +36,7 @@ public class AssistController {
     }
 
     @ApiOperation(value = "发送邮件")
-    @GetMapping("/email/{email}")
+    @PostMapping("/email/{email}")
     public void sendEmail(@PathVariable String email) throws MessagingException {
         userService.sendEmail(email);
     }
