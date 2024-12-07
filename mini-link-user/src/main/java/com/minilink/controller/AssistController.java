@@ -1,23 +1,17 @@
 package com.minilink.controller;
 
-import com.google.code.kaptcha.Producer;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.minilink.constant.RedisConstant;
-import com.minilink.util.HttpServletUtil;
-import com.minilink.util.IpUtil;
-import com.minilink.util.Md5Util;
+import com.minilink.service.MiniLinkUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -34,26 +28,17 @@ import java.security.NoSuchAlgorithmException;
 @RestController
 public class AssistController {
     @Autowired
-    private Producer captchaProducer;
+    private MiniLinkUserService userService;
 
     @ApiOperation(value = "图片验证码")
     @GetMapping("/captcha")
     public void captcha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        String captchaText = captchaProducer.createText();
-        HttpServletRequest request = HttpServletUtil.getRequest();
-        String userAgent = request.getHeader("User-Agent");
-        String ip = IpUtil.getIpAddr(request);
-        String captchaKey = RedisConstant.CAPTCHA_KEY + Md5Util.encrypt(userAgent + ip);
+        userService.captcha();
+    }
 
-        // TODO 验证码信息放入缓存
-
-        HttpServletResponse response = HttpServletUtil.getResponse();
-        BufferedImage bufferedImage = captchaProducer.createImage(captchaText);
-        try (ServletOutputStream outputStream = response.getOutputStream()) {
-            ImageIO.write(bufferedImage, "jpg", outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            log.error("IOException:{}", e.getMessage());
-        }
+    @ApiOperation(value = "发送邮件")
+    @PostMapping("/email/{email}")
+    public void sendEmail(@PathVariable String email) {
+        userService.sendEmail(email);
     }
 }

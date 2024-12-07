@@ -9,9 +9,9 @@ import java.util.Random;
  * @Description: 随机生成工具类
  */
 public class RandomCodeUtil {
-    private static final String NUMBERS = "0123456789";
-    private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final String NUMBERS_AND_LETTERS = NUMBERS + LETTERS;
+    public static final String NUM = "0123456789";
+    public static final String TEXT = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    public static final String NUM_TEXT = NUM + TEXT;
 
     /**
      * 生成随机内容
@@ -26,13 +26,13 @@ public class RandomCodeUtil {
         String charSet = "";
         switch (type) {
             case 1:
-                charSet = NUMBERS;
+                charSet = NUM;
                 break;
             case 2:
-                charSet = LETTERS;
+                charSet = TEXT;
                 break;
             case 3:
-                charSet = NUMBERS_AND_LETTERS;
+                charSet = NUM_TEXT;
                 break;
             default:
                 return "Invalid type";

@@ -1,6 +1,7 @@
 package com.minilink.exception;
 
 import com.minilink.enums.BizCodeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Data;
  * @Description: 自定义异常
  */
 @Data
+@AllArgsConstructor
 public class BizException extends RuntimeException {
     private BizCodeEnum codeEnum;
 }
