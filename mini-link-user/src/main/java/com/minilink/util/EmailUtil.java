@@ -1,12 +1,6 @@
 package com.minilink.util;
 
-/**
- * @Author 徐志斌
- * @Date: 2023/12/24 12:04
- * @Version 1.0
- * @Description: 发送邮件工具类
- */
-
+import com.minilink.config.ThreadPoolTaskConfig;
 import jakarta.annotation.Resource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
@@ -16,6 +10,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -41,6 +36,7 @@ public class EmailUtil {
      * @param subject 主题
      * @param content 内容
      */
+    @Async(ThreadPoolTaskConfig.THREAD_POOL_NAME)
     public void sendTextMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);

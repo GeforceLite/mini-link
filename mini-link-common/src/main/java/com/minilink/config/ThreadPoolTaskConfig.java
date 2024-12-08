@@ -14,7 +14,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Configuration
 public class ThreadPoolTaskConfig {
-    @Bean("threadPoolTaskExecutor")
+    public static final String THREAD_POOL_NAME = "threadPoolTaskExecutor";
+
+    @Bean(THREAD_POOL_NAME)
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(8);

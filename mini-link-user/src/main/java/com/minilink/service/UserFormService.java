@@ -29,5 +29,5 @@ public interface UserFormService {
      * @param loginDTO 登录表单参数
      * @return 登录账户相关信息
      */
-    Map<String, Object> login(LoginDTO loginDTO);
+    Map<String, Object> login(LoginDTO loginDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }

@@ -37,7 +37,7 @@ public class UserFormController {
 
     @Operation(summary = "登录账号")
     @PostMapping("/login")
-    public R login(@RequestBody LoginDTO loginDTO) {
+    public R login(@RequestBody LoginDTO loginDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Map<String, Object> resultMap = formService.login(loginDTO);
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author 徐志斌
  * @Date: 2024/12/8 17:05
  * @Version 1.0
- * @Description: 账户Token-拦截器
+ * @Description: Token-拦截器
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {

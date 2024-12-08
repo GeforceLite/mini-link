@@ -2,8 +2,6 @@ package com.minilink.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.minilink.adapter.UserAdapter;
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
 import com.minilink.pojo.po.MiniLinkUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -21,10 +19,9 @@ import java.util.Date;
 public class JwtUtil {
     public static final long EXPIRE = 7 * 24 * 60 * 60 * 1000;
     public static final String JWT_SECRET = "Mini_Link_XzbWsx";
-    public static final String TOKEN_PREFIX = "mini-link-token";
 
     public static String generate(String email, String nickName, String avatar) {
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setSubject("Mini Link")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
@@ -33,7 +30,6 @@ public class JwtUtil {
                 .claim("nick_name", nickName)
                 .claim("avatar", avatar)
                 .compact();
-        return TOKEN_PREFIX + token;
     }
 
     public static MiniLinkUser resolve(String token) {

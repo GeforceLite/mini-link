@@ -21,6 +21,11 @@ public interface UserAssistService {
     void captcha() throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     /**
+     * 获取客户端图片验证码 Redis Key
+     */
+    String getCaptchaKey() throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    /**
      * 发送邮件
      *
      * @param email 邮箱

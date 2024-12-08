@@ -44,10 +44,7 @@ public class UserAssistServiceImpl implements UserAssistService {
     @Override
     public void captcha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String captchaText = captchaProducer.createText();
-        HttpServletRequest request = HttpServletUtil.getRequest();
-        String userAgent = request.getHeader("User-Agent");
-        String ip = IpUtil.getIpAddr(request);
-        String captchaKey = RedisConstant.CAPTCHA_KEY + Md5Util.encrypt(userAgent + ip);
+        String captchaKey = this.getCaptchaKey();
         redisTemplate.opsForValue().set(captchaKey, captchaText, 3, TimeUnit.MINUTES);
         HttpServletResponse response = HttpServletUtil.getResponse();
         BufferedImage bufferedImage = captchaProducer.createImage(captchaText);
@@ -57,6 +54,14 @@ public class UserAssistServiceImpl implements UserAssistService {
         } catch (IOException e) {
             log.error("图片验证码生成失败:{}", e.getMessage());
         }
+    }
+
+    @Override
+    public String getCaptchaKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        HttpServletRequest request = HttpServletUtil.getRequest();
+        String userAgent = request.getHeader("User-Agent");
+        String ip = IpUtil.getIpAddr(request);
+        return RedisConstant.CAPTCHA_KEY + Md5Util.encrypt(userAgent + ip);
     }
 
     @Override

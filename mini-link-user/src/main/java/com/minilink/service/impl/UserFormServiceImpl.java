@@ -8,6 +8,7 @@ import com.minilink.exception.BizException;
 import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
 import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.service.UserAssistService;
 import com.minilink.service.UserFormService;
 import com.minilink.store.MiniLinkUserStore;
 import com.minilink.util.JwtUtil;
@@ -38,6 +39,8 @@ public class UserFormServiceImpl implements UserFormService {
     private RedisTemplate redisTemplate;
     @Autowired
     private MiniLinkUserStore userStore;
+    @Autowired
+    private UserAssistService assistService;
 
     @Override
     public void register(RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -57,7 +60,7 @@ public class UserFormServiceImpl implements UserFormService {
         String salt = "$1$" + RandomCodeUtil.generate(8, 3);
         String password = Md5Util.encrypt(registerDTO.getPassword1() + salt);
         userPO = UserAdapter.buildUserPO(
-                "用户" + RandomCodeUtil.generate(8, 1),
+                "用户" + RandomCodeUtil.generate(12, 1),
                 "",
                 email,
                 password,
@@ -67,15 +70,15 @@ public class UserFormServiceImpl implements UserFormService {
     }
 
     @Override
-    public Map<String, Object> login(LoginDTO loginDTO) {
-        String captchaKey = RedisConstant.CAPTCHA_KEY + loginDTO.getEmail();
+    public Map<String, Object> login(LoginDTO loginDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String captchaKey = assistService.getCaptchaKey();
         String captchaCode = (String) redisTemplate.opsForValue().get(captchaKey);
         if (!loginDTO.getCaptchaCode().equalsIgnoreCase(captchaCode)) {
             throw new BizException(BizCodeEnum.CODE_CAPTCHA_ERROR);
         }
         MiniLinkUser userPO = userStore.getByEmail(loginDTO.getEmail());
-        if (ObjectUtils.isNotEmpty(userPO)) {
-            throw new BizException(BizCodeEnum.ACCOUNT_REPEAT);
+        if (ObjectUtils.isEmpty(userPO)) {
+            throw new BizException(BizCodeEnum.ACCOUNT_UNREGISTER);
         }
         userPO.setPassword(null);
         userPO.setSalt(null);
