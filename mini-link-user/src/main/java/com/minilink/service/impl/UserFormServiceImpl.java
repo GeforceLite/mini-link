@@ -80,12 +80,10 @@ public class UserFormServiceImpl implements UserFormService {
         if (ObjectUtils.isEmpty(userPO)) {
             throw new BizException(BizCodeEnum.ACCOUNT_UNREGISTER);
         }
-        userPO.setPassword(null);
-        userPO.setSalt(null);
         String token = JwtUtil.generate(userPO.getEmail(), userPO.getNickName(), userPO.getAvatar());
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("token", token);
-        resultMap.put("user", userPO);
+        resultMap.put("user", UserAdapter.buildUserVO(userPO));
         return resultMap;
     }
 }

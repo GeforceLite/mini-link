@@ -1,6 +1,7 @@
 package com.minilink.adapter;
 
 import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.vo.UserVO;
 
 /**
  * @Author 徐志斌
@@ -17,5 +18,14 @@ public class UserAdapter {
         userPO.setPassword(password);
         userPO.setSalt(salt);
         return userPO;
+    }
+
+    public static UserVO buildUserVO(MiniLinkUser userPO) {
+        UserVO userVO = new UserVO();
+        userVO.setEmail(userPO.getEmail());
+        userVO.setNickName(userPO.getNickName());
+        userVO.setAvatar(userPO.getAvatar());
+        userVO.setCreateTime(userPO.getCreateTime());
+        return userVO;
     }
 }
