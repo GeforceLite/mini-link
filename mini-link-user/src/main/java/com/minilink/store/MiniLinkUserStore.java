@@ -26,5 +26,5 @@ public interface MiniLinkUserStore extends IService<MiniLinkUser> {
      * @param userPO 用户信息
      * @return 执行结果
      */
-    Boolean saveUserInfo(MiniLinkUser userPO);
+    Boolean saveUser(MiniLinkUser userPO);
 }

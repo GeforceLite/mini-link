@@ -1,6 +1,5 @@
 package com.minilink.adapter;
 
-import com.minilink.pojo.dto.RegisterDTO;
 import com.minilink.pojo.po.MiniLinkUser;
 
 /**
@@ -10,10 +9,11 @@ import com.minilink.pojo.po.MiniLinkUser;
  * @Description: 账户相关-适配器
  */
 public class UserAdapter {
-    public static MiniLinkUser buildUserPO(RegisterDTO registerDTO){
+    public static MiniLinkUser buildUserPO(String email, String password, String nickName, String salt, String avatar) {
         MiniLinkUser userPO = new MiniLinkUser();
 //        userPO.setNickName();
-        userPO.setEmail(registerDTO.getEmail());
+        userPO.setEmail(email);
+        userPO.setPassword(password);
         return userPO;
     }
 }

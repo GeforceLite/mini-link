@@ -21,7 +21,7 @@ public class LoginDTO {
     private String password;
 
     /**
-     * 邮箱验证码
+     * 图片验证码
      */
-    private String emailCode;
+    private String captchaCode;
 }

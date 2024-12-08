@@ -27,7 +27,7 @@ public class MiniLinkUserStoreImpl extends ServiceImpl<MiniLinkUserMapper, MiniL
     }
 
     @Override
-    public Boolean saveUserInfo(MiniLinkUser userPO) {
+    public Boolean saveUser(MiniLinkUser userPO) {
         return this.save(userPO);
     }
 }

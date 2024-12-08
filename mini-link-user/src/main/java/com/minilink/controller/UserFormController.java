@@ -1,6 +1,7 @@
 package com.minilink.controller;
 
 import com.minilink.enums.BizCodeEnum;
+import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
 import com.minilink.response.R;
 import com.minilink.service.UserFormService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
@@ -27,15 +30,15 @@ public class UserFormController {
 
     @Operation(summary = "注册账号")
     @PostMapping("/register")
-    public R register(@RequestBody RegisterDTO registerDTO) {
+    public R register(@RequestBody RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         formService.register(registerDTO);
         return R.out(BizCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "登录账号")
     @PostMapping("/login")
-    public R login(@RequestBody RegisterDTO registerDTO) {
-        Map<String, Object> resultMap = formService.login(registerDTO);
+    public R login(@RequestBody LoginDTO loginDTO) {
+        Map<String, Object> resultMap = formService.login(loginDTO);
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 

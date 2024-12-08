@@ -1,5 +1,6 @@
 package com.minilink.service;
 
+import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
 
 import java.io.UnsupportedEncodingException;
@@ -25,8 +26,8 @@ public interface UserFormService {
     /**
      * 登录系统
      *
-     * @param registerDTO 登录表单参数
+     * @param loginDTO 登录表单参数
      * @return 登录账户相关信息
      */
-    Map<String, Object> login(RegisterDTO registerDTO);
+    Map<String, Object> login(LoginDTO loginDTO);
 }

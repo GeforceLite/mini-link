@@ -32,6 +32,7 @@
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <captcha.version>1.1.0</captcha.version>
         <springdoc.version>2.1.0</springdoc.version>
+        <jwt.version>0.9.0</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -89,6 +90,11 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
