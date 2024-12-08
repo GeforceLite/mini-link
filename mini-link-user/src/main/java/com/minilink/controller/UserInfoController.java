@@ -24,14 +24,14 @@ public class UserInfoController {
 
     @Operation(summary = "查询账户信息")
     @GetMapping("/info")
-    public R register() {
+    public R getUserInfo() {
 //        userService.register();
         return R.out(BizCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "修改用户信息")
     @PostMapping("/update")
-    public R login() {
+    public R updateUserInfo() {
 //        userService.login();
         return R.out(BizCodeEnum.SUCCESS);
     }

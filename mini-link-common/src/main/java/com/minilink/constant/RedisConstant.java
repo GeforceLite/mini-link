@@ -7,7 +7,13 @@ package com.minilink.constant;
  * @Description: Redis Key常量
  */
 public class RedisConstant {
-    public static final String CAPTCHA_KEY = "mini-link-user:captcha";
-    public static final String EMAIL_CODE_KEY = "mini-link-user:email-code";
-    public static final String EMAIL_CHECK_KEY = "mini-link-user:email-check";
+    public static final String CAPTCHA_KEY = "account:captcha";
+    public static final String EMAIL_CODE_KEY = "account:email-code";
+    public static final String EMAIL_CHECK_KEY = "account:email-check";
+
+    /**
+     * Spring Cache Key
+     */
+    public static final String MINI_LINK_USER_KEY = "mini-link-user";
+    public static final String MINI_LINK_URL_KEY = "mini-link-url";
 }

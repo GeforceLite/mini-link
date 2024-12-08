@@ -2,6 +2,8 @@ package com.minilink.service;
 
 import com.minilink.pojo.dto.RegisterDTO;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
@@ -18,7 +20,7 @@ public interface UserFormService {
      *
      * @param registerDTO 注册表单参数
      */
-    void register(RegisterDTO registerDTO);
+    void register(RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     /**
      * 登录系统

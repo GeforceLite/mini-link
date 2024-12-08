@@ -39,7 +39,7 @@ public class UserFormController {
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 
-    @Operation(summary = "忘了密码")
+    @Operation(summary = "忘记密码")
     @PostMapping("/forget")
     public R forget() {
         return R.out(BizCodeEnum.SUCCESS);
