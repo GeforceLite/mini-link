@@ -57,11 +57,11 @@ public class UserFormServiceImpl implements UserFormService {
         String salt = "$1$" + RandomCodeUtil.generate(8, 3);
         String password = Md5Util.encrypt(registerDTO.getPassword1() + salt);
         userPO = UserAdapter.buildUserPO(
+                "用户" + RandomCodeUtil.generate(8, 1),
+                "",
                 email,
                 password,
-                "用户" + RandomCodeUtil.generate(8, 1),
-                salt,
-                ""
+                salt
         );
         userStore.saveUser(userPO);
     }

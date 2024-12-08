@@ -1,8 +1,8 @@
-package com.minilink.exception;
+package com.minilink.config;
 
 import com.minilink.enums.BizCodeEnum;
+import com.minilink.exception.BizException;
 import com.minilink.response.R;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @Author 徐志斌
  * @Date: 2024/12/6 11:08
  * @Version 1.0
- * @Description: 全局统一异常处理
+ * @Description: 全局异常处理
  */
-@Slf4j
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionConfig {
     /**
      * 自定义异常 BizException
      */
