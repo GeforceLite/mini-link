@@ -1,0 +1,7 @@
+server:
+  port: 9004
+  servlet:
+    context-path: /api/flink
+spring:
+  application:
+    name: mini-link-flink

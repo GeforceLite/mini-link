@@ -34,6 +34,7 @@
         <springdoc.version>2.1.0</springdoc.version>
         <jwt.version>0.9.0</jwt.version>
         <jaxb.api>2.3.0</jaxb.api>
+        <sharding-jdbc.version>5.5.0</sharding-jdbc.version>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +61,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
@@ -101,6 +107,11 @@
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb.api}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc</artifactId>
+                <version>${sharding-jdbc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

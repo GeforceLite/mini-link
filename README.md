@@ -13,8 +13,8 @@
 通过 Flink 实现海量PV UV等运营数据实时计算、清洗、聚合、存储到OLAP数据库，提供多维度数据统计面板功能
 <br>
 
-
 短链接系统使用场景：
+
 1. 在线广告
 2. 社交媒体
 3. 电商平台
@@ -25,13 +25,13 @@
 <br>
 
 短链接系统优势用途：
+
 1. 缩短长字符链接，好看美观
 2. 降低短信字数，降低短信费用成本
 3. 降低图形二维码生成复杂度
 4. 隐藏链接参数，提高系统安全性
 5. 方便统计流量、点击率等运营数据
 6. ......
-
 
 # 🚀项目架构
 
@@ -95,7 +95,7 @@ mini-link              ---   父工程
 | Ingress-Nginx | 负载均衡器          | https://v-charts.js.org/       |
 | Prometheus    | 数据采集           | https://v-charts.js.org/       |
 | Grafana       | 数据展示           | https://v-charts.js.org/       |
-| Rancher       | K8S图形化工具       | https://v-charts.js.org/       |
+| EFK           | 日志系统           | https://v-charts.js.org/       |
 
 # 🎉贡献名单
 
