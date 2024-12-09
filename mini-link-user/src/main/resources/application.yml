@@ -1,8 +1,8 @@
 spring:
-  application:
-    name: mini-link-user
   profiles:
     active: dev
+  application:
+    name: mini-link-user
 server:
   port: 9002
   servlet:

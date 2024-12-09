@@ -24,7 +24,7 @@ spring:
             key-generate-strategy:
               column: id
               key-generator-name: SNOWFLAKE
-#            actual-data-nodes: blog$->{0..2}.tb_article_type$->{0..2}
+            actual-data-nodes: ds0.tb_article_type$->{0..2}
 #            database-strategy:
 #              standard:
 #                sharding-column: status

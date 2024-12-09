@@ -23,7 +23,7 @@ public class MyBatisPlusGenerator {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
         String username = "root";
-        String password = "Pxy161122";
+        String password = "123456";
         String projectPath = System.getProperty("user.dir");
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
@@ -55,7 +55,7 @@ public class MyBatisPlusGenerator {
                     builder.enableCapitalMode()
                             .enableSkipView()
                             .disableSqlFilter()
-                            .addInclude("mini_link_user")
+                            .addInclude("mini_link_url")
                             .entityBuilder().enableFileOverride().enableLombok()
                             .enableChainModel()
                             .enableRemoveIsPrefix()
