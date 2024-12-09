@@ -1,35 +1,9 @@
+spring:
+  application:
+    name: mini-link-user
+  profiles:
+    active: dev
 server:
   port: 9002
   servlet:
     context-path: /api/user
-spring:
-  application:
-    name: mini-link-user
-  datasource:
-    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:sharding.yml
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      database: 0
-      timeout: 3000
-      connectTimeout: 5000
-      lettuce:
-        pool:
-          min-idle: 100
-          max-idle: 100
-          max-active: 100
-          max-wait: 20000
-  mail:
-    host: smtp.qq.com
-    port: 465
-    username: 1262254123@qq.com
-    password: ocebnufztunlbagc
-    default-encoding: UTF-8
-    properties:
-      mail:
-        debug: true
-        smtp:
-          socketFactory:
-            class: javax.net.ssl.SSLSocketFactory

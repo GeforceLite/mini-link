@@ -1,0 +1,62 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/mini_link?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+        username: root
+        password: 123456
+    rules:
+      sharding:
+        sharding-algorithms:
+#          database-inline:
+#            type: INLINE
+#            props:
+#              algorithm-expression: mini_link_$->{status % 2}
+          table-inline:
+            type: INLINE
+            props:
+              algorithm-expression: mini_link_url_$->{id % 2}
+        tables:
+          mini_link_url:
+            key-generate-strategy:
+              column: id
+              key-generator-name: SNOWFLAKE
+#            actual-data-nodes: blog$->{0..2}.tb_article_type$->{0..2}
+#            database-strategy:
+#              standard:
+#                sharding-column: status
+#                sharding-algorithm-name: database-inline
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: table-inline
+    props:
+      sql-show: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 3000
+      connectTimeout: 5000
+      lettuce:
+        pool:
+          min-idle: 100
+          max-idle: 100
+          max-active: 100
+          max-wait: 20000
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1262254123@qq.com
+    password: ocebnufztunlbagc
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
