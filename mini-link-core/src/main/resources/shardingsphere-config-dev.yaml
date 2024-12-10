@@ -4,16 +4,16 @@ dataSources:
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: Pxy161122
+    password: 123456
 rules:
   - !SHARDING
     tables:
-      mini_link:
+      mini_link_url:
         actualDataNodes: ds_0.mini_link_url_${0..2}
         tableStrategy:
           standard:
             shardingColumn: gid
-            shardingAlgorithmName: link_table_hash_mod
+            shardingAlgorithmName: hash_mode
     shardingAlgorithms:
       link_table_hash_mod:
         type: HASH_MOD

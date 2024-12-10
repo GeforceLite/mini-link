@@ -1,8 +1,14 @@
 #spring:
 #  shardingsphere:
 #    datasource:
-#      names: ds0
+#      names: ds0,ds1
 #      ds0:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/mini_link?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+#        username: root
+#        password: Pxy161122
+#      ds1:
 #        type: com.alibaba.druid.pool.DruidDataSource
 #        driver-class-name: com.mysql.cj.jdbc.Driver
 #        url: jdbc:mysql://localhost:3306/mini_link?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
@@ -26,4 +32,5 @@
 #                sharding-column: id
 #                sharding-algorithm-name: table-inline
 #    props:
-#      sql-show: true
+#      sql:
+#        show: true
