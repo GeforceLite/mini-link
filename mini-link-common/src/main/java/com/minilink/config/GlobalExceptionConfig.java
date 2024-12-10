@@ -27,7 +27,7 @@ public class GlobalExceptionConfig {
      */
     @ExceptionHandler(Exception.class)
     public R bindException(Exception e) {
-        return R.out(BizCodeEnum.FAIL, e.getMessage());
+        return R.out(BizCodeEnum.FAIL, e);
     }
 
 //    /**
