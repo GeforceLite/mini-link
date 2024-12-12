@@ -1,5 +1,6 @@
 package com.minilink.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.UserAdapter;
 import com.minilink.constant.RedisConstant;
@@ -60,6 +61,7 @@ public class UserFormServiceImpl implements UserFormService {
         String salt = "$1$" + RandomUtil.generate(8, 3);
         String password = EncryptUtil.md5(registerDTO.getPassword1() + salt);
         userPO = UserAdapter.buildUserPO(
+                IdWorker.getId(),
                 "用户" + RandomUtil.generate(12, 1),
                 "",
                 email,
@@ -80,7 +82,7 @@ public class UserFormServiceImpl implements UserFormService {
         if (ObjectUtils.isEmpty(userPO)) {
             throw new BizException(BizCodeEnum.ACCOUNT_UNREGISTER);
         }
-        String token = JwtUtil.generate(userPO.getEmail(), userPO.getNickName(), userPO.getAvatar());
+        String token = JwtUtil.generate(userPO.getAccountId(), userPO.getEmail(), userPO.getNickName(), userPO.getAvatar());
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("token", token);
         resultMap.put("user", UserAdapter.buildUserVO(userPO));

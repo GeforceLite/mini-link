@@ -5,6 +5,7 @@ import com.minilink.constant.RedisConstant;
 import com.minilink.mapper.MiniLinkUserMapper;
 import com.minilink.pojo.po.MiniLinkUser;
 import com.minilink.store.MiniLinkUserStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

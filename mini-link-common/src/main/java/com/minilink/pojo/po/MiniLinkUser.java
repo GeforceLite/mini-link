@@ -33,6 +33,12 @@ public class MiniLinkUser implements Serializable {
     /**
      * 账号
      */
+    @TableField("account_id")
+    private Long accountId;
+
+    /**
+     * 邮箱
+     */
     @TableField("email")
     private String email;
 

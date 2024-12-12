@@ -1,6 +1,5 @@
 <div align="center">
     <a href="https://github.com/Binx98/mini-link"><img src="https://img.shields.io/badge/后端-项目地址-yellow.svg?style=plasticr"></a>
-    <a href="https://github.com/Binx98/mini-link-front"><img src="https://img.shields.io/badge/前端-项目地址-blueviolet.svg?style=plasticr"></a>
     <a href="" target="_blank">
     <br>
     <h3>麻烦您帮忙点个Star⭐</h3>
@@ -8,12 +7,14 @@
 
 # ✨系统介绍
 
-基于 SpringBoot 3 + SpringCloud Alibaba 2023 等技术实现的高并发、高性能、海量数据短链接平台
+短链接系统是将长链接压缩为短链接服务，用户可以通过短链接快速分享、访问目标地址。支持多种使用场景，包括社交媒体分享、营销活动跟踪、数据分析等。
 <br>
-通过 Flink 实现海量PV UV等运营数据实时计算、清洗、聚合、存储到OLAP数据库，提供多维度数据统计面板功能
+基于SpringBoot 3.2 + SpringCloud Alibaba 2023等技术实现的高并发、高性能、海量数据短链接平台
+<br>
+通过Flink实现海量PV UV等运营数据实时计算、清洗、聚合、存储到OLAP数据库，提供多维度数据统计面板功能
 <br>
 
-短链接系统使用场景：
+短链接系统主要使用场景：
 
 1. 在线广告
 2. 社交媒体
@@ -26,7 +27,7 @@
 
 短链接系统优势用途：
 
-1. 缩短长字符链接，好看美观
+1. 缩短长字符链接，简洁美观
 2. 降低短信字数，降低短信费用成本
 3. 降低图形二维码生成复杂度
 4. 隐藏链接参数，提高系统安全性
@@ -38,13 +39,13 @@
 ## 模块划分
 
 ```
-mini-link              ---   父工程
+mini-link
 ├── mini-link-common   ---   公共通用
-├── mini-link-core     ---   短链接
-├── mini-link-data     ---   大数据看板
+├── mini-link-core     ---   短链接模块
+├── mini-link-data     ---   大数据统计看板
 ├── mini-link-flink    ---   大数据计算存储
 ├── mini-link-gateway  ---   API网关
-└── mini-link-user     ---   账户模块
+└── mini-link-user     ---   用户模块
 ```
 
 ## 服务端
@@ -65,7 +66,7 @@ mini-link              ---   父工程
 | MinIO                | 对象存储      | https://github.com/minio/minio                  |
 | ShardingSphere       | 分库分表      | https://github.com/minio/minio                  |
 | Lombok               | 简化对象封装工具  | https://github.com/rzwitserloot/lombok          |
-| Hutool               | 简化对象封装工具  | https://github.com/rzwitserloot/lombok          |
+| HuTool               | 简化对象封装工具  | https://github.com/rzwitserloot/lombok          |
 | Flink                | 大数据实时计算   | https://kubernetes.io/                          |
 | HDFS                 | 分布式文件存储   | https://kubernetes.io/                          |
 | ClickHouse           | 列式OLAP数据库 | https://github.com/jenkinsci/jenkins            |
@@ -103,6 +104,7 @@ mini-link              ---   父工程
   <img src="https://contrib.rocks/image?repo=Binx98/mini-link" />
 </a>
 
-| 姓名  |               Github               |      公司       |
-|:---:|:----------------------------------:|:-------------:|
-| 徐志斌 |     https://github.com/Binx98      | PARAVERSE 平行云 |
+| 姓名  |            Github             |      公司       |
+|:---:|:-----------------------------:|:-------------:|
+| 徐志斌 |   https://github.com/Binx98   | PARAVERSE 平行云 |
+| Joy | https://github.com/Joydevelop |      保密       |
