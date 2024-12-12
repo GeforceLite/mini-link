@@ -33,9 +33,10 @@
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <captcha.version>1.1.0</captcha.version>
         <springdoc.version>2.1.0</springdoc.version>
+        <sharding-jdbc.version>5.5.1</sharding-jdbc.version>
+        <hutool.version>5.8.23</hutool.version>
         <jwt.version>0.9.0</jwt.version>
         <jaxb.api>2.3.0</jaxb.api>
-        <sharding-jdbc.version>5.5.1</sharding-jdbc.version>
     </properties>
 
     <dependencyManagement>
@@ -120,6 +121,12 @@
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>shardingsphere-jdbc</artifactId>
                 <version>${sharding-jdbc.version}</version>
+            </dependency>
+            <!--Hutool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.xml.bind</groupId>
