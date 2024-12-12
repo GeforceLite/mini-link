@@ -17,11 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author 徐志斌
  * @Date: 2024/12/8 17:05
  * @Version 1.0
- * @Description: Token-拦截器
+ * @Description: 登录Token-拦截器
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
-    private static ThreadLocal threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<MiniLinkUser> threadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -33,11 +33,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (ObjectUtils.isEmpty(token)) {
             throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
         }
-        MiniLinkUser userPO = JwtUtil.resolve(token);
-        if (ObjectUtils.isEmpty(userPO)) {
+        MiniLinkUser user = JwtUtil.resolve(token);
+        if (ObjectUtils.isEmpty(user)) {
             throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
         }
-        threadLocal.set(userPO);
+        threadLocal.set(user);
         return true;
     }
 

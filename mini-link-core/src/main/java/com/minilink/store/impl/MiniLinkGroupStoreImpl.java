@@ -1,6 +1,6 @@
 package com.minilink.store.impl;
 
-import com.minilink.store.MiniLinkUrlStore;
+import com.minilink.service.MiniLinkGroupService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author 徐志斌
- * @since 2024-12-09
+ * @since 2024-12-12
  */
 @Service
-public class MiniLinkUrlStoreImpl implements MiniLinkUrlStore {
+public class MiniLinkGroupStoreImpl implements MiniLinkGroupService {
 
 }

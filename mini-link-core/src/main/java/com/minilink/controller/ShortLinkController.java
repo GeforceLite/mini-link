@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @Description: 短链接
  * @Version: 1.0
  */
-@Tag(name = "短链接相关")
+@Tag(name = "短链接")
 @RestController
 @RequestMapping("/link")
 public class ShortLinkController {
