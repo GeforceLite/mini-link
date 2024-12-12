@@ -1,11 +1,8 @@
 spring:
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
   application:
     name: mini-link-core
-  datasource:
-    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:shardingsphere-config-dev.yaml
 server:
   port: 9001
   servlet:
