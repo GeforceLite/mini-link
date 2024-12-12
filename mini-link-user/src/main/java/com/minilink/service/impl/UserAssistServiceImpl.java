@@ -60,8 +60,8 @@ public class UserAssistServiceImpl implements UserAssistService {
     public String getCaptchaKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         HttpServletRequest request = HttpServletUtil.getRequest();
         String userAgent = request.getHeader("User-Agent");
-        String ip = IpUtil.getIpAddr(request);
-        return RedisConstant.CAPTCHA_KEY + Md5Util.encrypt(userAgent + ip);
+        String ip = ClientUtil.getPublicIp(request);
+        return RedisConstant.CAPTCHA_KEY + EncryptUtil.md5(userAgent + ip);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class UserAssistServiceImpl implements UserAssistService {
         }
         String checkKey = RedisConstant.EMAIL_CHECK_KEY + email;
         redisTemplate.opsForValue().set(checkKey, "email send check", 60, TimeUnit.SECONDS);
-        String code = RandomCodeUtil.generate(4, 1);
+        String code = RandomUtil.generate(4, 1);
         String emailKey = RedisConstant.EMAIL_CODE_KEY + email;
         redisTemplate.opsForValue().set(emailKey, code, 3, TimeUnit.MINUTES);
         emailUtil.sendTextMail(email, "subject", "您正在注册账号，验证码：" + code);

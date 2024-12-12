@@ -11,9 +11,9 @@ import com.minilink.pojo.po.MiniLinkUser;
 import com.minilink.service.UserAssistService;
 import com.minilink.service.UserFormService;
 import com.minilink.store.MiniLinkUserStore;
+import com.minilink.util.EncryptUtil;
 import com.minilink.util.JwtUtil;
-import com.minilink.util.Md5Util;
-import com.minilink.util.RandomCodeUtil;
+import com.minilink.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -57,10 +57,10 @@ public class UserFormServiceImpl implements UserFormService {
         if (ObjectUtils.isNotEmpty(userPO)) {
             throw new BizException(BizCodeEnum.ACCOUNT_REPEAT);
         }
-        String salt = "$1$" + RandomCodeUtil.generate(8, 3);
-        String password = Md5Util.encrypt(registerDTO.getPassword1() + salt);
+        String salt = "$1$" + RandomUtil.generate(8, 3);
+        String password = EncryptUtil.md5(registerDTO.getPassword1() + salt);
         userPO = UserAdapter.buildUserPO(
-                "用户" + RandomCodeUtil.generate(12, 1),
+                "用户" + RandomUtil.generate(12, 1),
                 "",
                 email,
                 password,

@@ -2,13 +2,11 @@ package com.minilink.controller;
 
 import com.minilink.pojo.po.MiniLinkUrl;
 import com.minilink.store.MiniLinkUrlStore;
-import com.minilink.util.RandomCodeUtil;
+import com.minilink.util.RandomUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 /**
  * @Author: 徐志斌
@@ -33,7 +31,7 @@ public class ShortLinkController {
     public void createShort(@PathVariable String longLink) {
         for (int i = 0; i < 10; i++) {
             MiniLinkUrl url = new MiniLinkUrl();
-            url.setShortLink(RandomCodeUtil.generate(8, 2));
+            url.setShortLink(RandomUtil.generate(8, 2));
             url.setAccountId("xuzhibin");
             url.setGroupId(123219939L);
             url.setLongLink(longLink);

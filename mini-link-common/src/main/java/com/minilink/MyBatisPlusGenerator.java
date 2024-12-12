@@ -1,4 +1,4 @@
-package com.minilink.util;
+package com.minilink;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

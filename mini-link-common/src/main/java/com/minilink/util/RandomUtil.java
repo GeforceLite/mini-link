@@ -8,7 +8,7 @@ import java.util.Random;
  * @Version 1.0
  * @Description: 随机生成工具类
  */
-public class RandomCodeUtil {
+public class RandomUtil {
     public static final String NUM = "0123456789";
     public static final String TEXT = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     public static final String NUM_TEXT = NUM + TEXT;

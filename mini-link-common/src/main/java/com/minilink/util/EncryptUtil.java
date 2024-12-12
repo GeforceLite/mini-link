@@ -8,10 +8,10 @@ import java.security.NoSuchAlgorithmException;
  * @Author 徐志斌
  * @Date: 2024/12/6 21:09
  * @Version 1.0
- * @Description: MD5加密
+ * @Description: 加密工具类
  */
-public class Md5Util {
-    public static String encrypt(String data) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+public class EncryptUtil {
+    public static String md5(String data) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] array = md.digest(data.getBytes("UTF-8"));
         StringBuilder sb = new StringBuilder();
