@@ -1,8 +1,7 @@
 package com.minilink.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.minilink.pojo.po.MiniLinkUser;
-import org.apache.ibatis.annotations.Mapper;
+import com.minilink.pojo.po.LinkUser;
 
 /**
  * <p>
@@ -12,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author 徐志斌
  * @since 2024-12-06
  */
-public interface MiniLinkUserMapper extends BaseMapper<MiniLinkUser> {
+public interface LinkUserMapper extends BaseMapper<LinkUser> {
 
 }

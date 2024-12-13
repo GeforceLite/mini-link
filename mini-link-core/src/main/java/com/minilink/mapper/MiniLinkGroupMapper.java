@@ -1,7 +1,7 @@
 package com.minilink.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.minilink.pojo.po.MiniLinkGroup;
+import com.minilink.pojo.po.LinkGroup;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.minilink.pojo.po.MiniLinkGroup;
  * @author 徐志斌
  * @since 2024-12-12
  */
-public interface MiniLinkGroupMapper extends BaseMapper<MiniLinkGroup> {
+public interface MiniLinkGroupMapper extends BaseMapper<LinkGroup> {
 
 }

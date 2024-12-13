@@ -1,9 +1,9 @@
 package com.minilink.store.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.minilink.mapper.MiniLinkUrlMapper;
-import com.minilink.pojo.po.MiniLinkUrl;
-import com.minilink.store.MiniLinkUrlStore;
+import com.minilink.mapper.LinkUrlMapper;
+import com.minilink.pojo.po.LinkUrl;
+import com.minilink.store.LinkUrlStore;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-12-09
  */
 @Service
-public class MiniLinkUrlStoreImpl extends ServiceImpl<MiniLinkUrlMapper, MiniLinkUrl> implements MiniLinkUrlStore {
+public class LinkUrlStoreImpl extends ServiceImpl<LinkUrlMapper, LinkUrl> implements LinkUrlStore {
 
 }

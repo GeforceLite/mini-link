@@ -2,7 +2,7 @@ package com.minilink.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.minilink.adapter.UserAdapter;
-import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.po.LinkUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -33,7 +33,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static MiniLinkUser resolve(String token) {
+    public static LinkUser resolve(String token) {
         if (StringUtils.isBlank(token)) {
             return null;
         }

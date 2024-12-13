@@ -1,7 +1,7 @@
 package com.minilink.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.po.LinkUser;
 
 /**
  * <p>
@@ -11,14 +11,14 @@ import com.minilink.pojo.po.MiniLinkUser;
  * @author 徐志斌
  * @since 2024-12-06
  */
-public interface MiniLinkUserStore extends IService<MiniLinkUser> {
+public interface LinkUserStore extends IService<LinkUser> {
     /**
      * 根据 email 查询账户信息
      *
      * @param email 邮箱
      * @return 账户信息
      */
-    MiniLinkUser getByEmail(String email);
+    LinkUser getByEmail(String email);
 
     /**
      * 保存账户信息
@@ -26,5 +26,5 @@ public interface MiniLinkUserStore extends IService<MiniLinkUser> {
      * @param userPO 用户信息
      * @return 执行结果
      */
-    Boolean saveUser(MiniLinkUser userPO);
+    Boolean saveUser(LinkUser userPO);
 }

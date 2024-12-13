@@ -23,8 +23,8 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("mini_link_url")
-public class MiniLinkUrl implements Serializable {
+@TableName("link_url")
+public class LinkUrl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

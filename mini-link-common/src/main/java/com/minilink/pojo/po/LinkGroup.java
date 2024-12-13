@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author 徐志斌
- * @since 2024-12-06
+ * @since 2024-12-12
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("mini_link_user")
-public class MiniLinkUser implements Serializable {
+@TableName("link_group")
+public class LinkGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,34 +37,10 @@ public class MiniLinkUser implements Serializable {
     private Long accountId;
 
     /**
-     * 邮箱
+     * 分组名称
      */
-    @TableField("email")
-    private String email;
-
-    /**
-     * 头像
-     */
-    @TableField("avatar")
-    private String avatar;
-
-    /**
-     * 昵称
-     */
-    @TableField("nick_name")
-    private String nickName;
-
-    /**
-     * 密码
-     */
-    @TableField("password")
-    private String password;
-
-    /**
-     * 盐
-     */
-    @TableField("salt")
-    private String salt;
+    @TableField("group_name")
+    private String groupName;
 
     /**
      * 创建时间

@@ -8,10 +8,10 @@ import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
-import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.po.LinkUser;
 import com.minilink.service.UserAssistService;
 import com.minilink.service.UserFormService;
-import com.minilink.store.MiniLinkUserStore;
+import com.minilink.store.LinkUserStore;
 import com.minilink.util.EncryptUtil;
 import com.minilink.util.JwtUtil;
 import com.minilink.util.RandomUtil;
@@ -39,7 +39,7 @@ public class UserFormServiceImpl implements UserFormService {
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
-    private MiniLinkUserStore userStore;
+    private LinkUserStore userStore;
     @Autowired
     private UserAssistService assistService;
 
@@ -54,7 +54,7 @@ public class UserFormServiceImpl implements UserFormService {
         if (!registerDTO.getEmailCode().equalsIgnoreCase(emailCode)) {
             throw new BizException(BizCodeEnum.CODE_EMAIL_ERROR);
         }
-        MiniLinkUser userPO = userStore.getByEmail(email);
+        LinkUser userPO = userStore.getByEmail(email);
         if (ObjectUtils.isNotEmpty(userPO)) {
             throw new BizException(BizCodeEnum.ACCOUNT_REPEAT);
         }
@@ -78,7 +78,7 @@ public class UserFormServiceImpl implements UserFormService {
         if (!loginDTO.getCaptchaCode().equalsIgnoreCase(captchaCode)) {
             throw new BizException(BizCodeEnum.CODE_CAPTCHA_ERROR);
         }
-        MiniLinkUser userPO = userStore.getByEmail(loginDTO.getEmail());
+        LinkUser userPO = userStore.getByEmail(loginDTO.getEmail());
         if (ObjectUtils.isEmpty(userPO)) {
             throw new BizException(BizCodeEnum.ACCOUNT_UNREGISTER);
         }

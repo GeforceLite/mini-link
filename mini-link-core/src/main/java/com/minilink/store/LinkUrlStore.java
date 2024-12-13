@@ -1,7 +1,7 @@
 package com.minilink.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.minilink.pojo.po.MiniLinkUrl;
+import com.minilink.pojo.po.LinkUrl;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.minilink.pojo.po.MiniLinkUrl;
  * @author 徐志斌
  * @since 2024-12-09
  */
-public interface MiniLinkUrlStore extends IService<MiniLinkUrl> {
+public interface LinkUrlStore extends IService<LinkUrl> {
 
 }

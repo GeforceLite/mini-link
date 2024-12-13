@@ -3,7 +3,7 @@ package com.minilink.interceptor;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
-import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.po.LinkUser;
 import com.minilink.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
-    private static ThreadLocal<MiniLinkUser> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<LinkUser> threadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (ObjectUtils.isEmpty(token)) {
             throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
         }
-        MiniLinkUser user = JwtUtil.resolve(token);
+        LinkUser user = JwtUtil.resolve(token);
         if (ObjectUtils.isEmpty(user)) {
             throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
         }

@@ -1,6 +1,6 @@
 package com.minilink.service.impl;
 
-import com.minilink.service.MiniLinkGroupService;
+import com.minilink.service.LinkGroupService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-12-12
  */
 @Service
-public class MiniLinkGroupServiceImpl implements MiniLinkGroupService {
+public class MiniLinkGroupServiceImpl implements LinkGroupService {
 
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.minilink.mapper.MiniLinkUserMapper">
+<mapper namespace="com.minilink.mapper.LinkUserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.minilink.pojo.po.MiniLinkUser">
+    <resultMap id="BaseResultMap" type="com.minilink.pojo.po.LinkUser">
         <id column="id" property="id" />
         <result column="email" property="email" />
         <result column="avatar" property="avatar" />

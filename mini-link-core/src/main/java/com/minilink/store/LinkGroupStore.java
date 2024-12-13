@@ -1,7 +1,7 @@
 package com.minilink.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.minilink.pojo.po.MiniLinkGroup;
+import com.minilink.pojo.po.LinkGroup;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.minilink.pojo.po.MiniLinkGroup;
  * @author 徐志斌
  * @since 2024-12-12
  */
-public interface MiniLinkGroupStore extends IService<MiniLinkGroup> {
+public interface LinkGroupStore extends IService<LinkGroup> {
 
 }

@@ -1,7 +1,7 @@
 package com.minilink.controller;
 
-import com.minilink.pojo.po.MiniLinkUrl;
-import com.minilink.store.MiniLinkUrlStore;
+import com.minilink.pojo.po.LinkUrl;
+import com.minilink.store.LinkUrlStore;
 import com.minilink.util.RandomUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/link")
 public class ShortLinkController {
     @Autowired
-    private MiniLinkUrlStore urlService;
+    private LinkUrlStore urlService;
 
     /**
      * 不能使用301，担心永久重定向由于浏览器缓存问题，就无法统计pv uv数据了
@@ -30,7 +30,7 @@ public class ShortLinkController {
     @PostMapping("/createLong/{longLink}")
     public void createShort(@PathVariable String longLink) {
         for (int i = 0; i < 10; i++) {
-            MiniLinkUrl url = new MiniLinkUrl();
+            LinkUrl url = new LinkUrl();
             url.setShortLink(RandomUtil.generate(8, 2));
             url.setAccountId("xuzhibin");
             url.setGroupId(123219939L);

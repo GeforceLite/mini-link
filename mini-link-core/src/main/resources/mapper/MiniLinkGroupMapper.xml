@@ -3,7 +3,7 @@
 <mapper namespace="com.minilink.mapper.MiniLinkGroupMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.minilink.pojo.po.MiniLinkGroup">
+    <resultMap id="BaseResultMap" type="com.minilink.pojo.po.LinkGroup">
         <id column="id" property="id" />
         <result column="account_id" property="accountId" />
         <result column="group_name" property="groupName" />

@@ -1,6 +1,6 @@
 package com.minilink.adapter;
 
-import com.minilink.pojo.po.MiniLinkUser;
+import com.minilink.pojo.po.LinkUser;
 import com.minilink.pojo.vo.UserVO;
 
 /**
@@ -10,9 +10,9 @@ import com.minilink.pojo.vo.UserVO;
  * @Description: 账户相关-适配器
  */
 public class UserAdapter {
-    public static MiniLinkUser buildUserPO(Long accountId, String nickName, String avatar,
-                                           String email, String password, String salt) {
-        MiniLinkUser userPO = new MiniLinkUser();
+    public static LinkUser buildUserPO(Long accountId, String nickName, String avatar,
+                                       String email, String password, String salt) {
+        LinkUser userPO = new LinkUser();
         userPO.setAccountId(accountId);
         userPO.setNickName(nickName);
         userPO.setAvatar(avatar);
@@ -22,8 +22,8 @@ public class UserAdapter {
         return userPO;
     }
 
-    public static MiniLinkUser buildUserPO(Long accountId, String nickName, String avatar, String email) {
-        MiniLinkUser userPO = new MiniLinkUser();
+    public static LinkUser buildUserPO(Long accountId, String nickName, String avatar, String email) {
+        LinkUser userPO = new LinkUser();
         userPO.setAccountId(accountId);
         userPO.setNickName(nickName);
         userPO.setAvatar(avatar);
@@ -31,7 +31,7 @@ public class UserAdapter {
         return userPO;
     }
 
-    public static UserVO buildUserVO(MiniLinkUser userPO) {
+    public static UserVO buildUserVO(LinkUser userPO) {
         UserVO userVO = new UserVO();
         userVO.setEmail(userPO.getEmail());
         userVO.setNickName(userPO.getNickName());
