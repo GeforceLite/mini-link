@@ -1,23 +1,23 @@
-dataSources:
-  ds0:
-    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: Pxy161122
-rules:
-  - !SHARDING
-    tables:
-      mini_link_url:
-        actualDataNodes: ds0.mini_link_url_${0..2}
-        tableStrategy:
-          standard:
-            shardingColumn: id
-            shardingAlgorithmName: link_table_hash_mod
-    shardingAlgorithms:
-      link_table_hash_mod:
-        type: INLINE
-        props:
-          algorithm-expression: mini_link_url_${id % 3}
-props:
-  sql-show: true
+#dataSources:
+#  ds0:
+#    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: Pxy161122
+#rules:
+#  - !SHARDING
+#    tables:
+#      mini_link_url:
+#        actualDataNodes: ds0.mini_link_url_${0..2}
+#        tableStrategy:
+#          standard:
+#            shardingColumn: id
+#            shardingAlgorithmName: link_table_hash_mod
+#    shardingAlgorithms:
+#      link_table_hash_mod:
+#        type: INLINE
+#        props:
+#          algorithm-expression: mini_link_url_${id % 3}
+#props:
+#  sql-show: true

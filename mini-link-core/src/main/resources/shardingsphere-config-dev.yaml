@@ -2,22 +2,43 @@ dataSources:
   ds0:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_0?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: Pxy161122
+  ds1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_1?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: Pxy161122
+  ds2:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_2?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: Pxy161122
+
 rules:
   - !SHARDING
     tables:
       mini_link_url:
-        actualDataNodes: ds0.mini_link_url_${0..2}
+        actualDataNodes: ds${0..2}.mini_link_url_${0..1}
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: datasource-inline
         tableStrategy:
           standard:
             shardingColumn: id
-            shardingAlgorithmName: link_table_hash_mod
+            shardingAlgorithmName: table-inline
     shardingAlgorithms:
-      link_table_hash_mod:
+      datasource-inline:
         type: INLINE
         props:
-          algorithm-expression: mini_link_url_${id % 3}
+          algorithm-expression: ds${id % 3}
+      table-inline:
+        type: INLINE
+        props:
+          algorithm-expression: mini_link_url_${id % 2}
 props:
   sql-show: true

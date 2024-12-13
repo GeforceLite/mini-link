@@ -1,6 +1,7 @@
 package com.minilink.util;
 
 import com.google.common.hash.Hashing;
+import com.minilink.sharding.ShardingUtil;
 
 /**
  * @Author: 徐志斌
@@ -10,11 +11,6 @@ import com.google.common.hash.Hashing;
  */
 public class ShortLinkUtil {
     private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    public static String generate(String link) {
-        long murmurHash32 = murmurHash32(link);
-        return encodeToBase62(murmurHash32);
-    }
 
     private static long murmurHash32(String str) {
         return Hashing.murmur3_32_fixed().hashUnencodedChars(str).padToLong();
@@ -28,5 +24,21 @@ public class ShortLinkUtil {
             num = num / CHARS.length();
         } while (num > 0);
         return sb.reverse().toString();
+    }
+
+    /**
+     * 生成短链接
+     * ---------------------------------
+     * 格式：库号表号-短链接
+     * 例如：02-4s3sQA
+     */
+    public static String generate(String link) {
+        long murmurHash32 = murmurHash32(link);
+        StringBuffer sb = new StringBuffer();
+        sb.append(ShardingUtil.getDatabaseCode());
+        sb.append(ShardingUtil.getTableCode());
+        sb.append("-");
+        sb.append(encodeToBase62(murmurHash32));
+        return sb.toString();
     }
 }
