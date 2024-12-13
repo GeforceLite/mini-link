@@ -14,6 +14,6 @@ public class RedisConstant {
     /**
      * Spring Cache Key
      */
-    public static final String MINI_LINK_USER_KEY = "mini-link-user";
-    public static final String MINI_LINK_URL_KEY = "mini-link-url";
+    public static final String LINK_USER_KEY = "link-user";
+    public static final String LINK_URL_KEY = "link-url";
 }

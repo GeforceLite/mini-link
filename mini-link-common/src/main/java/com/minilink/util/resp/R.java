@@ -1,6 +1,8 @@
 package com.minilink.util.resp;
 
 import com.minilink.enums.BizCodeEnum;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @Author 徐志斌
@@ -8,6 +10,8 @@ import com.minilink.enums.BizCodeEnum;
  * @Version 1.0
  * @Description: 响应封装类
  */
+@Getter
+@Setter
 public class R<T> extends BaseResponse {
     private T data;
 

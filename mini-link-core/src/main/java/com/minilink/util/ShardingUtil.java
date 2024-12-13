@@ -9,6 +9,8 @@ import java.util.Random;
  * @CreateTime: 2024-12-13  10:44
  * @Description: 库位、表位工具类
  * @Version: 1.0
+ * --------------------------------------
+ * TODO 数据倾斜，配置权重
  */
 public class ShardingUtil {
     private static final List<String> databaseList = new ArrayList<>();

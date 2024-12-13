@@ -3,8 +3,11 @@ package com.minilink.config;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.util.resp.R;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 /**
  * @Author 徐志斌
@@ -22,21 +25,21 @@ public class GlobalExceptionConfig {
         return R.out(e.getCodeEnum());
     }
 
+//    /**
+//     * 注解校验异常 BindException
+//     */
+//    @ExceptionHandler({HandlerMethodValidationException.class, BindException.class, MethodArgumentNotValidException.class})
+//    public R validationException(BindException b, HandlerMethodValidationException c) {
+//        StringBuilder sb = new StringBuilder();
+//        b.getBindingResult().getAllErrors().forEach(e -> sb.append(e.getDefaultMessage()).append("\r\n"));
+//        return R.out(BizCodeEnum.FAIL, sb);
+//    }
+
     /**
-     * 所有异常兜底
+     * 异常兜底
      */
     @ExceptionHandler(Exception.class)
     public R bindException(Exception e) {
         return R.out(BizCodeEnum.FAIL, e);
     }
-
-//    /**
-//     * 注解校验异常 BindException
-//     */
-//    @ExceptionHandler(BindException.class)
-//    public R validationException(BindException b) {
-//        final StringBuilder sb = new StringBuilder();
-//        b.getBindingResult().getAllErrors().forEach(e -> sb.append(e.getDefaultMessage()).append("\r\n"));
-//        return R.out(ResponseEnum.FAIL, sb);
-//    }
 }

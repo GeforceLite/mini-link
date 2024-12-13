@@ -60,9 +60,10 @@ public class UserFormServiceImpl implements UserFormService {
         }
         String salt = "$1$" + RandomUtil.generate(8, 3);
         String password = EncryptUtil.md5(registerDTO.getPassword1() + salt);
+        long snowFlakeId = IdWorker.getId();
         userPO = UserAdapter.buildUserPO(
-                IdWorker.getId(),
-                "用户" + RandomUtil.generate(12, 1),
+                snowFlakeId,
+                "用户" + snowFlakeId,
                 "",
                 email,
                 password,

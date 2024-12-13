@@ -21,8 +21,8 @@ dataSources:
 rules:
   - !SHARDING
     tables:
-      mini_link_url:
-        actualDataNodes: ds${0..2}.mini_link_url_${0..1}
+      link_url:
+        actualDataNodes: ds${0..2}.link_url_${0..1}
         databaseStrategy:
           standard:
             shardingColumn: id
@@ -39,6 +39,6 @@ rules:
       table-inline:
         type: INLINE
         props:
-          algorithm-expression: mini_link_url_${id % 2}
+          algorithm-expression: link_url_${id % 2}
 props:
   sql-show: true

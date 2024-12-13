@@ -42,8 +42,8 @@ public class UserFormController {
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 
-    @Operation(summary = "忘记密码")
-    @PostMapping("/forget")
+    @Operation(summary = "修改密码")
+    @PostMapping("/updatePwd")
     public R forget() {
         return R.out(BizCodeEnum.SUCCESS);
     }

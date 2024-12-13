@@ -38,6 +38,8 @@ public enum BizCodeEnum {
      * 短链接
      */
     SHORT_LINK_NOT_EXIST(260404, "短链接不存在"),
+    SHORT_LINK_EXPIRED(260001, "短链接已过期，无法访问"),
+    SHORT_LINK_FORMAT_ERROR(260500, "短链接格式错误"),
 
     /**
      * 长链接

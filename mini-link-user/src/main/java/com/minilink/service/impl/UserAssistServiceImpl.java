@@ -67,11 +67,11 @@ public class UserAssistServiceImpl implements UserAssistService {
     @Override
     public void sendEmail(String email) {
         String emailCheckKey = (String) redisTemplate.opsForValue().get(RedisConstant.EMAIL_CHECK_KEY + email);
-        if (!StringUtils.isBlank(emailCheckKey)) {
+        if (StringUtils.isNotBlank(emailCheckKey)) {
             throw new BizException(BizCodeEnum.OPS_REPEAT);
         }
         String checkKey = RedisConstant.EMAIL_CHECK_KEY + email;
-        redisTemplate.opsForValue().set(checkKey, "email send check", 60, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(checkKey, "Email Repeat Send Check", 60, TimeUnit.SECONDS);
         String code = RandomUtil.generate(4, 1);
         String emailKey = RedisConstant.EMAIL_CODE_KEY + email;
         redisTemplate.opsForValue().set(emailKey, code, 3, TimeUnit.MINUTES);
