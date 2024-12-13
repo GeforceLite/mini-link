@@ -1,4 +1,4 @@
-package com.minilink.sharding;
+package com.minilink.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-12-12
  */
 @Service
-public class MiniLinkGroupServiceImpl implements LinkGroupService {
+public class LinkGroupServiceImpl implements LinkGroupService {
 
 }

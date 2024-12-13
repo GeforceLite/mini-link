@@ -12,5 +12,11 @@ import com.minilink.pojo.po.LinkUrl;
  * @since 2024-12-09
  */
 public interface LinkUrlStore extends IService<LinkUrl> {
-
+    /**
+     * 保存链接记录
+     *
+     * @param linkUrl 链接信息
+     * @return 执行结果
+     */
+    Boolean saveLink(LinkUrl linkUrl);
 }

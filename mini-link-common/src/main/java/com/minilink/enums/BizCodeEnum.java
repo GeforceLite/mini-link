@@ -35,9 +35,14 @@ public enum BizCodeEnum {
     PASSWORD_NO_EQUAL(250005, "两次密码输入不一致"),
 
     /**
-     * 短链
+     * 短链接
      */
-    SHORT_LINK_NOT_EXIST(260404, "短链不存在"),
+    SHORT_LINK_NOT_EXIST(260404, "短链接不存在"),
+
+    /**
+     * 长链接
+     */
+    LONG_LINK_NOT_EXIST(270404, "长链接不存在"),
 
     /**
      * 流控操作

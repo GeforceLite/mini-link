@@ -16,5 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LinkUrlStoreImpl extends ServiceImpl<LinkUrlMapper, LinkUrl> implements LinkUrlStore {
-
+    @Override
+    public Boolean saveLink(LinkUrl linkUrl) {
+        return this.save(linkUrl);
+    }
 }
