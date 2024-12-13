@@ -1,8 +1,8 @@
 package com.minilink.controller;
 
 import com.minilink.enums.BizCodeEnum;
-import com.minilink.response.R;
 import com.minilink.service.UserAssistService;
+import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;

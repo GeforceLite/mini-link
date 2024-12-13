@@ -1,7 +1,7 @@
 package com.minilink.controller;
 
 import com.minilink.enums.BizCodeEnum;
-import com.minilink.response.R;
+import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public class LinkGroupController {
     }
 
     @Operation(summary = "修改分组")
-    @PostMapping("/create")
+    @PostMapping("/update")
     public R updateGroup() {
         return R.out(BizCodeEnum.SUCCESS);
     }

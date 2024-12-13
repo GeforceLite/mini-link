@@ -2,7 +2,7 @@ package com.minilink.config;
 
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
-import com.minilink.response.R;
+import com.minilink.util.resp.R;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

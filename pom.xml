@@ -122,12 +122,13 @@
                 <artifactId>shardingsphere-jdbc</artifactId>
                 <version>${sharding-jdbc.version}</version>
             </dependency>
-            <!--Hutool-->
+            <!--HuTool-->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!--jaxb-->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
