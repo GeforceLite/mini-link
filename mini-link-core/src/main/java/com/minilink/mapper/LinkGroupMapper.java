@@ -5,12 +5,12 @@ import com.minilink.pojo.po.LinkGroup;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author 徐志斌
  * @since 2024-12-12
  */
-public interface MiniLinkGroupMapper extends BaseMapper<LinkGroup> {
+public interface LinkGroupMapper extends BaseMapper<LinkGroup> {
 
 }
