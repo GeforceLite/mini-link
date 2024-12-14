@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-12-09
  */
 @Service
-public class LinkUrlStoreImpl extends ServiceImpl<LinkUrlTobMapper, LinkUrlTob> implements LinkUrlTobStore {
+public class LinkUrlTobStoreImpl extends ServiceImpl<LinkUrlTobMapper, LinkUrlTob> implements LinkUrlTobStore {
     @Override
     public Boolean saveLink(LinkUrlTob linkUrl) {
         return this.save(linkUrl);

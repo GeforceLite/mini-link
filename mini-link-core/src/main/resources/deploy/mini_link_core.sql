@@ -11,7 +11,7 @@
  Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 14/12/2024 18:23:02
+ Date: 14/12/2024 20:01:03
 */
 
 SET NAMES utf8mb4;
@@ -41,9 +41,15 @@ CREATE TABLE `link_url_tob_0`  (
 DROP TABLE IF EXISTS `link_url_tob_1`;
 CREATE TABLE `link_url_tob_1`  (
   `id` bigint NOT NULL COMMENT '主键id',
+  `group_id` bigint NULL DEFAULT NULL COMMENT '分组id',
+  `account_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '账号',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标题',
   `short_link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '短链接',
   `long_link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '长链接',
   `expired_time` datetime NULL DEFAULT NULL COMMENT '到期时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `deleted` tinyint(1) NULL DEFAULT NULL COMMENT '删除标识',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 

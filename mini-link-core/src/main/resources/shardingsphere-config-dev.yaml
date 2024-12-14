@@ -4,41 +4,41 @@ dataSources:
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_0?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: Pxy161122
+    password: 123456
   ds1:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_1?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: Pxy161122
+    password: 123456
   ds2:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_2?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: Pxy161122
+    password: 123456
 
 rules:
   - !SHARDING
     tables:
-      link_url_toc:
-        actualDataNodes: ds${0..2}.link_url_${0..1}
+      link_url_tob:
+        actualDataNodes: ds${0..2}.link_url_tob_${0..1}
         databaseStrategy:
           standard:
-            shardingColumn: id
-            shardingAlgorithmName: datasource-inline
+            shardingColumn: account_id
+            shardingAlgorithmName: link-url-tob-datasource-inline
         tableStrategy:
           standard:
-            shardingColumn: id
-            shardingAlgorithmName: table-inline
+            shardingColumn: account_id
+            shardingAlgorithmName: link-url-tob-table-inline
     shardingAlgorithms:
-      datasource-inline:
+      link-url-tob-datasource-inline:
         type: INLINE
         props:
-          algorithm-expression: ds${id % 3}
-      table-inline:
+          algorithm-expression: ds${account_id % 3}
+      link-url-tob-table-inline:
         type: INLINE
         props:
-          algorithm-expression: link_url_${id % 2}
+          algorithm-expression: link_url_tob_${account_id % 2}
 props:
   sql-show: true

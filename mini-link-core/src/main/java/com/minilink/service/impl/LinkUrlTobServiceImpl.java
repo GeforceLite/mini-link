@@ -1,5 +1,6 @@
 package com.minilink.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.minilink.adapter.LinkUrlAdapter;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
@@ -33,6 +34,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         }
         // TODO 校验缓存中是否存在
         LinkUrlTob linkUrlPO = LinkUrlAdapter.buildLinkUrlPO(
+                IdWorker.getId(),
                 saveDTO.getGroupId(),
                 saveDTO.getTitle(),
                 shortLink,
