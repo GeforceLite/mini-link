@@ -1,7 +1,7 @@
 package com.minilink.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.minilink.pojo.po.LinkUrl;
+import com.minilink.pojo.po.LinkUrlTob;
 
 /**
  * <p>
@@ -11,14 +11,14 @@ import com.minilink.pojo.po.LinkUrl;
  * @author 徐志斌
  * @since 2024-12-09
  */
-public interface LinkUrlStore extends IService<LinkUrl> {
+public interface LinkUrlTobStore extends IService<LinkUrlTob> {
     /**
      * 保存链接记录
      *
      * @param linkUrl 链接信息
      * @return 执行结果
      */
-    Boolean saveLink(LinkUrl linkUrl);
+    Boolean saveLink(LinkUrlTob linkUrl);
 
     /**
      * 根据短链接查询信息
@@ -26,5 +26,5 @@ public interface LinkUrlStore extends IService<LinkUrl> {
      * @param shortLink 短链接
      * @return 连接信息
      */
-    LinkUrl getByShortLink(String shortLink);
+    LinkUrlTob getByShortLink(String shortLink);
 }

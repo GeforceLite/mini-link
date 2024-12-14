@@ -21,7 +21,7 @@ import java.util.Collections;
  */
 public class MyBatisPlusGenerator {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/mini_link?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+        String url = "jdbc:mysql://localhost:3306/mini_link_core_0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
         String username = "root";
         String password = "123456";
         String projectPath = System.getProperty("user.dir");
@@ -55,7 +55,7 @@ public class MyBatisPlusGenerator {
                     builder.enableCapitalMode()
                             .enableSkipView()
                             .disableSqlFilter()
-                            .addInclude("mini_link_url")
+                            .addInclude("link_url_toc_0")
                             .entityBuilder().enableFileOverride().enableLombok()
                             .enableChainModel()
                             .enableRemoveIsPrefix()

@@ -2,7 +2,7 @@ package com.minilink.controller;
 
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
-import com.minilink.service.LinkUrlService;
+import com.minilink.service.LinkUrlTobService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "B端-短链接")
 @RestController
-@RequestMapping("/tob")
-public class LinkToBController {
+@RequestMapping("/api/tob")
+public class LinkTobController {
     @Autowired
-    private LinkUrlService urlService;
+    private LinkUrlTobService urlService;
 
     @Operation(summary = "创建链接")
     @PostMapping("/create")

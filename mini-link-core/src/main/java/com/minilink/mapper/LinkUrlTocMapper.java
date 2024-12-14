@@ -1,7 +1,7 @@
 package com.minilink.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.minilink.pojo.po.LinkUrl;
+import com.minilink.pojo.po.LinkUrlToc;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.minilink.pojo.po.LinkUrl;
  * </p>
  *
  * @author 徐志斌
- * @since 2024-12-09
+ * @since 2024-12-14
  */
-public interface LinkUrlMapper extends BaseMapper<LinkUrl> {
+public interface LinkUrlTocMapper extends BaseMapper<LinkUrlToc> {
 
 }

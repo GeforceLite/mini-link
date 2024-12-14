@@ -1,6 +1,6 @@
 package com.minilink.adapter;
 
-import com.minilink.pojo.po.LinkUrl;
+import com.minilink.pojo.po.LinkUrlTob;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  */
 public class LinkUrlAdapter {
-    public static LinkUrl buildLinkUrlPO(Long groupId, String title, String shortLink,
-                                         String longLink, LocalDateTime expiredTime) {
-        LinkUrl linkUrl = new LinkUrl();
+    public static LinkUrlTob buildLinkUrlPO(Long groupId, String title, String shortLink,
+                                            String longLink, LocalDateTime expiredTime) {
+        LinkUrlTob linkUrl = new LinkUrlTob();
         linkUrl.setGroupId(groupId);
         linkUrl.setTitle(title);
         linkUrl.setShortLink(shortLink);

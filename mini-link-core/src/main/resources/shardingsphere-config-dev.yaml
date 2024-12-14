@@ -21,7 +21,7 @@ dataSources:
 rules:
   - !SHARDING
     tables:
-      link_url:
+      link_url_toc:
         actualDataNodes: ds${0..2}.link_url_${0..1}
         databaseStrategy:
           standard:
