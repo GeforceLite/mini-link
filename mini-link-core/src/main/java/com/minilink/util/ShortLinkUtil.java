@@ -27,11 +27,8 @@ public class ShortLinkUtil {
 
     /**
      * 生成短链接：Murmurhash算法 + Base62编码
-     * 格式：库号表号-短链接
+     * 格式：库号表号 + 短链接
      * 例如：02-4s3sQA
-     * ------------------------------------------------------------------
-     * 为何使用库号表号？
-     * 配合自定义分库分表实现类，可以预防后期扩容时，数据迁移场景
      */
     public static String generate(String longLink) {
         long murmurHash32 = murmurHash32(longLink);

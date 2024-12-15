@@ -27,7 +27,9 @@ public class LinkUser implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+//    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    // TODO 这里测试一下单库不用ShardingJDBC，是不是不能用雪花算法
+    @TableId(value = "id")
     private Long id;
 
     /**

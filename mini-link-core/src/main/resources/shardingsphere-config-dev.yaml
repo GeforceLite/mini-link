@@ -31,6 +31,9 @@ rules:
           standard:
             shardingColumn: account_id
             shardingAlgorithmName: link-url-tob-table-inline
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake
     shardingAlgorithms:
       link-url-tob-datasource-inline:
         type: INLINE
@@ -40,5 +43,11 @@ rules:
         type: INLINE
         props:
           algorithm-expression: link_url_tob_${account_id % 2}
+    keyGenerators:
+      snowflake:
+        type: SNOWFLAKE
+        props:
+          worker:
+            id: ${workerId}
 props:
   sql-show: true

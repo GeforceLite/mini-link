@@ -7,10 +7,8 @@ import java.util.Random;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-13  10:44
- * @Description: 库位、表位工具类
+ * @Description: 库表位计算工具类：为了避免后续扩容后数据迁移场景
  * @Version: 1.0
- * --------------------------------------
- * TODO 数据倾斜，配置权重
  */
 public class ShardingUtil {
     private static final List<String> databaseList = new ArrayList<>();
@@ -21,13 +19,11 @@ public class ShardingUtil {
         databaseList.add("0");
         databaseList.add("1");
         databaseList.add("2");
-        // 可持续扩容......
     }
 
     static {
         tableList.add("0");
         tableList.add("1");
-        // 可持续扩容......
     }
 
     public static String getDatabaseCode() {

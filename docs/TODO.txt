@@ -1,0 +1,5 @@
+- Windows 部署 Nacos
+- Windows 部署 Kafka
+- 雪花算法处理
+- ToC 短链接解析重定向问题
+- ToB、ToC，自定义分库分表算法问题（权重问题）

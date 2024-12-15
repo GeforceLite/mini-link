@@ -32,6 +32,8 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         if (!shortLink.matches(SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
+
+        // TODO 推送到MQ，实现冗余双写
         // TODO 校验缓存中是否存在
         LinkUrlTob linkUrlPO = LinkUrlAdapter.buildLinkUrlPO(
                 IdWorker.getId(),
