@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LinkUrlTobServiceImpl implements LinkUrlTobService {
-    private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-[a-z0-9A-Z]+$";
+    private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
     @Autowired
     private LinkUrlTobStore urlStore;
 

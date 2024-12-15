@@ -1,6 +1,7 @@
 package com.minilink.util;
 
 import com.google.common.hash.Hashing;
+import com.minilink.sharding.ShardingFactory;
 
 /**
  * @Author: 徐志斌
@@ -27,14 +28,15 @@ public class ShortLinkUtil {
 
     /**
      * 生成短链接：Murmurhash算法 + Base62编码
-     * 格式：库号表号 + 短链接
-     * 例如：02-4s3sQA
+     * 格式：库号-表号-短链接
+     * 例如：0-2-4s3sQA
      */
     public static String generate(String longLink) {
         long murmurHash32 = murmurHash32(longLink);
         StringBuffer sb = new StringBuffer();
-        sb.append(ShardingUtil.getDatabaseCode());
-        sb.append(ShardingUtil.getTableCode());
+        sb.append(ShardingFactory.getCode(ShardingFactory.databaseList));
+        sb.append("-");
+        sb.append(ShardingFactory.getCode(ShardingFactory.tableList));
         sb.append("-");
         sb.append(encodeToBase62(murmurHash32));
         return sb.toString();

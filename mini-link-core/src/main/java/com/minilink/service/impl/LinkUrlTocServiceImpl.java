@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 @Service
 public class LinkUrlTocServiceImpl implements LinkUrlTocService {
-    private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-[a-z0-9A-Z]+$";
+    private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
 
     @Override
     public void redirect(String shortLink) throws IOException {
