@@ -43,10 +43,16 @@ public class LinkUrlTob implements Serializable {
     private Long accountId;
 
     /**
-     * 标题
+     * 链接标题
      */
     @TableField("title")
     private String title;
+
+    /**
+     * 链接icon
+     */
+    @TableField("icon")
+    private String icon;
 
     /**
      * 短链接
@@ -59,6 +65,12 @@ public class LinkUrlTob implements Serializable {
      */
     @TableField("long_link")
     private String longLink;
+
+    /**
+     * 二维码
+     */
+    @TableField("qr_code")
+    private String qrCode;
 
     /**
      * 到期时间

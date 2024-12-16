@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80036 (8.0.36)
+ Source Server Version : 101102 (10.11.2-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : mini_link_core_0
 
  Target Server Type    : MySQL
- Target Server Version : 80036 (8.0.36)
+ Target Server Version : 101102 (10.11.2-MariaDB)
  File Encoding         : 65001
 
- Date: 14/12/2024 20:01:03
+ Date: 16/12/2024 13:27:08
 */
 
 SET NAMES utf8mb4;
@@ -23,11 +23,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `link_url_tob_0`;
 CREATE TABLE `link_url_tob_0`  (
   `id` bigint NOT NULL COMMENT '主键id',
-  `group_id` bigint NULL DEFAULT NULL COMMENT '分组id',
+  `group_id` bigint NULL DEFAULT NULL COMMENT '链接分组id',
   `account_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '账号',
-  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标题',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '链接标题',
+  `icon` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '链接icon',
   `short_link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '短链接',
   `long_link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '长链接',
+  `qr_code` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '二维码',
   `expired_time` datetime NULL DEFAULT NULL COMMENT '到期时间',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
@@ -41,11 +43,13 @@ CREATE TABLE `link_url_tob_0`  (
 DROP TABLE IF EXISTS `link_url_tob_1`;
 CREATE TABLE `link_url_tob_1`  (
   `id` bigint NOT NULL COMMENT '主键id',
-  `group_id` bigint NULL DEFAULT NULL COMMENT '分组id',
+  `group_id` bigint NULL DEFAULT NULL COMMENT '链接分组id',
   `account_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '账号',
-  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标题',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '链接标题',
+  `icon` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '链接icon',
   `short_link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '短链接',
   `long_link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '长链接',
+  `qr_code` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '二维码',
   `expired_time` datetime NULL DEFAULT NULL COMMENT '到期时间',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
@@ -62,6 +66,9 @@ CREATE TABLE `link_url_toc_0`  (
   `short_link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '短链接',
   `long_link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '长链接',
   `expired_time` datetime NULL DEFAULT NULL COMMENT '到期时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `deleted` tinyint(1) NULL DEFAULT NULL COMMENT '删除标识',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 
@@ -74,6 +81,9 @@ CREATE TABLE `link_url_toc_1`  (
   `short_link` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '短链接',
   `long_link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '长链接',
   `expired_time` datetime NULL DEFAULT NULL COMMENT '到期时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `deleted` tinyint(1) NULL DEFAULT NULL COMMENT '删除标识',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
 

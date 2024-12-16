@@ -19,13 +19,13 @@ public class ShardingConfigFactory {
     private static final Random random = new Random();
 
     static {
-        databaseList.add(new ShardingElement("0", 0));
+        databaseList.add(new ShardingElement("0", 1));
         databaseList.add(new ShardingElement("1", 1));
-        databaseList.add(new ShardingElement("2", 0));
+        databaseList.add(new ShardingElement("2", 1));
     }
 
     static {
-        tableList.add(new ShardingElement("0", 0));
+        tableList.add(new ShardingElement("0", 1));
         tableList.add(new ShardingElement("1", 1));
     }
 

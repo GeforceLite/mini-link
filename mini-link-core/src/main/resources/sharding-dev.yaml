@@ -21,6 +21,18 @@ dataSources:
 rules:
   - !SHARDING
     tables:
+      # 短链接 ToB
+      link_url_tob:
+        actualDataNodes: ds${0..2}.link_url_tob_${0..1}
+        databaseStrategy:
+          standard:
+            shardingColumn: account_id
+            shardingAlgorithmName: link-url-tob-datasource
+        tableStrategy:
+          standard:
+            shardingColumn: account_id
+            shardingAlgorithmName: link-url-tob-table
+      # 短链接 ToC
       link_url_toc:
         actualDataNodes: ds${0..2}.link_url_toc_${0..1}
         databaseStrategy:
@@ -35,6 +47,16 @@ rules:
           column: id
           keyGeneratorName: snowflake
     shardingAlgorithms:
+      # 短链接 ToB
+      link-url-tob-datasource:
+        type: INLINE
+        props:
+          algorithm-expression: ds${account_id % 3}
+      link-url-tob-table:
+        type: INLINE
+        props:
+          algorithm-expression: link_url_tob_${account_id % 2}
+      # 短链接 ToC
       link-url-toc-datasource:
         type: CLASS_BASED
         props:
