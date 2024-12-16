@@ -58,17 +58,13 @@ mini-link
 | Spring Cloud Alibaba | 微服务框架     | https://github.com/alibaba/spring-cloud-alibaba |
 | MySQL                | 关系型数据库    | http://www.mybatis.org/mybatis-3/zh/index.html  |
 | Redis                | KV数据库     | https://redis.io/                               |
-| Redisson             | 分布式缓存     | https://redis.io/                               |
-| MyBatisPlus          | ORM框架     | http://www.mybatis.org/mybatis-3/zh/index.html  |
+| MyBatis-Plus         | ORM框架     | http://www.mybatis.org/mybatis-3/zh/index.html  |
 | XXL-JOB              | 定时调度      | http://www.mybatis.org/mybatis-3/zh/index.html  |
-| Elasticsearch        | 搜索引擎      | https://github.com/elastic/elasticsearch        |
 | Kafka                | 消息队列      | https://www.rabbitmq.com/                       |
 | MinIO                | 对象存储      | https://github.com/minio/minio                  |
-| ShardingSphere       | 分库分表      | https://github.com/minio/minio                  |
+| ShardingJDBC         | 分库分表      | https://github.com/minio/minio                  |
 | Lombok               | 简化对象封装工具  | https://github.com/rzwitserloot/lombok          |
-| HuTool               | 简化对象封装工具  | https://github.com/rzwitserloot/lombok          |
 | Flink                | 大数据实时计算   | https://kubernetes.io/                          |
-| HDFS                 | 分布式文件存储   | https://kubernetes.io/                          |
 | ClickHouse           | 列式OLAP数据库 | https://github.com/jenkinsci/jenkins            |
 
 ## 前端
@@ -87,13 +83,12 @@ mini-link
 
 | 技术            | 说明             | 官网                             |
 |---------------|----------------|--------------------------------|
-| CentOS 7.9    | Linux版本        | https://vuejs.org/             |
 | Docker        | 镜像容器           | https://router.vuejs.org/      |
 | Kubernetes    | 容器编排工具         | https://vuex.vuejs.org/        |
+| Ingress-Nginx | 负载均衡器          | https://v-charts.js.org/       |
 | Gitlab        | 代码仓库           | https://element.eleme.io/      |
 | Harbor        | 镜像仓库           | https://github.com/axios/axios |
 | Jenkins       | 基于Echarts的图表框架 | https://v-charts.js.org/       |
-| Ingress-Nginx | 负载均衡器          | https://v-charts.js.org/       |
 | Prometheus    | 数据采集           | https://v-charts.js.org/       |
 | Grafana       | 数据展示           | https://v-charts.js.org/       |
 | EFK           | 日志系统           | https://v-charts.js.org/       |

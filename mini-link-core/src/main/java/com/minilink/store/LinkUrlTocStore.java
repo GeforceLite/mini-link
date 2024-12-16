@@ -19,4 +19,12 @@ public interface LinkUrlTocStore extends IService<LinkUrlToc> {
      * @return 执行结果
      */
     Boolean saveLink(LinkUrlToc linkUrl);
+
+    /**
+     * 根据短链接查询记录
+     *
+     * @param shortLink 短链接
+     * @return 链接记录
+     */
+    LinkUrlToc getByShortLink(String shortLink);
 }

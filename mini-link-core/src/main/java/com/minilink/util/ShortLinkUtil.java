@@ -10,6 +10,7 @@ import com.minilink.sharding.ShardingConfigFactory;
  * @Version: 1.0
  */
 public class ShortLinkUtil {
+    public static final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
     private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private static long murmurHash32(String str) {

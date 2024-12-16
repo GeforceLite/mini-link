@@ -38,9 +38,9 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
 
-        LinkUrlTob shortLinkPO = tobStore.getByShortLink(shortLink);
+        LinkUrlToc shortLinkPO = tocStore.getByShortLink(shortLink);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
-            this.createShortLink(saveDTO);
+            throw new BizException(BizCodeEnum.FAIL);
         }
 
         // 保存短链接（两个维度）：TODO 后续推送到MQ，实现冗余双写

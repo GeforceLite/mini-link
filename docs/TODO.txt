@@ -1,4 +1,7 @@
 - Windows 部署 Nacos
 - Windows 部署 Kafka
+- Windows 部署 ClickHouse
 - ToC 短链接解析重定向问题
-- ToC 自定义分库分表算法问题（权重问题）
+- 链接解析icon、title功能
+- 通过 Kafka 异步削峰链接双写操作
+- 分布式事务问题处理

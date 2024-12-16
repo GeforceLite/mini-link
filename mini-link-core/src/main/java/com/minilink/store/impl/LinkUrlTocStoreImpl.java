@@ -20,4 +20,11 @@ public class LinkUrlTocStoreImpl extends ServiceImpl<LinkUrlTocMapper, LinkUrlTo
     public Boolean saveLink(LinkUrlToc linkUrl) {
         return this.save(linkUrl);
     }
+
+    @Override
+    public LinkUrlToc getByShortLink(String shortLink) {
+        return this.lambdaQuery()
+                .eq(LinkUrlToc::getShortLink, shortLink)
+                .one();
+    }
 }
