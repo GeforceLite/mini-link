@@ -12,5 +12,11 @@ import com.minilink.pojo.po.LinkUrlToc;
  * @since 2024-12-14
  */
 public interface LinkUrlTocStore extends IService<LinkUrlToc> {
-
+    /**
+     * 保存链接记录
+     *
+     * @param linkUrl 链接信息
+     * @return 执行结果
+     */
+    Boolean saveLink(LinkUrlToc linkUrl);
 }

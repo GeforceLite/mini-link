@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("link_url_toc_0")
+@TableName("link_url_toc")
 public class LinkUrlToc implements Serializable {
 
     private static final long serialVersionUID = 1L;

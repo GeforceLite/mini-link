@@ -4,45 +4,47 @@ dataSources:
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_0?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: Pxy161122
   ds1:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_1?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: Pxy161122
   ds2:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/mini_link_core_2?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: Pxy161122
 
 rules:
   - !SHARDING
     tables:
-      link_url_tob:
-        actualDataNodes: ds${0..2}.link_url_tob_${0..1}
+      link_url_toc:
+        actualDataNodes: ds${0..2}.link_url_toc_${0..1}
         databaseStrategy:
           standard:
-            shardingColumn: account_id
-            shardingAlgorithmName: link-url-tob-datasource-inline
+            shardingColumn: short_link
+            shardingAlgorithmName: link-url-toc-datasource
         tableStrategy:
           standard:
-            shardingColumn: account_id
-            shardingAlgorithmName: link-url-tob-table-inline
+            shardingColumn: short_link
+            shardingAlgorithmName: link-url-toc-table
         keyGenerateStrategy:
           column: id
           keyGeneratorName: snowflake
     shardingAlgorithms:
-      link-url-tob-datasource-inline:
-        type: INLINE
+      link-url-toc-datasource:
+        type: CLASS_BASED
         props:
-          algorithm-expression: ds${account_id % 3}
-      link-url-tob-table-inline:
-        type: INLINE
+          strategy: STANDARD
+          algorithmClassName: com.minilink.sharding.algorithm.LinkTocDatabaseShardingAlgorithm
+      link-url-toc-table:
+        type: CLASS_BASED
         props:
-          algorithm-expression: link_url_tob_${account_id % 2}
+          strategy: STANDARD
+          algorithmClassName: com.minilink.sharding.algorithm.LinkTocTableShardingAlgorithm
     keyGenerators:
       snowflake:
         type: SNOWFLAKE

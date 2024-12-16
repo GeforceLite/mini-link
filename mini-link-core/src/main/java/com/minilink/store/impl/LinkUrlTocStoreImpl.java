@@ -16,5 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LinkUrlTocStoreImpl extends ServiceImpl<LinkUrlTocMapper, LinkUrlToc> implements LinkUrlTocStore {
-
+    @Override
+    public Boolean saveLink(LinkUrlToc linkUrl) {
+        return this.save(linkUrl);
+    }
 }

@@ -1,13 +1,12 @@
 package com.minilink.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.minilink.adapter.LinkUrlAdapter;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
-import com.minilink.pojo.po.LinkUrlTob;
+import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTobService;
-import com.minilink.store.LinkUrlTobStore;
+import com.minilink.store.LinkUrlTocStore;
 import com.minilink.util.ShortLinkUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
     @Autowired
-    private LinkUrlTobStore urlStore;
+    private LinkUrlTocStore tocStore;
 
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
@@ -35,14 +34,11 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
         // TODO 推送到MQ，实现冗余双写
         // TODO 校验缓存中是否存在
-        LinkUrlTob linkUrlPO = LinkUrlAdapter.buildLinkUrlPO(
-                IdWorker.getId(),
-                saveDTO.getGroupId(),
-                saveDTO.getTitle(),
+        LinkUrlToc linkUrlPO = LinkUrlAdapter.buildLinkUrlTocPO(
                 shortLink,
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
         );
-        urlStore.saveLink(linkUrlPO);
+        tocStore.saveLink(linkUrlPO);
     }
 }

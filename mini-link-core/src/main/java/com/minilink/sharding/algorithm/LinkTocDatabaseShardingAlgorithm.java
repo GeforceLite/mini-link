@@ -10,13 +10,16 @@ import java.util.Collection;
  * @Author 徐志斌
  * @Date: 2024/12/15 16:26
  * @Version 1.0
- * @Description: ToC短链接-分表算法
+ * @Description: ToC短链接-分库算法
  */
-public class LinkTocTableAlgorithm implements StandardShardingAlgorithm<String> {
+public class LinkTocDatabaseShardingAlgorithm implements StandardShardingAlgorithm<String> {
 
     @Override
     public String doSharding(Collection<String> collection, PreciseShardingValue<String> preciseShardingValue) {
-        return null;
+        String shortLink = preciseShardingValue.getValue();
+        String[] array = shortLink.split("-");
+        String databaseCode = array[0];
+        return "ds" + databaseCode;
     }
 
     @Override

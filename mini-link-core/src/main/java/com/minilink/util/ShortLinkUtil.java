@@ -1,7 +1,7 @@
 package com.minilink.util;
 
 import com.google.common.hash.Hashing;
-import com.minilink.sharding.ShardingFactory;
+import com.minilink.sharding.ShardingConfigFactory;
 
 /**
  * @Author: 徐志斌
@@ -34,9 +34,9 @@ public class ShortLinkUtil {
     public static String generate(String longLink) {
         long murmurHash32 = murmurHash32(longLink);
         StringBuffer sb = new StringBuffer();
-        sb.append(ShardingFactory.getCode(ShardingFactory.databaseList));
+        sb.append(ShardingConfigFactory.getCode(ShardingConfigFactory.databaseList));
         sb.append("-");
-        sb.append(ShardingFactory.getCode(ShardingFactory.tableList));
+        sb.append(ShardingConfigFactory.getCode(ShardingConfigFactory.tableList));
         sb.append("-");
         sb.append(encodeToBase62(murmurHash32));
         return sb.toString();

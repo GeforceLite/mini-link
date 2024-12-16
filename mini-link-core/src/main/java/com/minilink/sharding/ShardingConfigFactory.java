@@ -13,19 +13,19 @@ import java.util.Random;
  * @Description: 库表位-配置工厂
  * @Version: 1.0
  */
-public class ShardingFactory {
+public class ShardingConfigFactory {
     public static final List<ShardingElement> databaseList = new ArrayList<>();
     public static final List<ShardingElement> tableList = new ArrayList<>();
     private static final Random random = new Random();
 
     static {
-        databaseList.add(new ShardingElement("0", 1));
+        databaseList.add(new ShardingElement("0", 0));
         databaseList.add(new ShardingElement("1", 1));
-        databaseList.add(new ShardingElement("2", 1));
+        databaseList.add(new ShardingElement("2", 0));
     }
 
     static {
-        tableList.add(new ShardingElement("0", 1));
+        tableList.add(new ShardingElement("0", 0));
         tableList.add(new ShardingElement("1", 1));
     }
 
