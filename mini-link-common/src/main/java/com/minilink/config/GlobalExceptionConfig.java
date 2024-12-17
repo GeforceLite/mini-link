@@ -3,8 +3,8 @@ package com.minilink.config;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.util.resp.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
@@ -15,6 +15,7 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
  * @Version 1.0
  * @Description: 全局异常处理
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionConfig {
     /**
@@ -22,24 +23,34 @@ public class GlobalExceptionConfig {
      */
     @ExceptionHandler(BizException.class)
     public R bizException(BizException e) {
+        log.error("-------------bizException:{}-------------", e.getCodeEnum());
         return R.out(e.getCodeEnum());
     }
 
-//    /**
-//     * 注解校验异常 BindException
-//     */
-//    @ExceptionHandler({HandlerMethodValidationException.class, BindException.class, MethodArgumentNotValidException.class})
-//    public R validationException(BindException b, HandlerMethodValidationException c) {
-//        StringBuilder sb = new StringBuilder();
-//        b.getBindingResult().getAllErrors().forEach(e -> sb.append(e.getDefaultMessage()).append("\r\n"));
-//        return R.out(BizCodeEnum.FAIL, sb);
-//    }
+    /**
+     * 服务端接口参数校验异常
+     */
+    @ExceptionHandler(BindException.class)
+    public R validationException(BindException e) {
+        StringBuilder sb = new StringBuilder();
+        e.getBindingResult().getAllErrors().forEach(error -> sb.append(error.getDefaultMessage()).append("\r\n"));
+        log.error("-------------bindException:{}-------------", e.getMessage());
+        return R.out(BizCodeEnum.PARAM_ERROR, sb);
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public R handlerMethodValidationException(HandlerMethodValidationException e) {
+        log.error("-------------handlerMethodValidationException:{}-------------", e.getMessage());
+        return R.out(BizCodeEnum.SHORT_LINK_FORMAT_ERROR, e.getMessage());
+    }
+
 
     /**
-     * 异常兜底
+     * 异常兜底 Exception
      */
     @ExceptionHandler(Exception.class)
-    public R bindException(Exception e) {
-        return R.out(BizCodeEnum.FAIL, e);
+    public R exception(Exception e) {
+        log.error("-------------exception:{}-------------", e.getMessage());
+        return R.out(BizCodeEnum.FAIL, e.getMessage());
     }
 }

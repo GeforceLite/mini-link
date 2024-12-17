@@ -1,13 +1,5 @@
 package com.minilink.service;
 
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
-import com.minilink.util.HttpServletUtil;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
-
-import java.io.IOException;
-
 /**
  * <p>
  * 服务类
@@ -22,5 +14,5 @@ public interface LinkUrlTocService {
      *
      * @param shortLink 短链接
      */
-    void redirect(String shortLink) throws IOException;
+    void redirect(String shortLink);
 }

@@ -1,6 +1,6 @@
 package com.minilink.util;
 
-import com.minilink.config.ThreadPoolTaskConfig;
+import com.minilink.config.MyThreadPoolExecutor;
 import jakarta.annotation.Resource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
@@ -36,7 +36,7 @@ public class EmailUtil {
      * @param subject 主题
      * @param content 内容
      */
-    @Async(ThreadPoolTaskConfig.THREAD_POOL_NAME)
+    @Async(MyThreadPoolExecutor.THREAD_POOL_NAME)
     public void sendTextMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);

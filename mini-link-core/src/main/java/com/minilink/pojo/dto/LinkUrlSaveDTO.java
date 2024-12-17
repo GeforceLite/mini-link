@@ -22,14 +22,14 @@ public class LinkUrlSaveDTO {
     /**
      * 标题
      */
-    @NotBlank(message = "标题不存在")
+    @NotBlank(message = "标题信息不能为空")
     private String title;
 
     /**
-     * 长链接
+     * 长链接（目标链接）
      */
-    @NotBlank(message = "长链接不存在")
-    @Pattern(regexp = "^https?://", message = "长连接格式不正确")
+    @NotBlank(message = "目标链接信息不能为空")
+    @Pattern(regexp = "^https?://.*", message = "目标链接格式不正确")
     private String longLink;
 
     /**

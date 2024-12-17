@@ -15,8 +15,8 @@ public enum BizCodeEnum {
      */
     SUCCESS(20000, "操作成功"),
     FAIL(50000, "操作失败"),
+    PARAM_ERROR(50001, "服务端参数异常"),
     OPS_REPEAT(110001, "重复操作"),
-    OPS_NETWORK_ADDRESS_ERROR(110002, "⽹络地址错误"),
 
     /**
      * 验证码
@@ -40,11 +40,13 @@ public enum BizCodeEnum {
     SHORT_LINK_NOT_EXIST(260404, "短链接不存在"),
     SHORT_LINK_EXPIRED(260001, "短链接已过期，无法访问"),
     SHORT_LINK_FORMAT_ERROR(260500, "短链接格式错误"),
+    SHORT_LINK_REPEAT(260501, "短链接重复，请重新生成"),
 
     /**
      * 长链接
      */
     LONG_LINK_NOT_EXIST(270404, "长链接不存在"),
+    LONG_LINK_FORMAT_ERROR(270500, "长链接格式错误"),
 
     /**
      * 流控操作

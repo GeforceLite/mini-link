@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @Version: 1.0
  */
 @Configuration
-public class ThreadPoolTaskConfig {
+public class MyThreadPoolExecutor {
     public static final String THREAD_POOL_NAME = "threadPoolTaskExecutor";
 
     @Bean(THREAD_POOL_NAME)
