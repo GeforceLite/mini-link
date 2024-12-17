@@ -18,20 +18,6 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for mini_link_group
--- ----------------------------
-DROP TABLE IF EXISTS `mini_link_group`;
-CREATE TABLE `mini_link_group`  (
-  `id` bigint NOT NULL COMMENT '主键',
-  `account_id` bigint NULL DEFAULT NULL COMMENT '账号',
-  `group_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分组名称',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  `deleted` tinyint(1) NULL DEFAULT NULL COMMENT '删除标识',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for mini_link_user
 -- ----------------------------
 DROP TABLE IF EXISTS `mini_link_user`;

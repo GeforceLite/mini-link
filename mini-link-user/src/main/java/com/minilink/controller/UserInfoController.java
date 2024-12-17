@@ -1,7 +1,8 @@
 package com.minilink.controller;
 
 import com.minilink.enums.BizCodeEnum;
-import com.minilink.service.UserAssistService;
+import com.minilink.pojo.vo.UserVO;
+import com.minilink.service.UserInfoService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,12 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserInfoController {
     @Autowired
-    private UserAssistService userService;
+    private UserInfoService userService;
 
     @Operation(summary = "查询账户信息")
     @GetMapping("/info/{accountId}")
     public R getUserInfo(@PathVariable Long accountId) {
-        return R.out(BizCodeEnum.SUCCESS);
+        UserVO userVO = userService.getUserInfo(accountId);
+        return R.out(BizCodeEnum.SUCCESS, userVO);
     }
 
     @Operation(summary = "修改用户信息")

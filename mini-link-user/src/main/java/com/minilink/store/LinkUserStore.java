@@ -27,4 +27,12 @@ public interface LinkUserStore extends IService<LinkUser> {
      * @return 执行结果
      */
     Boolean saveUser(LinkUser userPO);
+
+    /**
+     * 根据 account_id 查询用户信息
+     *
+     * @param accountId 账号
+     * @return 用户信息
+     */
+    LinkUser getByAccountId(Long accountId);
 }
