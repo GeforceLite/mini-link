@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/tob")
 public class LinkTobController {
     @Autowired
-    private LinkUrlTobService urlService;
+    private LinkUrlTobService urlTobService;
 
     @Operation(summary = "创建链接")
     @PostMapping("/create")
     public R create(@RequestBody LinkUrlSaveDTO saveDTO) {
-        urlService.createShortLink(saveDTO);
+        urlTobService.createShortLink(saveDTO);
         return R.out(BizCodeEnum.SUCCESS);
     }
 

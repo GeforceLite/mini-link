@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,16 +24,14 @@ public class UserInfoController {
     private UserAssistService userService;
 
     @Operation(summary = "查询账户信息")
-    @GetMapping("/info")
-    public R getUserInfo() {
-//        userService.register();
+    @GetMapping("/info/{accountId}")
+    public R getUserInfo(@PathVariable Long accountId) {
         return R.out(BizCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "修改用户信息")
     @PostMapping("/update")
     public R updateUserInfo() {
-//        userService.login();
         return R.out(BizCodeEnum.SUCCESS);
     }
 }

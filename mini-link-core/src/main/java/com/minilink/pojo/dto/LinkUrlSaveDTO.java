@@ -1,6 +1,7 @@
 package com.minilink.pojo.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ public class LinkUrlSaveDTO {
      * 长链接
      */
     @NotBlank(message = "长链接不存在")
+    @Pattern(regexp = "^https?://", message = "长连接格式不正确")
     private String longLink;
 
     /**
