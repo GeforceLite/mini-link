@@ -15,6 +15,8 @@ import com.minilink.util.ShortLinkUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务实现类
@@ -25,20 +27,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LinkUrlTobServiceImpl implements LinkUrlTobService {
-    private final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
     @Autowired
-    private LinkUrlTocStore tocStore;
+    private LinkUrlTocStore urlTocStore;
     @Autowired
-    private LinkUrlTobStore tobStore;
+    private LinkUrlTobStore urlTobStore;
 
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
         String shortLink = ShortLinkUtil.generate(saveDTO.getLongLink());
-        if (!shortLink.matches(SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLink.matches(ShortLinkUtil.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
-
-        LinkUrlToc shortLinkPO = tocStore.getByShortLink(shortLink);
+        LinkUrlToc shortLinkPO = urlTocStore.getByShortLink(shortLink);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
         }
@@ -52,12 +52,17 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
         );
-        tobStore.saveLink(tobLinkPO);
+        urlTobStore.saveLink(tobLinkPO);
         LinkUrlToc tocLinkPO = LinkUrlAdapter.buildLinkUrlTocPO(
                 shortLink,
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
         );
-        tocStore.saveLink(tocLinkPO);
+        urlTocStore.saveLink(tocLinkPO);
+    }
+
+    @Override
+    public Map<String, Object> parseLink(String link) {
+        return null;
     }
 }

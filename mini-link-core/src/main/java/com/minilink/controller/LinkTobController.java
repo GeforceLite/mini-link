@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-03  16:37
@@ -28,6 +30,13 @@ public class LinkTobController {
     public R create(@Validated @RequestBody LinkUrlSaveDTO saveDTO) {
         urlTobService.createShortLink(saveDTO);
         return R.out(BizCodeEnum.SUCCESS);
+    }
+
+    @Operation(summary = "解析链接标题、图标")
+    @PostMapping("/parse")
+    public R create(String link) {
+        Map<String, Object> resultMap = urlTobService.parseLink(link);
+        return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "分页列表")

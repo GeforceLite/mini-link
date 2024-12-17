@@ -2,6 +2,8 @@ package com.minilink.service;
 
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -17,4 +19,12 @@ public interface LinkUrlTobService {
      * @param saveDTO 保存入参DTO
      */
     void createShortLink(LinkUrlSaveDTO saveDTO);
+
+    /**
+     * 获取目标链接 User-Agent 信息
+     *
+     * @param link 目标链接
+     * @return User-Agent信息
+     */
+    Map<String, Object> parseLink(String link);
 }

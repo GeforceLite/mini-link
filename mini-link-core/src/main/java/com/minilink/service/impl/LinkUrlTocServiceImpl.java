@@ -5,6 +5,7 @@ import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
 import com.minilink.store.LinkUrlTocStore;
 import com.minilink.util.HttpServletUtil;
+import com.minilink.util.ShortLinkUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,22 +24,32 @@ import java.time.LocalDateTime;
 @Service
 public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Autowired
-    private LinkUrlTocStore tocStore;
+    private LinkUrlTocStore urlTocStore;
 
     @Override
     public void redirect(String shortLink) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        LinkUrlToc linkUrlPO = tocStore.getByShortLink(shortLink);
+        if (!shortLink.matches(ShortLinkUtil.SHORT_LINK_FORMAT_REGEX)) {
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            return;
+        }
+
+        LinkUrlToc linkUrlPO = urlTocStore.getByShortLink(shortLink);
         if (ObjectUtils.isEmpty(linkUrlPO)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
+            return;
         }
+
         if (ObjectUtils.isNotEmpty(linkUrlPO.getExpiredTime())
                 && linkUrlPO.getExpiredTime().isBefore(LocalDateTime.now())) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
-        } else {
-            // TODO Kafka将本次行为数据推送到大数据服务
-            response.setHeader("Location", linkUrlPO.getLongLink());
-            response.setStatus(HttpStatus.FOUND.value());
+            return;
         }
+
+        // TODO Kafka 推送用户点击访问行为数据推送到 Flink 进行实时计算
+
+        // 重定向跳转到目标链接
+        response.setHeader("Location", linkUrlPO.getLongLink());
+        response.setStatus(HttpStatus.FOUND.value());
     }
 }

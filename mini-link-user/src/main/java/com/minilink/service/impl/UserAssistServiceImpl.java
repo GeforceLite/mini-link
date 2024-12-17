@@ -60,7 +60,7 @@ public class UserAssistServiceImpl implements UserAssistService {
     public String getCaptchaKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         HttpServletRequest request = HttpServletUtil.getRequest();
         String userAgent = request.getHeader("User-Agent");
-        String ip = ClientUtil.getPublicIp(request);
+        String ip = IpUtil.getPublicIp(request);
         return RedisConstant.CAPTCHA_KEY + EncryptUtil.md5(userAgent + ip);
     }
 
