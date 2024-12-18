@@ -36,7 +36,8 @@
         <sharding-jdbc.version>5.5.1</sharding-jdbc.version>
         <hutool.version>5.8.23</hutool.version>
         <jwt.version>0.9.0</jwt.version>
-        <jaxb.api>2.3.0</jaxb.api>
+        <jaxb.api.version>2.3.0</jaxb.api.version>
+        <jsoup.version>1.14.3</jsoup.version>
     </properties>
 
     <dependencyManagement>
@@ -138,7 +139,13 @@
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
-                <version>${jaxb.api}</version>
+                <version>${jaxb.api.version}</version>
+            </dependency>
+            <!--jsoup-->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

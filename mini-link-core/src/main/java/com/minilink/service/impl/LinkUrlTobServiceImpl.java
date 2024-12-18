@@ -12,9 +12,14 @@ import com.minilink.service.LinkUrlTobService;
 import com.minilink.store.LinkUrlTobStore;
 import com.minilink.store.LinkUrlTocStore;
 import com.minilink.util.ShortLinkUtil;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -62,7 +67,17 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     }
 
     @Override
-    public Map<String, Object> parseLink(String link) {
-        return null;
+    public Map<String, Object> parseLink(String link) throws IOException {
+        Document doc = Jsoup.connect(link).get();
+        String title = doc.title();
+        Element descriptionTag = doc.select("meta[name=description]").first();
+        String description = descriptionTag != null ? descriptionTag.attr("content") : "";
+        Element iconTag = doc.select("link[rel=icon], link[rel=shortcut icon]").first();
+        String iconLink = iconTag != null ? iconTag.attr("href") : "";
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("description", description);
+        map.put("iconLink", iconLink);
+        return map;
     }
 }

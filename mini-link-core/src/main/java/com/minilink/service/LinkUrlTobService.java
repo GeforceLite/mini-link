@@ -2,6 +2,7 @@ package com.minilink.service;
 
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -26,5 +27,5 @@ public interface LinkUrlTobService {
      * @param link 目标链接
      * @return User-Agent信息
      */
-    Map<String, Object> parseLink(String link);
+    Map<String, Object> parseLink(String link) throws IOException;
 }
