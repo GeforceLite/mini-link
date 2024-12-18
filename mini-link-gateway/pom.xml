@@ -14,11 +14,6 @@
     <name>mini-link-gateway</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.minilink</groupId>
-            <artifactId>mini-link-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

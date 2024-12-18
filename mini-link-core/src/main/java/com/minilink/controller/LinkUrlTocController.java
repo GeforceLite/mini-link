@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "C端-短链接")
 @RestController
-public class LinkTocController {
+public class LinkUrlTocController {
     @Autowired
     private LinkUrlTocService tocService;
 

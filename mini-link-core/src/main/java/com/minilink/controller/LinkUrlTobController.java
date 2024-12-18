@@ -21,7 +21,7 @@ import java.util.Map;
 @Tag(name = "B端-短链接")
 @RestController
 @RequestMapping("/api/tob")
-public class LinkTobController {
+public class LinkUrlTobController {
     @Autowired
     private LinkUrlTobService urlTobService;
 

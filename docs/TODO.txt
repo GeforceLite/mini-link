@@ -1,7 +1,5 @@
-- Windows 部署 Nacos
 - Windows 部署 Kafka
 - Windows 部署 ClickHouse
-- 整合 UserAgentUtil 开源工具
 - 链接解析 icon、title 接口
 - 通过 Kafka 异步削峰链接双写操作
 - 通过 Kafka 上报短链接访问用户行为数据
