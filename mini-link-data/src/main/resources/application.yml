@@ -5,7 +5,3 @@ server:
 spring:
   application:
     name: mini-link-data
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848

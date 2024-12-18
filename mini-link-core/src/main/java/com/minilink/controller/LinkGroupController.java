@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "链接分组")
 @RestController
-@RequestMapping("/api/group")
+@RequestMapping("/group")
 public class LinkGroupController {
     @Operation(summary = "创建分组")
     @PostMapping("/create")

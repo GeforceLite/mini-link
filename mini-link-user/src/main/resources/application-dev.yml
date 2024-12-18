@@ -9,6 +9,7 @@ spring:
       host: localhost
       port: 6379
       database: 0
+      password: Pxy123456
       timeout: 3000
       connectTimeout: 5000
       lettuce:

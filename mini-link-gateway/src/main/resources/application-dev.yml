@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: mini-link-user
+          uri: lb://mini-link-user
+          predicates:
+            - Path=/user/**
+
+        - id: mini-link-core-tob
+          uri: lb://mini-link-core
+          predicates:
+            - Path=/tob/**
+
+        - id: mini-link-core-toc
+          uri: lb://mini-link-core
+          predicates:
+            - Path=/**
