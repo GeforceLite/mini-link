@@ -7,12 +7,7 @@ spring:
           predicates:
             - Path=/user/**
 
-        - id: mini-link-core-tob
+        - id: mini-link-core
           uri: lb://mini-link-core
           predicates:
-            - Path=/tob/**
-
-        - id: mini-link-core-toc
-          uri: lb://mini-link-core
-          predicates:
-            - Path=/**
+            - Path=/url/**,/**
