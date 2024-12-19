@@ -27,7 +27,7 @@ public class LinkUrlToc implements Serializable {
     /**
      * 主键id
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id")
     private Long id;
 
     /**

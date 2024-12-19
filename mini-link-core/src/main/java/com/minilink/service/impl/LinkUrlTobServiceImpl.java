@@ -69,6 +69,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         );
         urlTobStore.saveLink(tobLinkPO);
         LinkUrlToc tocLinkPO = LinkUrlAdapter.buildLinkUrlTocPO(
+                SnowFlakeUtil.nextId(),
                 shortLinkCode,
                 miniLinkDomain + shortLinkCode,
                 saveDTO.getLongLink(),

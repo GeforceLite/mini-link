@@ -28,8 +28,10 @@ public class LinkUrlAdapter {
         return linkUrl;
     }
 
-    public static LinkUrlToc buildLinkUrlTocPO(String shortLinkCode, String shortLink, String longLink, LocalDateTime expiredTime) {
+    public static LinkUrlToc buildLinkUrlTocPO(Long id, String shortLinkCode, String shortLink,
+                                               String longLink, LocalDateTime expiredTime) {
         LinkUrlToc linkUrl = new LinkUrlToc();
+        linkUrl.setId(id);
         linkUrl.setShortLinkCode(shortLinkCode);
         linkUrl.setShortLink(shortLink);
         linkUrl.setLongLink(longLink);
