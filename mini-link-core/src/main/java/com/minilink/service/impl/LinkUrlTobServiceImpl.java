@@ -50,26 +50,27 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
 
-        String shortLink = miniLinkDomain + shortLinkCode;
-        LinkUrlToc shortLinkPO = urlTocStore.getByShortLink(shortLink);
+        LinkUrlToc shortLinkPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
         }
 
+        Long groupId = ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId;
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
                 SnowFlakeUtil.nextId(),
-                ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId,
+                groupId,
                 saveDTO.getTitle(),
                 saveDTO.getIcon(),
                 miniLinkDomain,
                 shortLinkCode,
-                shortLink,
+                miniLinkDomain + shortLinkCode,
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
         );
         urlTobStore.saveLink(tobLinkPO);
         LinkUrlToc tocLinkPO = LinkUrlAdapter.buildLinkUrlTocPO(
-                shortLink,
+                shortLinkCode,
+                miniLinkDomain + shortLinkCode,
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
         );

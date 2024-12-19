@@ -16,9 +16,9 @@ public class LinkTocDatabaseShardingAlgorithm implements StandardShardingAlgorit
 
     @Override
     public String doSharding(Collection<String> collection, PreciseShardingValue<String> preciseShardingValue) {
-        String shortLink = preciseShardingValue.getValue();
+        String shortLinkCode = preciseShardingValue.getValue();
         String databaseName = "ds";
-        String databaseCode = shortLink.split("-")[0];
+        String databaseCode = shortLinkCode.split("-")[0];
         return databaseName + databaseCode;
     }
 

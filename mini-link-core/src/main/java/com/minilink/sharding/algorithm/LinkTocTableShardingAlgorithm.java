@@ -16,9 +16,9 @@ public class LinkTocTableShardingAlgorithm implements StandardShardingAlgorithm<
 
     @Override
     public String doSharding(Collection<String> collection, PreciseShardingValue<String> preciseShardingValue) {
-        String shortLink = preciseShardingValue.getValue();
+        String shortLinkCode = preciseShardingValue.getValue();
         String tableName = preciseShardingValue.getLogicTableName();
-        String tableCode = shortLink.split("-")[1];
+        String tableCode = shortLinkCode.split("-")[1];
         return tableName + "_" + tableCode;
     }
 

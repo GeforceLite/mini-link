@@ -22,9 +22,9 @@ public class LinkUrlTocStoreImpl extends ServiceImpl<LinkUrlTocMapper, LinkUrlTo
     }
 
     @Override
-    public LinkUrlToc getByShortLink(String shortLink) {
+    public LinkUrlToc getByShortLinkCode(String shortLinkCode) {
         return this.lambdaQuery()
-                .eq(LinkUrlToc::getShortLink, shortLink)
+                .eq(LinkUrlToc::getShortLinkCode, shortLinkCode)
                 .one();
     }
 }

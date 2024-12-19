@@ -23,8 +23,8 @@ public interface LinkUrlTocStore extends IService<LinkUrlToc> {
     /**
      * 根据短链接查询记录
      *
-     * @param shortLink 短链接
+     * @param shortLinkCode 短链接码
      * @return 链接记录
      */
-    LinkUrlToc getByShortLink(String shortLink);
+    LinkUrlToc getByShortLinkCode(String shortLinkCode);
 }

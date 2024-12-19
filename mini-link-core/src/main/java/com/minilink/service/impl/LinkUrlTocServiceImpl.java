@@ -34,7 +34,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
             return;
         }
 
-        LinkUrlToc linkUrlPO = urlTocStore.getByShortLink(shortLink);
+        LinkUrlToc linkUrlPO = urlTocStore.getByShortLinkCode(shortLink);
         if (ObjectUtils.isEmpty(linkUrlPO)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;

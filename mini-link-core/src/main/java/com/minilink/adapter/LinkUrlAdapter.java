@@ -20,7 +20,7 @@ public class LinkUrlAdapter {
         linkUrl.setGroupId(groupId);
         linkUrl.setTitle(title);
         linkUrl.setIcon(icon);
-        linkUrl.setIcon(domain);
+        linkUrl.setDomain(domain);
         linkUrl.setShortLinkCode(shortLinkCode);
         linkUrl.setShortLink(shortLink);
         linkUrl.setLongLink(longLink);
@@ -28,8 +28,9 @@ public class LinkUrlAdapter {
         return linkUrl;
     }
 
-    public static LinkUrlToc buildLinkUrlTocPO(String shortLink, String longLink, LocalDateTime expiredTime) {
+    public static LinkUrlToc buildLinkUrlTocPO(String shortLinkCode, String shortLink, String longLink, LocalDateTime expiredTime) {
         LinkUrlToc linkUrl = new LinkUrlToc();
+        linkUrl.setShortLinkCode(shortLinkCode);
         linkUrl.setShortLink(shortLink);
         linkUrl.setLongLink(longLink);
         linkUrl.setExpiredTime(expiredTime);
