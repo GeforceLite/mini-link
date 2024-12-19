@@ -12,12 +12,16 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  */
 public class LinkUrlAdapter {
-    public static LinkUrlTob buildLinkUrlTobPO(Long accountId, Long groupId, String title,
-                                               String shortLink, String longLink, LocalDateTime expiredTime) {
+    public static LinkUrlTob buildLinkUrlTobPO(Long accountId, Long groupId, String title, String icon,
+                                               String domain, String shortLinkCode, String shortLink,
+                                               String longLink, LocalDateTime expiredTime) {
         LinkUrlTob linkUrl = new LinkUrlTob();
         linkUrl.setAccountId(accountId);
         linkUrl.setGroupId(groupId);
         linkUrl.setTitle(title);
+        linkUrl.setIcon(icon);
+        linkUrl.setIcon(domain);
+        linkUrl.setShortLinkCode(shortLinkCode);
         linkUrl.setShortLink(shortLink);
         linkUrl.setLongLink(longLink);
         linkUrl.setExpiredTime(expiredTime);

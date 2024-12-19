@@ -5,7 +5,7 @@ import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
 import com.minilink.store.LinkUrlTocStore;
 import com.minilink.util.HttpServletUtil;
-import com.minilink.util.ShortLinkUtil;
+import com.minilink.util.LinkUrlUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Override
     public void redirect(String shortLink) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        if (!shortLink.matches(ShortLinkUtil.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLink.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }

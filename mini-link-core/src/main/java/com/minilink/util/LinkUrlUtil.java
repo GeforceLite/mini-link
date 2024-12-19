@@ -6,10 +6,10 @@ import com.minilink.sharding.ShardingConfigFactory;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-12  13:12
- * @Description: 短链接工具类
+ * @Description: 链接工具类
  * @Version: 1.0
  */
-public class ShortLinkUtil {
+public class LinkUrlUtil {
     public static final String SHORT_LINK_FORMAT_REGEX = "^\\d+-\\d+-[a-z0-9A-Z]+$";
     public static final String LONG_LINK_FORMAT_REGEX = "^https?://.*";
     private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -34,7 +34,7 @@ public class ShortLinkUtil {
      * 例如：0-2-4s3sQA
      */
     public static String generate(String longLink) {
-        long murmurHash32 = murmurHash32(longLink);
+        long murmurHash32 = murmurHash32(SnowFlakeUtil.nextId() + "&" + longLink);
         StringBuffer sb = new StringBuffer();
         sb.append(ShardingConfigFactory.getCode(ShardingConfigFactory.databaseList));
         sb.append("-");

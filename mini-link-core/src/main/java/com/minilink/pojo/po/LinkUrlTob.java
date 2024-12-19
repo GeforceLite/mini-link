@@ -55,6 +55,18 @@ public class LinkUrlTob implements Serializable {
     private String icon;
 
     /**
+     * 域名
+     */
+    @TableField("domain")
+    private String domain;
+
+    /**
+     * 短链接码（1-0-cXcLm）
+     */
+    @TableField("short_link_code")
+    private String shortLinkCode;
+
+    /**
      * 短链接
      */
     @TableField("short_link")

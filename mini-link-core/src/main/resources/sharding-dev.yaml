@@ -40,11 +40,11 @@ rules:
         actualDataNodes: ds${0..2}.link_url_toc_${0..1}
         databaseStrategy:
           standard:
-            shardingColumn: short_link
+            shardingColumn: short_link_code
             shardingAlgorithmName: link-url-toc-datasource
         tableStrategy:
           standard:
-            shardingColumn: short_link
+            shardingColumn: short_link_code
             shardingAlgorithmName: link-url-toc-table
         keyGenerateStrategy:
           column: id

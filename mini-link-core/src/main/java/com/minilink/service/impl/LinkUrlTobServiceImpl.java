@@ -1,6 +1,5 @@
 package com.minilink.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.LinkUrlAdapter;
 import com.minilink.enums.BizCodeEnum;
@@ -11,11 +10,13 @@ import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTobService;
 import com.minilink.store.LinkUrlTobStore;
 import com.minilink.store.LinkUrlTocStore;
-import com.minilink.util.ShortLinkUtil;
+import com.minilink.util.LinkUrlUtil;
+import com.minilink.util.SnowFlakeUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -37,22 +38,31 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     @Autowired
     private LinkUrlTobStore urlTobStore;
 
+    @Value("${mini-link.domain}")
+    private String miniLinkDomain;
+    @Value("${mini-link.group-id}")
+    private Long miniLinkGroupId;
+
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
-        String shortLink = ShortLinkUtil.generate(saveDTO.getLongLink());
-        if (!shortLink.matches(ShortLinkUtil.SHORT_LINK_FORMAT_REGEX)) {
+        String shortLinkCode = LinkUrlUtil.generate(saveDTO.getLongLink());
+        if (!shortLinkCode.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
+
+        String shortLink = miniLinkDomain + shortLinkCode;
         LinkUrlToc shortLinkPO = urlTocStore.getByShortLink(shortLink);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
         }
 
-        // 保存短链接（两个维度）：TODO 后续推送到MQ，实现冗余双写
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
-                IdWorker.getId(),
-                saveDTO.getGroupId(),
+                SnowFlakeUtil.nextId(),
+                ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId,
                 saveDTO.getTitle(),
+                saveDTO.getIcon(),
+                miniLinkDomain,
+                shortLinkCode,
                 shortLink,
                 saveDTO.getLongLink(),
                 saveDTO.getExpiredTime()
