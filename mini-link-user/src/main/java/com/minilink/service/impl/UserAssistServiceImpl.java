@@ -78,7 +78,7 @@ public class UserAssistServiceImpl implements UserAssistService {
     }
 
     @Override
-    public void uploadAvatar(MultipartFile avatarFile) {
+    public void uploadFile(Integer type, MultipartFile file) {
 
     }
 }

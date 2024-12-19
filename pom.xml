@@ -38,6 +38,7 @@
         <jwt.version>0.9.0</jwt.version>
         <jaxb.api.version>2.3.0</jaxb.api.version>
         <jsoup.version>1.14.3</jsoup.version>
+        <minio.version>8.5.2</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -146,6 +147,12 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+            <!--Minio-->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,6 +1,5 @@
 package com.minilink.service;
 
-import jakarta.mail.MessagingException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
@@ -30,12 +29,13 @@ public interface UserAssistService {
      *
      * @param email 邮箱
      */
-    void sendEmail(String email) throws MessagingException;
+    void sendEmail(String email);
 
     /**
-     * 上传头像
+     * 上传文件
      *
-     * @param avatarFile 头像文件
+     * @param type       类型
+     * @param avatarFile 文件
      */
-    void uploadAvatar(MultipartFile avatarFile);
+    void uploadFile(Integer type, MultipartFile avatarFile);
 }

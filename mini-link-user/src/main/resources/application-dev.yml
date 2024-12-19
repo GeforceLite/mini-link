@@ -30,3 +30,13 @@ spring:
         smtp:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
+
+storage:
+  minio:
+    endpoint: http://localhost:9000
+    access-key: admin
+    secret-key: 12345678
+    bucketName:
+      avatar: avatar-bucket
+      qrcode: qrcode-bucket
+

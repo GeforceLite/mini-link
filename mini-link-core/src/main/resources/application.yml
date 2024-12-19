@@ -4,4 +4,4 @@ spring:
   application:
     name: mini-link-core
 server:
-  port: 9001
+  port: 9091

@@ -5,7 +5,6 @@ import com.minilink.service.UserAssistService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,15 +35,15 @@ public class UserAssistController {
 
     @Operation(summary = "发送邮件")
     @PostMapping("/email/{email}")
-    public R sendEmail(@PathVariable String email) throws MessagingException {
+    public R sendEmail(@PathVariable String email) {
         assistService.sendEmail(email);
         return R.out(BizCodeEnum.SUCCESS);
     }
 
-    @Operation(summary = "上传头像")
-    @PostMapping("/avatar")
-    public R uploadAvatar(MultipartFile avatarFile) {
-        assistService.uploadAvatar(avatarFile);
+    @Operation(summary = "上传文件")
+    @PostMapping("/upload/{type}")
+    public R uploadFile(@PathVariable Integer type, MultipartFile file) {
+        assistService.uploadFile(type, file);
         return R.out(BizCodeEnum.SUCCESS);
     }
 }

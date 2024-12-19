@@ -1,6 +1,5 @@
 package com.minilink.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.UserAdapter;
 import com.minilink.constant.RedisConstant;
@@ -15,6 +14,7 @@ import com.minilink.store.LinkUserStore;
 import com.minilink.util.EncryptUtil;
 import com.minilink.util.JwtUtil;
 import com.minilink.util.RandomUtil;
+import com.minilink.util.SnowFlakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -60,15 +60,8 @@ public class UserFormServiceImpl implements UserFormService {
         }
         String salt = "$1$" + RandomUtil.generate(8, 3);
         String password = EncryptUtil.md5(registerDTO.getPassword1() + salt);
-        long snowFlakeId = IdWorker.getId();
-        userPO = UserAdapter.buildUserPO(
-                snowFlakeId,
-                "用户" + snowFlakeId,
-                "",
-                email,
-                password,
-                salt
-        );
+        long snowFlakeId = SnowFlakeUtil.nextId();
+        userPO = UserAdapter.buildUserPO(snowFlakeId, "用户" + snowFlakeId, "", email, password, salt);
         userStore.saveUser(userPO);
     }
 
