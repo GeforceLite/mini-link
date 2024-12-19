@@ -1,6 +1,4 @@
 - Windows 部署 Kafka
 - Windows 部署 ClickHouse
-- 链接解析 icon、title 接口
 - 通过 Kafka 异步削峰链接双写操作
 - 通过 Kafka 上报短链接访问用户行为数据
-- 分布式事务问题处理
