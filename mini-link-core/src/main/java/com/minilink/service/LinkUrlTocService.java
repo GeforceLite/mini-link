@@ -12,7 +12,7 @@ public interface LinkUrlTocService {
     /**
      * 访问短链接
      *
-     * @param shortLink 短链接
+     * @param shortLinkCode 短链接码
      */
-    void redirect(String shortLink);
+    void redirect(String shortLinkCode);
 }

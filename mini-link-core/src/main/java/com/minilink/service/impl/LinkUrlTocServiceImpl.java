@@ -1,6 +1,10 @@
 package com.minilink.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.minilink.adapter.KafkaMsgAdapter;
+import com.minilink.constant.KafkaConstant;
+import com.minilink.pojo.entity.VisitShortLinkMsg;
 import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
 import com.minilink.store.LinkUrlTocStore;
@@ -10,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,29 +35,24 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     private KafkaTemplate kafkaTemplate;
 
     @Override
-    public void redirect(String shortLink) {
+    public void redirect(String shortLinkCode) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        if (!shortLink.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
-
-        LinkUrlToc linkUrlPO = urlTocStore.getByShortLinkCode(shortLink);
+        LinkUrlToc linkUrlPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isEmpty(linkUrlPO)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
-
         if (ObjectUtils.isNotEmpty(linkUrlPO.getExpiredTime())
                 && linkUrlPO.getExpiredTime().isBefore(LocalDateTime.now())) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
-
-        // TODO Kafka 推送用户点击访问行为数据推送到 Flink 进行实时计算
-        kafkaTemplate.send("test-topic", "测试消息");
-
-        // 重定向跳转到目标链接
+        VisitShortLinkMsg visitShortLinkMsg = KafkaMsgAdapter.buildVisitShortLinkMsg(shortLinkCode);
+        kafkaTemplate.send(KafkaConstant.CLICK_LINK_LOG_TOPIC, JSONUtil.toJsonStr(visitShortLinkMsg));
         response.setHeader("Location", linkUrlPO.getLongLink());
         response.setStatus(HttpStatus.FOUND.value());
     }

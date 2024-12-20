@@ -1,8 +1,7 @@
+mini-link:
+  domain: localhost:8080/
+  group-id: 1
 spring:
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
     url: jdbc:shardingsphere:classpath:sharding-dev.yaml
-
-mini-link:
-  domain: localhost:8080/
-  group-id: 1

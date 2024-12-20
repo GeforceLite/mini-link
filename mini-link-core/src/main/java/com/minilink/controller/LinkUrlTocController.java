@@ -21,8 +21,8 @@ public class LinkUrlTocController {
     private LinkUrlTocService tocService;
 
     @Operation(summary = "访问短链接")
-    @GetMapping("/{shortLink}")
-    public void redirect(@PathVariable String shortLink) {
-        tocService.redirect(shortLink);
+    @GetMapping("/{shortLinkCode}")
+    public void redirect(@PathVariable String shortLinkCode) {
+        tocService.redirect(shortLinkCode);
     }
 }

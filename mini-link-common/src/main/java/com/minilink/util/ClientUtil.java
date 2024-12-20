@@ -52,7 +52,7 @@ public class ClientUtil {
         return browser.getGroup();
     }
 
-    public static String getOperatingSystemName() {
+    public static String getOsName() {
         OperatingSystem operatingSystem = getOperatingSystem();
         return operatingSystem.getName();
     }
@@ -62,7 +62,7 @@ public class ClientUtil {
         return operatingSystem.getDeviceType();
     }
 
-    public static OperatingSystem getOperatingSystemGroup() {
+    public static OperatingSystem getOsGroup() {
         OperatingSystem operatingSystem = getOperatingSystem();
         return operatingSystem.getGroup();
     }
