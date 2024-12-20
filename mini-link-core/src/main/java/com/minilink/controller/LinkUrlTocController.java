@@ -1,5 +1,6 @@
 package com.minilink.controller;
 
+import com.minilink.annotation.NoLogin;
 import com.minilink.service.LinkUrlTocService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,6 +21,7 @@ public class LinkUrlTocController {
     @Autowired
     private LinkUrlTocService tocService;
 
+    @NoLogin
     @Operation(summary = "访问短链接")
     @GetMapping("/{shortLinkCode}")
     public void redirect(@PathVariable String shortLinkCode) {

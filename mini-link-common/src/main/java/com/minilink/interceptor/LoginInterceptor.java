@@ -1,6 +1,8 @@
 package com.minilink.interceptor;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.minilink.annotation.NoLogin;
+import com.minilink.constant.CommonConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.pojo.po.LinkUser;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
-    private static ThreadLocal<LinkUser> threadLocal = new ThreadLocal<>();
+    public static ThreadLocal<LinkUser> threadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -29,7 +32,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setStatus(HttpStatus.NO_CONTENT.value());
             return true;
         }
-        String token = request.getHeader("mini-link-token");
+        HandlerMethod method = (HandlerMethod) handler;
+        NoLogin noLogin = method.getMethod().getAnnotation(NoLogin.class);
+        if (ObjectUtils.isNotEmpty(noLogin)) {
+            return true;
+        }
+        String token = request.getHeader(CommonConstant.HEADER_TOKEN_KEY);
         if (ObjectUtils.isEmpty(token)) {
             throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
         }

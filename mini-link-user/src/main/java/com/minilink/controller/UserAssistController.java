@@ -1,5 +1,6 @@
 package com.minilink.controller;
 
+import com.minilink.annotation.NoLogin;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.service.UserAssistService;
 import com.minilink.util.resp.R;
@@ -27,12 +28,14 @@ public class UserAssistController {
     @Autowired
     private UserAssistService assistService;
 
+    @NoLogin
     @Operation(summary = "图片验证码")
     @GetMapping("/captcha")
     public void captcha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         assistService.captcha();
     }
 
+    @NoLogin
     @Operation(summary = "发送邮件")
     @PostMapping("/email/{email}")
     public R sendEmail(@PathVariable String email) {

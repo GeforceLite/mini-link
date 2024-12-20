@@ -1,10 +1,9 @@
 package com.minilink.controller;
 
-import com.minilink.constant.LinkUrlConstant;
+import com.minilink.constant.CommonConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.service.LinkUrlTobService;
-import com.minilink.util.LinkUrlUtil;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,7 +37,7 @@ public class LinkUrlTobController {
 
     @Operation(summary = "解析链接内容")
     @GetMapping("/parse")
-    public R parse(@Pattern(regexp = LinkUrlConstant.LONG_LINK_FORMAT_REGEX, message = "长连接格式不正确") String link) throws IOException {
+    public R parse(@Pattern(regexp = CommonConstant.LONG_LINK_FORMAT_REGEX, message = "长连接格式不正确") String link) throws IOException {
         Map<String, Object> resultMap = urlTobService.parseLink(link);
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
