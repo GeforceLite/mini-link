@@ -3,9 +3,10 @@ package com.minilink.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.minilink.adapter.LinkUrlAdapter;
-import com.minilink.constant.LinkUrlConstant;
+import com.minilink.constant.CommonConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
+import com.minilink.interceptor.LoginInterceptor;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.pojo.po.LinkUrlToc;
@@ -40,15 +41,15 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     @Autowired
     private LinkUrlTobStore urlTobStore;
 
-    @Value("${mini-link.domain}")
-    private String miniLinkDomain;
     @Value("${mini-link.group-id}")
     private Long miniLinkGroupId;
+    @Value("${mini-link.domain}")
+    private String miniLinkDomain;
 
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
         String shortLinkCode = LinkUrlUtil.generate(saveDTO.getLongLink());
-        if (!shortLinkCode.matches(LinkUrlConstant.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
 
@@ -57,9 +58,10 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
             throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
         }
 
+        Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
         Long groupId = ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId;
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
-                8557967973694861312L,
+                accountId,
                 groupId,
                 saveDTO.getTitle(),
                 saveDTO.getIcon(),
@@ -97,7 +99,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
     @Override
     public Map<String, Object> getPageList(Long groupId, Integer current, Integer size) {
-        Long accountId = 8557967973694861312L;
+        Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
         Page<LinkUrlTob> page = urlTobStore.getPage(accountId, groupId, current, size);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", page.getRecords());

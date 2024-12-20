@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.KafkaMsgAdapter;
 import com.minilink.constant.KafkaConstant;
-import com.minilink.constant.LinkUrlConstant;
+import com.minilink.constant.CommonConstant;
 import com.minilink.pojo.entity.VisitShortLinkMsg;
 import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
@@ -36,7 +36,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Override
     public void redirect(String shortLinkCode) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        if (!shortLinkCode.matches(LinkUrlConstant.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
