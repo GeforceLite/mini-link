@@ -3,6 +3,7 @@ package com.minilink.controller;
 import com.minilink.constant.CommonConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
+import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.service.LinkUrlTobService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,9 +51,10 @@ public class LinkUrlTobController {
     }
 
     @Operation(summary = "链接详情")
-    @GetMapping("/detail")
-    public R detail() {
-        return R.out(BizCodeEnum.SUCCESS);
+    @GetMapping("/detail/{id}")
+    public R detail(@PathVariable Long id) {
+        LinkUrlTob result = urlTobService.detail(id);
+        return R.out(BizCodeEnum.SUCCESS, result);
     }
 
     @Operation(summary = "修改链接")

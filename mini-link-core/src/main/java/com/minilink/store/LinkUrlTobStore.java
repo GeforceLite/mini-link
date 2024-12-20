@@ -31,4 +31,13 @@ public interface LinkUrlTobStore extends IService<LinkUrlTob> {
      * @return 分页结果
      */
     Page<LinkUrlTob> getPage(Long accountId, Long groupId, Integer current, Integer size);
+
+    /**
+     * 根据 account_id 和 id 查询链接信息
+     *
+     * @param id        主键id
+     * @param accountId 账号
+     * @return 链接详情
+     */
+    LinkUrlTob getLinkDetail(Long id, Long accountId);
 }

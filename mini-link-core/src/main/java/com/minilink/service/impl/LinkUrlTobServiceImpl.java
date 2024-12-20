@@ -52,17 +52,13 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
-
         LinkUrlToc shortLinkPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
         }
-
-        Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
-        Long groupId = ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId;
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
-                accountId,
-                groupId,
+                LoginInterceptor.threadLocal.get().getAccountId(),
+                ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId,
                 saveDTO.getTitle(),
                 saveDTO.getIcon(),
                 miniLinkDomain,
@@ -92,8 +88,8 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         String iconLink = iconTag != null ? iconTag.attr("href") : "";
         Map<String, Object> map = new HashMap<>();
         map.put("title", title);
-        map.put("description", description);
-        map.put("iconLink", iconLink);
+        map.put("desc", description);
+        map.put("icon", iconLink);
         return map;
     }
 
@@ -105,5 +101,11 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         resultMap.put("list", page.getRecords());
         resultMap.put("total", page.getTotal());
         return resultMap;
+    }
+
+    @Override
+    public LinkUrlTob detail(Long id) {
+        Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
+        return urlTobStore.getLinkDetail(id, accountId);
     }
 }
