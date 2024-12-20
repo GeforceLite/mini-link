@@ -1,5 +1,6 @@
 package com.minilink.controller;
 
+import com.minilink.constant.LinkUrlConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.service.LinkUrlTobService;
@@ -37,15 +38,16 @@ public class LinkUrlTobController {
 
     @Operation(summary = "解析链接内容")
     @GetMapping("/parse")
-    public R parse(@Pattern(regexp = LinkUrlUtil.LONG_LINK_FORMAT_REGEX, message = "长连接格式不正确") String link) throws IOException {
+    public R parse(@Pattern(regexp = LinkUrlConstant.LONG_LINK_FORMAT_REGEX, message = "长连接格式不正确") String link) throws IOException {
         Map<String, Object> resultMap = urlTobService.parseLink(link);
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "分页列表")
-    @GetMapping("/list")
-    public R list() {
-        return R.out(BizCodeEnum.SUCCESS);
+    @GetMapping("/page/{groupId}/{current}/{size}")
+    public R getPageList(@PathVariable Long groupId, @PathVariable Integer current, @PathVariable Integer size) {
+        Map<String, Object> resultMap = urlTobService.getPageList(groupId, current, size);
+        return R.out(BizCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "链接详情")

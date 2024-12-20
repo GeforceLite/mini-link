@@ -1,6 +1,6 @@
 package com.minilink.pojo.dto;
 
-import com.minilink.util.LinkUrlUtil;
+import com.minilink.constant.LinkUrlConstant;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -35,7 +35,7 @@ public class LinkUrlSaveDTO {
      * 长链接（目标链接）
      */
     @NotBlank(message = "长链接信息不能为空")
-    @Pattern(regexp = LinkUrlUtil.LONG_LINK_FORMAT_REGEX, message = "长链接格式不正确")
+    @Pattern(regexp = LinkUrlConstant.LONG_LINK_FORMAT_REGEX, message = "长链接格式不正确")
     private String longLink;
 
     /**

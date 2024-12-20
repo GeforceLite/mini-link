@@ -1,7 +1,9 @@
 package com.minilink.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.minilink.adapter.LinkUrlAdapter;
+import com.minilink.constant.LinkUrlConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
@@ -46,7 +48,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
         String shortLinkCode = LinkUrlUtil.generate(saveDTO.getLongLink());
-        if (!shortLinkCode.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(LinkUrlConstant.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
 
@@ -57,7 +59,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
         Long groupId = ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId;
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
-                SnowFlakeUtil.nextId(),
+                8557967973694861312L,
                 groupId,
                 saveDTO.getTitle(),
                 saveDTO.getIcon(),
@@ -91,5 +93,15 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
         map.put("description", description);
         map.put("iconLink", iconLink);
         return map;
+    }
+
+    @Override
+    public Map<String, Object> getPageList(Long groupId, Integer current, Integer size) {
+        Long accountId = 8557967973694861312L;
+        Page<LinkUrlTob> page = urlTobStore.getPage(accountId, groupId, current, size);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", page.getRecords());
+        resultMap.put("total", page.getTotal());
+        return resultMap;
     }
 }

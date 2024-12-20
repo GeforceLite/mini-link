@@ -28,4 +28,14 @@ public interface LinkUrlTobService {
      * @return User-Agent信息
      */
     Map<String, Object> parseLink(String link) throws IOException;
+
+    /**
+     * 分页查询短链接列表
+     *
+     * @param groupId 分组id
+     * @param current 当前页
+     * @param size    每页数据条数
+     * @return
+     */
+    Map<String, Object> getPageList(Long groupId, Integer current, Integer size);
 }

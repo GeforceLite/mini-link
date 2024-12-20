@@ -4,17 +4,16 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.KafkaMsgAdapter;
 import com.minilink.constant.KafkaConstant;
+import com.minilink.constant.LinkUrlConstant;
 import com.minilink.pojo.entity.VisitShortLinkMsg;
 import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
 import com.minilink.store.LinkUrlTocStore;
 import com.minilink.util.HttpServletUtil;
-import com.minilink.util.LinkUrlUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,7 +36,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Override
     public void redirect(String shortLinkCode) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        if (!shortLinkCode.matches(LinkUrlUtil.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(LinkUrlConstant.SHORT_LINK_FORMAT_REGEX)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
