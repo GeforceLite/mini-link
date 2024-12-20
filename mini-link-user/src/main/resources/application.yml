@@ -4,6 +4,6 @@ spring:
   application:
     name: mini-link-user
 server:
-  port: 9090
+  port: 8001
   servlet:
     context-path: /user

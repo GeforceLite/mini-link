@@ -9,6 +9,7 @@ import com.minilink.util.LinkUrlUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ import java.time.LocalDateTime;
 public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Autowired
     private LinkUrlTocStore urlTocStore;
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @Override
     public void redirect(String shortLink) {
@@ -47,6 +50,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
         }
 
         // TODO Kafka 推送用户点击访问行为数据推送到 Flink 进行实时计算
+        kafkaTemplate.send("test-topic", "测试消息");
 
         // 重定向跳转到目标链接
         response.setHeader("Location", linkUrlPO.getLongLink());

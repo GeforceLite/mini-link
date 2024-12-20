@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LinkUserStoreImpl extends ServiceImpl<LinkUserMapper, LinkUser> implements LinkUserStore {
     @Override
-    @Cacheable(value = RedisConstant.LINK_USER_CACHE_KEY, key = "#p0", unless = "#result == null")
+    @Cacheable(value = RedisConstant.CACHE_LINK_USER, key = "#p0", unless = "#result == null")
     public LinkUser getByEmail(String email) {
         return this.lambdaQuery()
                 .eq(LinkUser::getEmail, email)
@@ -32,7 +32,7 @@ public class LinkUserStoreImpl extends ServiceImpl<LinkUserMapper, LinkUser> imp
     }
 
     @Override
-    @Cacheable(value = RedisConstant.LINK_USER_CACHE_KEY, key = "#p0", unless = "#result == null")
+    @Cacheable(value = RedisConstant.CACHE_LINK_USER, key = "#p0", unless = "#result == null")
     public LinkUser getByAccountId(Long accountId) {
         return this.lambdaQuery()
                 .eq(LinkUser::getAccountId, accountId)
