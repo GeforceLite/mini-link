@@ -1,9 +1,12 @@
 package com.minilink.adapter;
 
+import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.pojo.po.LinkUrlToc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: 徐志斌
@@ -37,5 +40,33 @@ public class LinkUrlAdapter {
         linkUrl.setLongLink(longLink);
         linkUrl.setExpiredTime(expiredTime);
         return linkUrl;
+    }
+
+    public static LinkUrlTobVO buildLinkUrlTobVO(LinkUrlTob linkUrlTob) {
+        LinkUrlTobVO linkUrl = new LinkUrlTobVO();
+        linkUrl.setTitle(linkUrlTob.getTitle());
+        linkUrl.setGroupId(linkUrlTob.getGroupId());
+        linkUrl.setAccountId(linkUrlTob.getAccountId());
+        linkUrl.setShortLink(linkUrlTob.getShortLink());
+        linkUrl.setQrCode(linkUrlTob.getQrCode());
+        linkUrl.setLongLink(linkUrlTob.getLongLink());
+        linkUrl.setExpiredTime(linkUrlTob.getExpiredTime());
+        return linkUrl;
+    }
+
+    public static List<LinkUrlTobVO> buildLinkUrlTobVOList(List<LinkUrlTob> urlTobList) {
+        List<LinkUrlTobVO> result = new ArrayList<>();
+        for (LinkUrlTob urlTob : urlTobList) {
+            LinkUrlTobVO linkUrl = new LinkUrlTobVO();
+            linkUrl.setTitle(urlTob.getTitle());
+            linkUrl.setGroupId(urlTob.getGroupId());
+            linkUrl.setAccountId(urlTob.getAccountId());
+            linkUrl.setShortLink(urlTob.getShortLink());
+            linkUrl.setQrCode(urlTob.getQrCode());
+            linkUrl.setLongLink(urlTob.getLongLink());
+            linkUrl.setExpiredTime(urlTob.getExpiredTime());
+            result.add(linkUrl);
+        }
+        return result;
     }
 }

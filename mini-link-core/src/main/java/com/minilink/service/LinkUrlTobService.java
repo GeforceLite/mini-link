@@ -1,7 +1,7 @@
 package com.minilink.service;
 
+import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
-import com.minilink.pojo.po.LinkUrlTob;
 
 import java.io.IOException;
 import java.util.Map;
@@ -46,5 +46,5 @@ public interface LinkUrlTobService {
      * @param id 主键id
      * @return 链接详情
      */
-    LinkUrlTob detail(Long id);
+    LinkUrlTobVO detail(Long id);
 }

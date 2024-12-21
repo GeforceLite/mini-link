@@ -1,12 +1,14 @@
 package com.minilink.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.minilink.adapter.LinkUrlAdapter;
 import com.minilink.constant.CommonConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
 import com.minilink.interceptor.LoginInterceptor;
+import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.pojo.po.LinkUrlToc;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,32 +83,40 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
     @Override
     public Map<String, Object> parseLink(String link) throws IOException {
+        if (StringUtils.isBlank(link) || !link.matches(CommonConstant.LONG_LINK_FORMAT_REGEX)) {
+            return null;
+        }
         Document doc = Jsoup.connect(link).get();
         String title = doc.title();
         Element descriptionTag = doc.select("meta[name=description]").first();
         String description = descriptionTag != null ? descriptionTag.attr("content") : "";
         Element iconTag = doc.select("link[rel=icon], link[rel=shortcut icon]").first();
         String iconLink = iconTag != null ? iconTag.attr("href") : "";
-        Map<String, Object> map = new HashMap<>();
-        map.put("title", title);
-        map.put("desc", description);
-        map.put("icon", iconLink);
-        return map;
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("title", title);
+        resultMap.put("desc", description);
+        resultMap.put("icon", iconLink);
+        return resultMap;
     }
 
     @Override
     public Map<String, Object> getPageList(Long groupId, Integer current, Integer size) {
         Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
         Page<LinkUrlTob> page = urlTobStore.getPage(accountId, groupId, current, size);
+        List<LinkUrlTobVO> list = LinkUrlAdapter.buildLinkUrlTobVOList(page.getRecords());
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", page.getRecords());
+        resultMap.put("list", list);
         resultMap.put("total", page.getTotal());
         return resultMap;
     }
 
     @Override
-    public LinkUrlTob detail(Long id) {
+    public LinkUrlTobVO detail(Long id) {
         Long accountId = LoginInterceptor.threadLocal.get().getAccountId();
-        return urlTobStore.getLinkDetail(id, accountId);
+        LinkUrlTob urlTob = urlTobStore.getLinkDetail(id, accountId);
+        if (ObjectUtils.isEmpty(urlTob)) {
+            return null;
+        }
+        return LinkUrlAdapter.buildLinkUrlTobVO(urlTob);
     }
 }
