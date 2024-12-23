@@ -27,9 +27,10 @@ public interface UserAssistService {
     /**
      * 发送邮件
      *
+     * @param type  类型
      * @param email 邮箱
      */
-    void sendEmail(String email);
+    void sendEmail(Integer type, String email);
 
     /**
      * 上传文件

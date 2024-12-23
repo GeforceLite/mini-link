@@ -32,15 +32,15 @@ public class EmailUtil {
     /**
      * 文本邮件
      *
-     * @param to      收件人
+     * @param toEmail 收件人
      * @param subject 主题
      * @param content 内容
      */
     @Async(MyThreadPoolExecutor.THREAD_POOL_NAME)
-    public void sendTextMail(String to, String subject, String content) {
+    public void sendTextMail(String toEmail, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);
-        message.setTo(to);
+        message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(content);
         mailSender.send(message);
@@ -53,6 +53,7 @@ public class EmailUtil {
      * @param subject 主题
      * @param content 内容
      */
+    @Async(MyThreadPoolExecutor.THREAD_POOL_NAME)
     public void sendHtmlMail(String toEmail, String subject, String content) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -72,6 +73,7 @@ public class EmailUtil {
      * @param content  内容
      * @param filePath 附件
      */
+    @Async(MyThreadPoolExecutor.THREAD_POOL_NAME)
     public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);

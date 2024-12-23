@@ -5,8 +5,13 @@ import com.google.code.kaptcha.Producer;
 import com.minilink.constant.RedisConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
+import com.minilink.pojo.entity.EmailParamEntity;
 import com.minilink.service.UserAssistService;
-import com.minilink.util.*;
+import com.minilink.strategy.email.AbstractEmailStrategy;
+import com.minilink.strategy.email.EmailStrategyFactory;
+import com.minilink.util.ClientUtil;
+import com.minilink.util.EncryptUtil;
+import com.minilink.util.HttpServletUtil;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,8 +40,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class UserAssistServiceImpl implements UserAssistService {
     @Autowired
-    private EmailUtil emailUtil;
-    @Autowired
     private Producer captchaProducer;
     @Autowired
     private RedisTemplate redisTemplate;
@@ -52,7 +55,7 @@ public class UserAssistServiceImpl implements UserAssistService {
             ImageIO.write(bufferedImage, "jpg", outputStream);
             outputStream.flush();
         } catch (IOException e) {
-            log.error("图片验证码生成失败:{}", e.getMessage());
+            log.error("----------图片验证码生成失败:{}----------", e.getMessage());
         }
     }
 
@@ -64,17 +67,16 @@ public class UserAssistServiceImpl implements UserAssistService {
     }
 
     @Override
-    public void sendEmail(String email) {
+    public void sendEmail(Integer type, String email) {
         String emailCheckKey = (String) redisTemplate.opsForValue().get(RedisConstant.EMAIL_CHECK_KEY + email);
         if (StringUtils.isNotBlank(emailCheckKey)) {
             throw new BizException(BizCodeEnum.OPS_REPEAT);
         }
-        String checkKey = RedisConstant.EMAIL_CHECK_KEY + email;
-        redisTemplate.opsForValue().set(checkKey, "Email Repeat Send Check", 60, TimeUnit.SECONDS);
-        String code = RandomUtil.generate(4, 1);
-        String emailKey = RedisConstant.EMAIL_CODE_KEY + email;
-        redisTemplate.opsForValue().set(emailKey, code, 3, TimeUnit.MINUTES);
-        emailUtil.sendTextMail(email, "subject", "您正在注册账号，验证码：" + code);
+
+        EmailParamEntity paramEntity = new EmailParamEntity();
+        paramEntity.setEmail(email);
+        AbstractEmailStrategy handler = EmailStrategyFactory.getStrategyHandler(type);
+        handler.packageEmail(paramEntity);
     }
 
     @Override

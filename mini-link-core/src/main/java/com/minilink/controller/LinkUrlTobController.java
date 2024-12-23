@@ -3,7 +3,6 @@ package com.minilink.controller;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
-import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.service.LinkUrlTobService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +43,9 @@ public class LinkUrlTobController {
 
     @Operation(summary = "分页列表")
     @GetMapping("/page/{groupId}/{current}/{size}")
-    public R getPageList(@PathVariable Long groupId, @PathVariable Integer current, @PathVariable Integer size) {
+    public R getPageList(@PathVariable Long groupId,
+                         @PathVariable Integer current,
+                         @PathVariable Integer size) {
         Map<String, Object> resultMap = urlTobService.getPageList(groupId, current, size);
         return R.out(BizCodeEnum.SUCCESS, resultMap);
     }

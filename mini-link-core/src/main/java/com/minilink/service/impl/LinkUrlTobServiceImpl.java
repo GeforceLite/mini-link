@@ -51,14 +51,15 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
-        String shortLinkCode = LinkUrlUtil.generate(saveDTO.getLongLink());
+        String shortLinkCode = LinkUrlUtil.generate(SnowFlakeUtil.nextId() + "&" + saveDTO.getLongLink());
         if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
             throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
         }
         LinkUrlToc shortLinkPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
-            throw new BizException(BizCodeEnum.SHORT_LINK_REPEAT);
+            this.createShortLink(saveDTO);
         }
+
         LinkUrlTob tobLinkPO = LinkUrlAdapter.buildLinkUrlTobPO(
                 LoginInterceptor.threadLocal.get().getAccountId(),
                 ObjectUtils.isNotEmpty(saveDTO.getGroupId()) ? saveDTO.getGroupId() : miniLinkGroupId,

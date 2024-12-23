@@ -1,5 +1,6 @@
 package com.minilink.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Getter;
  * @Description: 响应、异常状态码枚举
  */
 @Getter
+@AllArgsConstructor
 public enum BizCodeEnum {
     /**
      * 通用操作码
@@ -60,12 +62,6 @@ public enum BizCodeEnum {
      */
     FILE_UPLOAD_USER_IMG_FAIL(700101, "⽤户头像⽂件上传失败");
 
-
-    private String msg;
     private int code;
-
-    BizCodeEnum(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
+    private String msg;
 }

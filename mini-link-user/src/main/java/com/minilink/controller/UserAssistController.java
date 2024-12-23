@@ -37,9 +37,9 @@ public class UserAssistController {
 
     @NoLogin
     @Operation(summary = "发送邮件")
-    @PostMapping("/email/{email}")
-    public R sendEmail(@PathVariable String email) {
-        assistService.sendEmail(email);
+    @PostMapping("/email/{type}/{email}")
+    public R sendEmail(@PathVariable Integer type, @PathVariable String email) {
+        assistService.sendEmail(type, email);
         return R.out(BizCodeEnum.SUCCESS);
     }
 
