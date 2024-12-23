@@ -32,7 +32,7 @@ public class LinkUrlUtil {
      * 例如：0-2-4s3sQA
      */
     public static String generate(String longLink) {
-        long murmurHash32 = murmurHash32(SnowFlakeUtil.nextId() + "&" + longLink);
+        long murmurHash32 = murmurHash32(longLink);
         StringBuffer sb = new StringBuffer();
         sb.append(ShardingConfigFactory.getCode(ShardingConfigFactory.databaseList));
         sb.append("-");

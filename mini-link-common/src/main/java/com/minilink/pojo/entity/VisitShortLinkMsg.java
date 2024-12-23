@@ -33,9 +33,14 @@ public class VisitShortLinkMsg {
     private String osType;
 
     /**
-     * 浏览器
+     * 浏览器类型
      */
     private String browserType;
+
+    /**
+     * 访问网络
+     */
+    private String netWork;
 
     /**
      * 访问时间
