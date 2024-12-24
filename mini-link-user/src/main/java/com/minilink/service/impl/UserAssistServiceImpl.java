@@ -2,6 +2,7 @@ package com.minilink.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.code.kaptcha.Producer;
+import com.minilink.constant.CommonConstant;
 import com.minilink.constant.RedisConstant;
 import com.minilink.enums.BizCodeEnum;
 import com.minilink.exception.BizException;
@@ -68,15 +69,17 @@ public class UserAssistServiceImpl implements UserAssistService {
 
     @Override
     public void sendEmail(Integer type, String email) {
+        if (!email.matches(CommonConstant.REGEX_EMAIL_FORMAT)) {
+            throw new BizException(BizCodeEnum.CODE_EMAIL_ERROR);
+        }
         String emailCheckKey = (String) redisTemplate.opsForValue().get(RedisConstant.EMAIL_CHECK_KEY + email);
         if (StringUtils.isNotBlank(emailCheckKey)) {
             throw new BizException(BizCodeEnum.OPS_REPEAT);
         }
-
         EmailParamEntity paramEntity = new EmailParamEntity();
         paramEntity.setEmail(email);
-        AbstractEmailStrategy handler = EmailStrategyFactory.getStrategyHandler(type);
-        handler.packageEmail(paramEntity);
+        AbstractEmailStrategy emailHandler = EmailStrategyFactory.getStrategyHandler(type);
+        emailHandler.sendEmail(paramEntity);
     }
 
     @Override

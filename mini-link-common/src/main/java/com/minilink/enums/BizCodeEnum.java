@@ -41,14 +41,12 @@ public enum BizCodeEnum {
      */
     SHORT_LINK_NOT_EXIST(260404, "短链接不存在"),
     SHORT_LINK_EXPIRED(260001, "短链接已过期，无法访问"),
-    SHORT_LINK_FORMAT_ERROR(260500, "短链接生成格式错误"),
     SHORT_LINK_REPEAT(260501, "短链接重复，请重新生成"),
 
     /**
      * 长链接
      */
     LONG_LINK_NOT_EXIST(270404, "长链接不存在"),
-    LONG_LINK_FORMAT_ERROR(270500, "长链接格式错误"),
 
     /**
      * 流控操作
@@ -60,7 +58,15 @@ public enum BizCodeEnum {
     /**
      * 文件相关
      */
-    FILE_UPLOAD_USER_IMG_FAIL(700101, "⽤户头像⽂件上传失败");
+    FILE_UPLOAD_USER_IMG_FAIL(700101, "⽤户头像⽂件上传失败"),
+
+    /**
+     * 正则表达式
+     */
+    REGEX_EMAIL_FORMAT_ERROR(900001, "邮箱格式错误"),
+    REGEX_SHORT_LINK_FORMAT_ERROR(900002, "短链接生成格式错误"),
+    REGEX_LONG_LINK_FORMAT_ERROR(900003, "长链接格式错误"),
+    ;
 
     private int code;
     private String msg;

@@ -35,7 +35,7 @@ public class LinkUrlSaveDTO {
      * 长链接（目标链接）
      */
     @NotBlank(message = "长链接信息不能为空")
-    @Pattern(regexp = CommonConstant.LONG_LINK_FORMAT_REGEX, message = "长链接格式不正确")
+    @Pattern(regexp = CommonConstant.REGEX_LONG_LINK_FORMAT, message = "长链接格式不正确")
     private String longLink;
 
     /**

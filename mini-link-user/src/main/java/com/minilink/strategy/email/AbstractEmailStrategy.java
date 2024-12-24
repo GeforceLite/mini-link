@@ -25,9 +25,9 @@ public abstract class AbstractEmailStrategy {
     protected abstract EmailEnum getEmailEnum();
 
     /**
-     * 封装邮件发送参数
+     * 发送邮件
      *
      * @param emailParam 发送邮件参数
      */
-    public abstract void packageEmail(EmailParamEntity emailParam);
+    public abstract void sendEmail(EmailParamEntity emailParam);
 }

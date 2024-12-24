@@ -52,8 +52,8 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
         String shortLinkCode = LinkUrlUtil.generate(SnowFlakeUtil.nextId() + "&" + saveDTO.getLongLink());
-        if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
-            throw new BizException(BizCodeEnum.SHORT_LINK_FORMAT_ERROR);
+        if (!shortLinkCode.matches(CommonConstant.REGEX_SHORT_LINK_FORMAT)) {
+            throw new BizException(BizCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR);
         }
         LinkUrlToc shortLinkPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
@@ -84,7 +84,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
     @Override
     public Map<String, Object> parseLink(String link) throws IOException {
-        if (StringUtils.isBlank(link) || !link.matches(CommonConstant.LONG_LINK_FORMAT_REGEX)) {
+        if (StringUtils.isBlank(link) || !link.matches(CommonConstant.REGEX_LONG_LINK_FORMAT)) {
             return null;
         }
         Document doc = Jsoup.connect(link).get();

@@ -36,7 +36,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
     @Override
     public void redirect(String shortLinkCode) {
         HttpServletResponse response = HttpServletUtil.getResponse();
-        if (!shortLinkCode.matches(CommonConstant.SHORT_LINK_FORMAT_REGEX)) {
+        if (!shortLinkCode.matches(CommonConstant.REGEX_SHORT_LINK_FORMAT)) {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }

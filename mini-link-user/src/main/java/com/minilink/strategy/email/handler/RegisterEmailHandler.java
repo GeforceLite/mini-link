@@ -31,7 +31,7 @@ public class RegisterEmailHandler extends AbstractEmailStrategy {
     }
 
     @Override
-    public void packageEmail(EmailParamEntity emailParam) {
+    public void sendEmail(EmailParamEntity emailParam) {
         String email = emailParam.getEmail();
         String emailCode = RandomUtil.generate(4, 1);
         String subject = "Mini Link注册账号";

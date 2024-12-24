@@ -41,7 +41,7 @@ public class GlobalExceptionConfig {
     @ExceptionHandler(HandlerMethodValidationException.class)
     public R handlerMethodValidationException(HandlerMethodValidationException e) {
         log.error("-------------handlerMethodValidationException:{}-------------", e.getMessage());
-        return R.out(BizCodeEnum.SHORT_LINK_FORMAT_ERROR, e.getMessage());
+        return R.out(BizCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR, e.getMessage());
     }
 
 
