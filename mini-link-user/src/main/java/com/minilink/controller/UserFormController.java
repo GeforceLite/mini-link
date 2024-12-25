@@ -1,7 +1,7 @@
 package com.minilink.controller;
 
 import com.minilink.annotation.NoLogin;
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
 import com.minilink.service.UserFormService;
@@ -34,7 +34,7 @@ public class UserFormController {
     @PostMapping("/register")
     public R register(@RequestBody RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         formService.register(registerDTO);
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 
     @NoLogin
@@ -42,19 +42,19 @@ public class UserFormController {
     @PostMapping("/login")
     public R login(@RequestBody LoginDTO loginDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Map<String, Object> resultMap = formService.login(loginDTO);
-        return R.out(BizCodeEnum.SUCCESS, resultMap);
+        return R.out(BusinessCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "修改密码")
     @PostMapping("/updatePwd")
     public R forget() {
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 
     @NoLogin
     @Operation(summary = "找回密码")
     @PostMapping("/find")
     public R findBack() {
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 }

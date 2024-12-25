@@ -1,7 +1,7 @@
 package com.minilink.sharding;
 
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,6 @@ public class ShardingConfigFactory {
                 return element.getName();
             }
         }
-        throw new BizException(BizCodeEnum.FAIL);
+        throw new BusinessException(BusinessCodeEnum.FAIL);
     }
 }

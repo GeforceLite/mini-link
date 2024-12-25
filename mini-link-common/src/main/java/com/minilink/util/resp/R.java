@@ -1,6 +1,6 @@
 package com.minilink.util.resp;
 
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,20 +15,20 @@ import lombok.Setter;
 public class R<T> extends BaseResponse {
     private T data;
 
-    private R(BizCodeEnum codeEnum) {
+    private R(BusinessCodeEnum codeEnum) {
         super(codeEnum);
     }
 
-    private R(BizCodeEnum codeEnum, T data) {
+    private R(BusinessCodeEnum codeEnum, T data) {
         super(codeEnum);
         this.data = data;
     }
 
-    public static <T> R<T> out(BizCodeEnum codeEnum) {
+    public static <T> R<T> out(BusinessCodeEnum codeEnum) {
         return new R<>(codeEnum);
     }
 
-    public static <T> R<T> out(BizCodeEnum codeEnum, T data) {
+    public static <T> R<T> out(BusinessCodeEnum codeEnum, T data) {
         return new R<>(codeEnum, data);
     }
 }

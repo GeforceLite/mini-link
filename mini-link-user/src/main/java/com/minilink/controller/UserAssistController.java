@@ -1,7 +1,7 @@
 package com.minilink.controller;
 
 import com.minilink.annotation.NoLogin;
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.service.UserAssistService;
 import com.minilink.util.resp.R;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,13 +40,13 @@ public class UserAssistController {
     @PostMapping("/email/{type}/{email}")
     public R sendEmail(@PathVariable Integer type, @PathVariable String email) {
         assistService.sendEmail(type, email);
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "上传文件")
     @PostMapping("/upload/{type}")
     public R uploadFile(@PathVariable Integer type, MultipartFile file) {
         assistService.uploadFile(type, file);
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 }

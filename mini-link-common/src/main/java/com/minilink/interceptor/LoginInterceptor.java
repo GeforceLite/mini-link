@@ -3,8 +3,8 @@ package com.minilink.interceptor;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.annotation.NoLogin;
 import com.minilink.constant.CommonConstant;
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 import com.minilink.pojo.po.LinkUser;
 import com.minilink.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,11 +39,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         String token = request.getHeader(CommonConstant.HEADER_TOKEN_KEY);
         if (ObjectUtils.isEmpty(token)) {
-            throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
+            throw new BusinessException(BusinessCodeEnum.ACCOUNT_NO_LOGIN);
         }
         LinkUser user = JwtUtil.resolve(token);
         if (ObjectUtils.isEmpty(user)) {
-            throw new BizException(BizCodeEnum.ACCOUNT_NO_LOGIN);
+            throw new BusinessException(BusinessCodeEnum.ACCOUNT_NO_LOGIN);
         }
         threadLocal.set(user);
         return true;

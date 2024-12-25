@@ -1,6 +1,6 @@
 package com.minilink.util.resp;
 
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +16,7 @@ public class BaseResponse {
     private Integer code;
     private String msg;
 
-    protected BaseResponse(BizCodeEnum codeEnum) {
+    protected BaseResponse(BusinessCodeEnum codeEnum) {
         this.code = codeEnum.getCode();
         this.msg = codeEnum.getMsg();
     }

@@ -1,7 +1,7 @@
 package com.minilink.config;
 
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 import com.minilink.util.resp.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -19,10 +19,10 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 @RestControllerAdvice
 public class GlobalExceptionConfig {
     /**
-     * 自定义异常 BizException
+     * 自定义异常 BusinessException
      */
-    @ExceptionHandler(BizException.class)
-    public R bizException(BizException e) {
+    @ExceptionHandler(BusinessException.class)
+    public R bizException(BusinessException e) {
         log.error("-------------bizException:{}-------------", e.getCodeEnum());
         return R.out(e.getCodeEnum());
     }
@@ -35,13 +35,13 @@ public class GlobalExceptionConfig {
         StringBuilder sb = new StringBuilder();
         e.getBindingResult().getAllErrors().forEach(error -> sb.append(error.getDefaultMessage()).append("\r\n"));
         log.error("-------------bindException:{}-------------", e.getMessage());
-        return R.out(BizCodeEnum.PARAM_ERROR, sb);
+        return R.out(BusinessCodeEnum.PARAM_ERROR, sb);
     }
 
     @ExceptionHandler(HandlerMethodValidationException.class)
     public R handlerMethodValidationException(HandlerMethodValidationException e) {
         log.error("-------------handlerMethodValidationException:{}-------------", e.getMessage());
-        return R.out(BizCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR, e.getMessage());
+        return R.out(BusinessCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR, e.getMessage());
     }
 
 
@@ -51,6 +51,6 @@ public class GlobalExceptionConfig {
     @ExceptionHandler(Exception.class)
     public R exception(Exception e) {
         log.error("-------------exception:{}-------------", e.getMessage());
-        return R.out(BizCodeEnum.FAIL, e.getMessage());
+        return R.out(BusinessCodeEnum.FAIL, e.getMessage());
     }
 }

@@ -1,6 +1,6 @@
 package com.minilink.controller;
 
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.pojo.vo.UserVO;
 import com.minilink.service.UserInfoService;
 import com.minilink.util.resp.R;
@@ -28,12 +28,12 @@ public class UserInfoController {
     @GetMapping("/info/{accountId}")
     public R getUserInfo(@PathVariable Long accountId) {
         UserVO userVO = userService.getUserInfo(accountId);
-        return R.out(BizCodeEnum.SUCCESS, userVO);
+        return R.out(BusinessCodeEnum.SUCCESS, userVO);
     }
 
     @Operation(summary = "修改用户信息")
     @PostMapping("/update")
     public R updateUserInfo() {
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 }

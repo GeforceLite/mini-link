@@ -1,6 +1,6 @@
 package com.minilink.controller;
 
-import com.minilink.enums.BizCodeEnum;
+import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.service.LinkUrlTobService;
@@ -31,14 +31,14 @@ public class LinkUrlTobController {
     @PostMapping("/create")
     public R create(@Validated @RequestBody LinkUrlSaveDTO saveDTO) {
         urlTobService.createShortLink(saveDTO);
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "解析链接内容")
     @GetMapping("/parse")
     public R parse(String link) throws IOException {
         Map<String, Object> resultMap = urlTobService.parseLink(link);
-        return R.out(BizCodeEnum.SUCCESS, resultMap);
+        return R.out(BusinessCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "分页列表")
@@ -47,25 +47,25 @@ public class LinkUrlTobController {
                          @PathVariable Integer current,
                          @PathVariable Integer size) {
         Map<String, Object> resultMap = urlTobService.getPageList(groupId, current, size);
-        return R.out(BizCodeEnum.SUCCESS, resultMap);
+        return R.out(BusinessCodeEnum.SUCCESS, resultMap);
     }
 
     @Operation(summary = "链接详情")
     @GetMapping("/detail/{id}")
     public R detail(@PathVariable Long id) {
         LinkUrlTobVO result = urlTobService.detail(id);
-        return R.out(BizCodeEnum.SUCCESS, result);
+        return R.out(BusinessCodeEnum.SUCCESS, result);
     }
 
     @Operation(summary = "修改链接")
     @PostMapping("/update")
     public R update() {
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 
     @Operation(summary = "删除链接")
     @DeleteMapping("/delete")
     public R delete() {
-        return R.out(BizCodeEnum.SUCCESS);
+        return R.out(BusinessCodeEnum.SUCCESS);
     }
 }

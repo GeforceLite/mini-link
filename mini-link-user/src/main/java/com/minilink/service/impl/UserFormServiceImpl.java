@@ -3,8 +3,8 @@ package com.minilink.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.UserAdapter;
 import com.minilink.constant.RedisConstant;
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 import com.minilink.pojo.dto.LoginDTO;
 import com.minilink.pojo.dto.RegisterDTO;
 import com.minilink.pojo.po.LinkUser;
@@ -47,16 +47,16 @@ public class UserFormServiceImpl implements UserFormService {
     public void register(RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String email = registerDTO.getEmail();
         if (!registerDTO.getPassword1().equals(registerDTO.getPassword2())) {
-            throw new BizException(BizCodeEnum.PASSWORD_NO_EQUAL);
+            throw new BusinessException(BusinessCodeEnum.PASSWORD_NO_EQUAL);
         }
         String emailCodeKey = RedisConstant.EMAIL_CODE_KEY + email;
         String emailCode = (String) redisTemplate.opsForValue().get(emailCodeKey);
         if (!registerDTO.getEmailCode().equalsIgnoreCase(emailCode)) {
-            throw new BizException(BizCodeEnum.CODE_EMAIL_ERROR);
+            throw new BusinessException(BusinessCodeEnum.CODE_EMAIL_ERROR);
         }
         LinkUser userPO = userStore.getByEmail(email);
         if (ObjectUtils.isNotEmpty(userPO)) {
-            throw new BizException(BizCodeEnum.ACCOUNT_REPEAT);
+            throw new BusinessException(BusinessCodeEnum.ACCOUNT_REPEAT);
         }
         String salt = "$1$" + RandomUtil.generate(8, 3);
         String password = EncryptUtil.md5(registerDTO.getPassword1() + salt);
@@ -70,11 +70,11 @@ public class UserFormServiceImpl implements UserFormService {
         String captchaKey = assistService.getCaptchaKey();
         String captchaCode = (String) redisTemplate.opsForValue().get(captchaKey);
         if (!loginDTO.getCaptchaCode().equalsIgnoreCase(captchaCode)) {
-            throw new BizException(BizCodeEnum.CODE_CAPTCHA_ERROR);
+            throw new BusinessException(BusinessCodeEnum.CODE_CAPTCHA_ERROR);
         }
         LinkUser userPO = userStore.getByEmail(loginDTO.getEmail());
         if (ObjectUtils.isEmpty(userPO)) {
-            throw new BizException(BizCodeEnum.ACCOUNT_UNREGISTER);
+            throw new BusinessException(BusinessCodeEnum.ACCOUNT_UNREGISTER);
         }
         String token = JwtUtil.generate(userPO.getAccountId(), userPO.getEmail(), userPO.getNickName(), userPO.getAvatar());
         Map<String, Object> resultMap = new HashMap<>();

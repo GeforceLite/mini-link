@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.minilink.adapter.LinkUrlAdapter;
-import com.minilink.constant.CommonConstant;
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.constant.RegexConstant;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 import com.minilink.interceptor.LoginInterceptor;
 import com.minilink.pojo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
@@ -52,8 +52,8 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
     @Override
     public void createShortLink(LinkUrlSaveDTO saveDTO) {
         String shortLinkCode = LinkUrlUtil.generate(SnowFlakeUtil.nextId() + "&" + saveDTO.getLongLink());
-        if (!shortLinkCode.matches(CommonConstant.REGEX_SHORT_LINK_FORMAT)) {
-            throw new BizException(BizCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR);
+        if (!shortLinkCode.matches(RegexConstant.REGEX_SHORT_LINK_FORMAT)) {
+            throw new BusinessException(BusinessCodeEnum.REGEX_SHORT_LINK_FORMAT_ERROR);
         }
         LinkUrlToc shortLinkPO = urlTocStore.getByShortLinkCode(shortLinkCode);
         if (ObjectUtils.isNotEmpty(shortLinkPO)) {
@@ -84,7 +84,7 @@ public class LinkUrlTobServiceImpl implements LinkUrlTobService {
 
     @Override
     public Map<String, Object> parseLink(String link) throws IOException {
-        if (StringUtils.isBlank(link) || !link.matches(CommonConstant.REGEX_LONG_LINK_FORMAT)) {
+        if (StringUtils.isBlank(link) || !link.matches(RegexConstant.REGEX_LONG_LINK_FORMAT)) {
             return null;
         }
         Document doc = Jsoup.connect(link).get();

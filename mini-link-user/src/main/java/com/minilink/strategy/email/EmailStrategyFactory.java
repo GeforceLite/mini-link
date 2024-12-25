@@ -1,7 +1,7 @@
 package com.minilink.strategy.email;
 
-import com.minilink.enums.BizCodeEnum;
-import com.minilink.exception.BizException;
+import com.minilink.enums.BusinessCodeEnum;
+import com.minilink.exception.BusinessException;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class EmailStrategyFactory {
     public static AbstractEmailStrategy getStrategyHandler(Integer code) {
         AbstractEmailStrategy strategyHandler = STRATEGY_MAP.get(code);
         if (ObjectUtils.isEmpty(strategyHandler)) {
-            throw new BizException(BizCodeEnum.FAIL);
+            throw new BusinessException(BusinessCodeEnum.FAIL);
         }
         return strategyHandler;
     }

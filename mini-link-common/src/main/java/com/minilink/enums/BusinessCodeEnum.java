@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BizCodeEnum {
+public enum BusinessCodeEnum {
     /**
      * 通用操作码
      */
