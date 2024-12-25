@@ -1,5 +1,6 @@
 package com.minilink.util;
 
+import com.minilink.constant.KafkaConstant;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
@@ -14,7 +15,6 @@ import java.util.Properties;
  * @Version: 1.0
  */
 public class KafkaFlinkUtil {
-    public static String kafkaServer = "localhost:9092";
 
     /**
      * 获取 Flink Kafka 生产者
@@ -24,7 +24,7 @@ public class KafkaFlinkUtil {
      * @return 生产者
      */
     public static FlinkKafkaProducer getKafkaProducer(String topic, String groupId) {
-        return new FlinkKafkaProducer(kafkaServer, topic, new SimpleStringSchema());
+        return new FlinkKafkaProducer(KafkaConstant.KAFKA_SERVER, topic, new SimpleStringSchema());
     }
 
     /**
@@ -37,7 +37,7 @@ public class KafkaFlinkUtil {
     public static FlinkKafkaConsumer getKafkaConsumer(String topic, String groupId) {
         Properties props = new Properties();
         props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-        props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstant.KAFKA_SERVER);
         return new FlinkKafkaConsumer(topic, new SimpleStringSchema(), props);
     }
 }

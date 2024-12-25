@@ -1,5 +1,6 @@
 package com.minilink.pojo;
 
+import com.minilink.enums.VisitorStateEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -41,6 +42,13 @@ public class VisitShortLinkMsg {
      * 访问网络
      */
     private String netWork;
+
+    /**
+     * 访客状态
+     *
+     * @see VisitorStateEnum
+     */
+    private Integer visitorState;
 
     /**
      * 访问时间
