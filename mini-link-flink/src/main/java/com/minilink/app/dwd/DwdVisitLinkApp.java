@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.minilink.app.func.VisitorStateMapFunction;
 import com.minilink.constant.KafkaConstant;
 import com.minilink.pojo.VisitShortLinkMsg;
-import com.minilink.util.KafkaFlinkUtil;
+import com.minilink.util.FlinkKafkaUtil;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -22,21 +22,12 @@ import org.apache.flink.util.Collector;
  * @Version: 1.0
  */
 public class DwdVisitLinkApp {
-    /**
-     * ODS
-     *  |
-     * DWD：当前位置
-     *  |
-     * DWM
-     *  |
-     * DWS
-     */
-    public static final String SOURCE_TOPIC = KafkaConstant.ODS_VISIT_LINK_TOPIC;
-    public static final String SINK_TOPIC = KafkaConstant.DWD_VISIT_LINK_TOPIC;
+    public static final String ODS_VISIT_LINK_TOPIC = KafkaConstant.ODS_VISIT_LINK_TOPIC;
+    public static final String DWD_VISIT_LINK_TOPIC = KafkaConstant.DWD_VISIT_LINK_TOPIC;
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        FlinkKafkaConsumer kafkaConsumer = KafkaFlinkUtil.getKafkaConsumer(SOURCE_TOPIC, KafkaConstant.VISIT_LINK_GROUP);
+        FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(ODS_VISIT_LINK_TOPIC, KafkaConstant.VISIT_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
         jsonStrDS.print("----------点击短链接行为数据----------");
 
@@ -50,7 +41,6 @@ public class DwdVisitLinkApp {
                     }
                 }
         );
-        jsonObjDS.print("----------字符转实体类数据----------");
 
         // 根据设备类型分组
         KeyedStream keyedStream = jsonObjDS.keyBy(
@@ -62,12 +52,13 @@ public class DwdVisitLinkApp {
                 }
         );
 
+        // 新老客标记
+        SingleOutputStreamOperator<String> visitorStateDS = keyedStream.map(new VisitorStateMapFunction());
 
-        // 新老客标记，下沉
-        jsonObjDS = keyedStream.map(new VisitorStateMapFunction());
-        FlinkKafkaProducer kafkaProducer = KafkaFlinkUtil.getKafkaProducer(SINK_TOPIC, KafkaConstant.VISIT_LINK_GROUP);
-        jsonObjDS.addSink(kafkaProducer);
-        jsonObjDS.print("----------标记新老客后数据----------");
+        // 数据推送到 dwd_visit_link_topic 主题
+        FlinkKafkaProducer kafkaProducer = FlinkKafkaUtil.getKafkaProducer(DWD_VISIT_LINK_TOPIC);
+        visitorStateDS.addSink(kafkaProducer);
+        visitorStateDS.print("----------标记新老客后数据----------");
         env.execute();
     }
 }

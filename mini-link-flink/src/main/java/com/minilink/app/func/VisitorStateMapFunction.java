@@ -1,5 +1,6 @@
 package com.minilink.app.func;
 
+import cn.hutool.json.JSONUtil;
 import com.minilink.enums.VisitorStateEnum;
 import com.minilink.pojo.VisitShortLinkMsg;
 import com.minilink.util.DateTimeUtil;
@@ -31,12 +32,14 @@ public class VisitorStateMapFunction extends RichMapFunction<VisitShortLinkMsg, 
         if (StringUtils.isNotEmpty(beforeTimeStr)) {
             if (beforeTimeStr.equalsIgnoreCase(nowTimeStr)) {
                 msg.setVisitorState(VisitorStateEnum.OLD.getCode());
+            } else {
+                msg.setVisitorState(VisitorStateEnum.NEW.getCode());
                 visitorState.update(nowTimeStr);
             }
+        } else {
+            msg.setVisitorState(VisitorStateEnum.NEW.getCode());
+            visitorState.update(nowTimeStr);
         }
-
-        msg.setVisitorState(VisitorStateEnum.NEW.getCode());
-        visitorState.update(nowTimeStr);
-        return null;
+        return JSONUtil.toJsonStr(msg);
     }
 }
