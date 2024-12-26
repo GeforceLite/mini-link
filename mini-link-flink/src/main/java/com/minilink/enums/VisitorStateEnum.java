@@ -13,9 +13,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum VisitorStateEnum {
-    NEW(0, "新访客"),
-    OLD(1, "老访客");
+    NEW("0", "新访客"),
+    OLD("1", "老访客");
 
-    private int code;
+    private String code;
     private String msg;
 }

@@ -54,6 +54,7 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
         String userAgentStr = HttpServletUtil.getRequest().getHeader("User-Agent");
         VisitShortLinkMsg visitShortLinkMsg = KafkaMsgAdapter.buildVisitShortLinkMsg(userAgentStr);
         kafkaTemplate.send(KafkaConstant.ODS_VISIT_LINK_TOPIC, JSONUtil.toJsonStr(visitShortLinkMsg));
+
         response.setHeader("Location", linkUrlPO.getLongLink());
         response.setStatus(HttpStatus.FOUND.value());
     }

@@ -8,20 +8,15 @@ import java.time.LocalDateTime;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-20  11:21
- * @Description: 访问短链接-队列消息
+ * @Description: 访问短链接行为日志数据
  * @Version: 1.0
  */
 @Data
-public class VisitShortLinkMsg {
+public class VisitShortLinkMsgLog {
     /**
      * ip
      */
     private String ip;
-
-    /**
-     * 短链接码
-     */
-    private String shortLinkCode;
 
     /**
      * 设备类型
@@ -39,16 +34,11 @@ public class VisitShortLinkMsg {
     private String browserType;
 
     /**
-     * 访问网络
-     */
-    private String netWork;
-
-    /**
      * 访客状态
      *
      * @see VisitorStateEnum
      */
-    private Integer visitorState;
+    private String visitorState;
 
     /**
      * 访问时间

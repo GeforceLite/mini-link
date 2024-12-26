@@ -1,6 +1,6 @@
 package com.minilink.service;
 
-import com.minilink.pojo.LinkUrlTobVO;
+import com.minilink.pojo.vo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 
 import java.io.IOException;

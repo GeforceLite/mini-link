@@ -1,4 +1,4 @@
-package com.minilink.pojo;
+package com.minilink.pojo.vo;
 
 import lombok.Data;
 

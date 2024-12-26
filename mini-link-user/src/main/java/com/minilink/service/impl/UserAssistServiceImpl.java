@@ -2,17 +2,17 @@ package com.minilink.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.code.kaptcha.Producer;
-import com.minilink.constant.RegexConstant;
 import com.minilink.constant.RedisConstant;
+import com.minilink.constant.RegexConstant;
 import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.exception.BusinessException;
 import com.minilink.pojo.entity.EmailParamEntity;
 import com.minilink.service.UserAssistService;
 import com.minilink.strategy.email.AbstractEmailStrategy;
 import com.minilink.strategy.email.EmailStrategyFactory;
-import com.minilink.util.ClientUtil;
 import com.minilink.util.EncryptUtil;
 import com.minilink.util.HttpServletUtil;
+import com.minilink.util.IpUtil;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -64,7 +64,7 @@ public class UserAssistServiceImpl implements UserAssistService {
     public String getCaptchaKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         HttpServletRequest request = HttpServletUtil.getRequest();
         String userAgent = request.getHeader("User-Agent");
-        return RedisConstant.CAPTCHA_KEY + EncryptUtil.md5(userAgent + ClientUtil.getIpAddr());
+        return RedisConstant.CAPTCHA_KEY + EncryptUtil.md5(userAgent + IpUtil.getIpAddr());
     }
 
     @Override

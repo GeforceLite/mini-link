@@ -54,6 +54,13 @@ public class DateTimeUtil {
     }
 
     /**
+     * timestamp 转 LocalDateTime
+     */
+    public static LocalDateTime timeStampToLocalDateTime(long timestamp) {
+        return LocalDateTime.ofInstant(new Date(timestamp).toInstant(), DEFAULT_ZONE_ID);
+    }
+
+    /**
      * String 转 Date
      */
     public static Date strToDate(String time) {

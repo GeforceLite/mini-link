@@ -1,7 +1,7 @@
 package com.minilink.controller;
 
 import com.minilink.enums.BusinessCodeEnum;
-import com.minilink.pojo.LinkUrlTobVO;
+import com.minilink.pojo.vo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.service.LinkUrlTobService;
 import com.minilink.util.resp.R;

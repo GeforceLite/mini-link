@@ -1,17 +1,14 @@
 package com.minilink.util;
 
-import eu.bitwalker.useragentutils.Browser;
-import eu.bitwalker.useragentutils.OperatingSystem;
-import eu.bitwalker.useragentutils.UserAgent;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @Author: 徐志斌
- * @CreateTime: 2024-12-17  16:15
- * @Description: 客户端解析工具类
+ * @CreateTime: 2024-12-26  13:31
+ * @Description: Ip地址工具类
  * @Version: 1.0
  */
-public class ClientUtil {
+public class IpUtil {
     public static String getIpAddr() {
         HttpServletRequest request = HttpServletUtil.getRequest();
         String ip = request.getHeader("x-forwarded-for");
@@ -37,26 +34,5 @@ public class ClientUtil {
             ip = ip.substring(ip.lastIndexOf(",") + 1).trim();
         }
         return ip;
-    }
-
-    public static UserAgent getUserAgent() {
-        HttpServletRequest request = HttpServletUtil.getRequest();
-        String userAgentStr = request.getHeader("User-Agent");
-        return UserAgent.parseUserAgentString(userAgentStr);
-    }
-
-    public static String getBrowserType() {
-        Browser browser = getUserAgent().getBrowser();
-        return browser.getGroup().getName();
-    }
-
-    public static String getOsType() {
-        OperatingSystem operatingSystem = getUserAgent().getOperatingSystem();
-        return operatingSystem.getGroup().getName();
-    }
-
-    public static String getDeviceType() {
-        OperatingSystem operatingSystem = getUserAgent().getOperatingSystem();
-        return operatingSystem.getDeviceType().getName();
     }
 }

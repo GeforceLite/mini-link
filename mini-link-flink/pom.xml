@@ -30,12 +30,6 @@
             <version>${flink.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-java</artifactId>-->
-<!--            <version>${flink.version}</version>-->
-<!--        </dependency>-->
-
 
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -44,6 +38,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.21</version>
         </dependency>
     </dependencies>
 

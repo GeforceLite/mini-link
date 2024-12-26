@@ -1,6 +1,6 @@
 package com.minilink.adapter;
 
-import com.minilink.pojo.LinkUrlTobVO;
+import com.minilink.pojo.vo.LinkUrlTobVO;
 import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.pojo.po.LinkUrlToc;
 

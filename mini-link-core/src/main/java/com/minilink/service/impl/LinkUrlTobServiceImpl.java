@@ -8,7 +8,7 @@ import com.minilink.constant.RegexConstant;
 import com.minilink.enums.BusinessCodeEnum;
 import com.minilink.exception.BusinessException;
 import com.minilink.interceptor.LoginInterceptor;
-import com.minilink.pojo.LinkUrlTobVO;
+import com.minilink.pojo.vo.LinkUrlTobVO;
 import com.minilink.pojo.dto.LinkUrlSaveDTO;
 import com.minilink.pojo.po.LinkUrlTob;
 import com.minilink.pojo.po.LinkUrlToc;

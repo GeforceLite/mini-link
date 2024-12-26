@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 public class VisitShortLinkMsg {
     /**
-     * ip
+     * 访问ip
      */
     private String ip;
 

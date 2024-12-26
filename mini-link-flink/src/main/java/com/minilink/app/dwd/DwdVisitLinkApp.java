@@ -30,6 +30,7 @@ public class DwdVisitLinkApp {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(SOURCE_TOPIC, DWD_VISIT_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
+        jsonStrDS.print("DWD-接收到ODS队列消息");
 
         SingleOutputStreamOperator<JSONObject> jsonObjDS = jsonStrDS.flatMap(
                 new FlatMapFunction<String, JSONObject>() {

@@ -1,7 +1,7 @@
 package com.minilink.adapter;
 
 import com.minilink.pojo.entity.VisitShortLinkMsg;
-import com.minilink.util.ClientUtil;
+import com.minilink.util.IpUtil;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class KafkaMsgAdapter {
     public static VisitShortLinkMsg buildVisitShortLinkMsg(String userAgentStr) {
         VisitShortLinkMsg msg = new VisitShortLinkMsg();
-        msg.setIp(ClientUtil.getIpAddr());
+        msg.setIp(IpUtil.getIpAddr());
         msg.setUserAgent(userAgentStr);
         msg.setVisitTime(LocalDateTime.now());
         return msg;
