@@ -1,9 +1,8 @@
 package com.minilink.app.func;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.minilink.enums.VisitorStateEnum;
-import com.minilink.pojo.VisitShortLinkMsg;
-import com.minilink.util.DateTimeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.state.ValueState;
@@ -16,7 +15,7 @@ import org.apache.flink.configuration.Configuration;
  * @Description: 新老访客-自定义函数
  * @Version: 1.0
  */
-public class VisitorStateMapFunction extends RichMapFunction<VisitShortLinkMsg, String> {
+public class VisitorStateMapFunction extends RichMapFunction<JSONObject, String> {
     private ValueState<String> visitorState;
 
     @Override
@@ -26,20 +25,20 @@ public class VisitorStateMapFunction extends RichMapFunction<VisitShortLinkMsg, 
     }
 
     @Override
-    public String map(VisitShortLinkMsg msg) throws Exception {
+    public String map(JSONObject jsonStr) throws Exception {
         String beforeTimeStr = visitorState.value();
-        String nowTimeStr = DateTimeUtil.format(msg.getVisitTime());
+        String nowTimeStr = jsonStr.getStr("visitTime");
         if (StringUtils.isNotEmpty(beforeTimeStr)) {
             if (beforeTimeStr.equalsIgnoreCase(nowTimeStr)) {
-                msg.setVisitorState(VisitorStateEnum.OLD.getCode());
+                jsonStr.set("visitState", VisitorStateEnum.OLD.getCode());
             } else {
-                msg.setVisitorState(VisitorStateEnum.NEW.getCode());
+                jsonStr.set("visitState", VisitorStateEnum.NEW.getCode());
                 visitorState.update(nowTimeStr);
             }
         } else {
-            msg.setVisitorState(VisitorStateEnum.NEW.getCode());
+            jsonStr.set("visitState", VisitorStateEnum.NEW.getCode());
             visitorState.update(nowTimeStr);
         }
-        return JSONUtil.toJsonStr(msg);
+        return JSONUtil.toJsonStr(jsonStr);
     }
 }

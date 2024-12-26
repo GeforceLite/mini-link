@@ -11,5 +11,8 @@ public class KafkaConstant {
 
     public static final String ODS_VISIT_LINK_TOPIC = "ods_visit_link_topic";
     public static final String DWD_VISIT_LINK_TOPIC = "dwd_visit_link_topic";
-    public static final String VISIT_LINK_GROUP = "visit_link_group";
+    public static final String DWS_VISIT_LINK_TOPIC = "dws_visit_link_topic";
+
+    public static final String DWD_VISIT_LINK_GROUP = "dwd_visit_link_group";
+    public static final String DWS_VISIT_LINK_GROUP = "dws_visit_link_group";
 }

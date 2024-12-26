@@ -12,14 +12,10 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  */
 public class KafkaMsgAdapter {
-    public static VisitShortLinkMsg buildVisitShortLinkMsg(String shortLinkCode) {
-
+    public static VisitShortLinkMsg buildVisitShortLinkMsg(String userAgentStr) {
         VisitShortLinkMsg msg = new VisitShortLinkMsg();
         msg.setIp(ClientUtil.getIpAddr());
-        msg.setShortLinkCode(shortLinkCode);
-        msg.setDeviceType(ClientUtil.getDeviceType().getName());
-        msg.setOsType(ClientUtil.getOsName());
-        msg.setBrowserType(ClientUtil.getBrowserGroup().getName());
+        msg.setUserAgent(userAgentStr);
         msg.setVisitTime(LocalDateTime.now());
         return msg;
     }

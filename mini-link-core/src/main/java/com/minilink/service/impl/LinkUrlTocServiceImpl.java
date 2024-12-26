@@ -3,8 +3,8 @@ package com.minilink.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.minilink.adapter.KafkaMsgAdapter;
-import com.minilink.constant.RegexConstant;
 import com.minilink.constant.KafkaConstant;
+import com.minilink.constant.RegexConstant;
 import com.minilink.pojo.entity.VisitShortLinkMsg;
 import com.minilink.pojo.po.LinkUrlToc;
 import com.minilink.service.LinkUrlTocService;
@@ -50,7 +50,9 @@ public class LinkUrlTocServiceImpl implements LinkUrlTocService {
             response.setStatus(HttpStatus.NOT_FOUND.value());
             return;
         }
-        VisitShortLinkMsg visitShortLinkMsg = KafkaMsgAdapter.buildVisitShortLinkMsg(shortLinkCode);
+
+        String userAgentStr = HttpServletUtil.getRequest().getHeader("User-Agent");
+        VisitShortLinkMsg visitShortLinkMsg = KafkaMsgAdapter.buildVisitShortLinkMsg(userAgentStr);
         kafkaTemplate.send(KafkaConstant.ODS_VISIT_LINK_TOPIC, JSONUtil.toJsonStr(visitShortLinkMsg));
         response.setHeader("Location", linkUrlPO.getLongLink());
         response.setStatus(HttpStatus.FOUND.value());

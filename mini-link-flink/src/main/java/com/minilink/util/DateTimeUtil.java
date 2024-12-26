@@ -60,4 +60,11 @@ public class DateTimeUtil {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DEFAULT_DATE_TIME_FORMATTER);
         return Date.from(localDateTime.atZone(DEFAULT_ZONE_ID).toInstant());
     }
+
+    /**
+     * String 转 LocalDateTime，默认日期格式
+     */
+    public static LocalDateTime strToLocalDateTime(String time) {
+        return LocalDateTime.parse(time, DEFAULT_DATE_TIME_FORMATTER);
+    }
 }

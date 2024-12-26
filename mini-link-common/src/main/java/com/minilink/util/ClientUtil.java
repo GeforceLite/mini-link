@@ -1,6 +1,8 @@
 package com.minilink.util;
 
-import eu.bitwalker.useragentutils.*;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -37,51 +39,24 @@ public class ClientUtil {
         return ip;
     }
 
-    public static String getBrowserName() {
-        Browser browser = getBrowser();
-        return browser.getName();
-    }
-
-    public static BrowserType getBrowserType() {
-        Browser browser = getBrowser();
-        return browser.getBrowserType();
-    }
-
-    public static Browser getBrowserGroup() {
-        Browser browser = getBrowser();
-        return browser.getGroup();
-    }
-
-    public static String getOsName() {
-        OperatingSystem operatingSystem = getOperatingSystem();
-        return operatingSystem.getName();
-    }
-
-    public static DeviceType getDeviceType() {
-        OperatingSystem operatingSystem = getOperatingSystem();
-        return operatingSystem.getDeviceType();
-    }
-
-    public static OperatingSystem getOsGroup() {
-        OperatingSystem operatingSystem = getOperatingSystem();
-        return operatingSystem.getGroup();
-    }
-
-    private static UserAgent getUserAgent() {
+    public static UserAgent getUserAgent() {
         HttpServletRequest request = HttpServletUtil.getRequest();
-        String agent = request.getHeader("User-Agent");
-        return UserAgent.parseUserAgentString(agent);
+        String userAgentStr = request.getHeader("User-Agent");
+        return UserAgent.parseUserAgentString(userAgentStr);
     }
 
-    private static Browser getBrowser() {
-        UserAgent userAgent = getUserAgent();
-        return userAgent.getBrowser();
+    public static String getBrowserType() {
+        Browser browser = getUserAgent().getBrowser();
+        return browser.getGroup().getName();
     }
 
-    private static OperatingSystem getOperatingSystem() {
-        HttpServletRequest request = HttpServletUtil.getRequest();
-        String agent = request.getHeader("User-Agent");
-        UserAgent userAgent = UserAgent.parseUserAgentString(agent);
-        return userAgent.getOperatingSystem();
+    public static String getOsType() {
+        OperatingSystem operatingSystem = getUserAgent().getOperatingSystem();
+        return operatingSystem.getGroup().getName();
+    }
+
+    public static String getDeviceType() {
+        OperatingSystem operatingSystem = getUserAgent().getOperatingSystem();
+        return operatingSystem.getDeviceType().getName();
     }
 }

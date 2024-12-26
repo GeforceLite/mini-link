@@ -18,29 +18,9 @@ public class VisitShortLinkMsg {
     private String ip;
 
     /**
-     * 短链接码
+     * 浏览器指纹
      */
-    private String shortLinkCode;
-
-    /**
-     * 设备类型
-     */
-    private String deviceType;
-
-    /**
-     * 操作系统类型
-     */
-    private String osType;
-
-    /**
-     * 浏览器类型
-     */
-    private String browserType;
-
-    /**
-     * 访问网络
-     */
-    private String netWork;
+    private String userAgent;
 
     /**
      * 访问时间

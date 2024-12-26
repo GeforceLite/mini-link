@@ -1,9 +1,9 @@
 package com.minilink.app.dwd;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.minilink.app.func.VisitorStateMapFunction;
 import com.minilink.constant.KafkaConstant;
-import com.minilink.pojo.VisitShortLinkMsg;
 import com.minilink.util.FlinkKafkaUtil;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
@@ -22,43 +22,38 @@ import org.apache.flink.util.Collector;
  * @Version: 1.0
  */
 public class DwdVisitLinkApp {
-    public static final String ODS_VISIT_LINK_TOPIC = KafkaConstant.ODS_VISIT_LINK_TOPIC;
-    public static final String DWD_VISIT_LINK_TOPIC = KafkaConstant.DWD_VISIT_LINK_TOPIC;
+    public static final String SOURCE_TOPIC = KafkaConstant.ODS_VISIT_LINK_TOPIC;
+    public static final String SINK_TOPIC = KafkaConstant.DWD_VISIT_LINK_TOPIC;
+    public static final String DWD_VISIT_LINK_GROUP = KafkaConstant.DWD_VISIT_LINK_GROUP;
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(ODS_VISIT_LINK_TOPIC, KafkaConstant.VISIT_LINK_GROUP);
+        FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(SOURCE_TOPIC, DWD_VISIT_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
-        jsonStrDS.print("----------点击短链接行为数据----------");
 
-        // 字符串信息转对象
-        SingleOutputStreamOperator<VisitShortLinkMsg> jsonObjDS = jsonStrDS.flatMap(
-                new FlatMapFunction<String, VisitShortLinkMsg>() {
+        SingleOutputStreamOperator<JSONObject> jsonObjDS = jsonStrDS.flatMap(
+                new FlatMapFunction<String, JSONObject>() {
                     @Override
                     public void flatMap(String msg, Collector collector) {
-                        VisitShortLinkMsg visitShortLinkMsg = JSONUtil.toBean(msg, VisitShortLinkMsg.class);
-                        collector.collect(visitShortLinkMsg);
+                        JSONObject jsonObj = JSONUtil.toBean(msg, JSONObject.class);
+                        collector.collect(jsonObj);
                     }
                 }
         );
 
-        // 根据设备类型分组
         KeyedStream keyedStream = jsonObjDS.keyBy(
-                new KeySelector<VisitShortLinkMsg, String>() {
+                new KeySelector<JSONObject, String>() {
                     @Override
-                    public String getKey(VisitShortLinkMsg msg) throws Exception {
-                        return msg.getDeviceType();
+                    public String getKey(JSONObject jsonStr) throws Exception {
+                        return jsonStr.getStr("userAgent");
                     }
                 }
         );
 
-        // 新老客标记
         SingleOutputStreamOperator<String> visitorStateDS = keyedStream.map(new VisitorStateMapFunction());
-
-        // 数据推送到 dwd_visit_link_topic 主题
-        FlinkKafkaProducer kafkaProducer = FlinkKafkaUtil.getKafkaProducer(DWD_VISIT_LINK_TOPIC);
+        FlinkKafkaProducer kafkaProducer = FlinkKafkaUtil.getKafkaProducer(SINK_TOPIC);
         visitorStateDS.addSink(kafkaProducer);
-        visitorStateDS.print("----------标记新老客后数据----------");
+        visitorStateDS.print("----------DWD-标记新老客后数据----------");
         env.execute();
     }
 }
