@@ -7,30 +7,30 @@
 
 # ✨系统介绍
 
-短链接系统用于将长链接压缩为短链接，访问用户可以通过短链接快速分享、访问源地址。支持多种使用场景，包括社交媒体分享、营销活动跟踪、数据分析等。
+Mini Link 是一套用于将长链接压缩为短链接系统，访问用户可以通过短链接快速分享、访问源地址。支持多种使用场景，包括社交媒体分享、营销活动跟踪、数据分析等。
 <br>
 系统基于 SpringBoot 3.2 + SpringCloud Alibaba 2023 等主流技术实现的高并发、高性能、海量数据短链接平台。
 <br>
-通过 Flink + ClickHouse 搭建实时数据仓库，实现海量用户行为数据实时统计聚合，提供多维度数据统计面板功能。
+通过 Kafka + Flink + ClickHouse 实现访问行为数据实时数仓，完成海量数据清洗、计算、聚合，提供多维度数据统计面板功能。
 <br>
 
-短链接系统主要使用场景：
-1. 在线广告
-2. 社交媒体
-3. 电商平台
-4. ......
+商业使用场景：
+1. **在线广告**
+2. **社交媒体**
+3. **电商平台**
+4. **......**
 
 ![img.png](docs/images/短信.png)
 <br>
 
-主要应用场景：
+短链接优点：
 
-1. 缩短长链接字符数量，简洁美观
-2. 降低营销短信字数，降低费用成本
-3. 简化图形二维码生成复杂度
-4. 隐藏链接业务参数，提高数据安全性
-5. 方便统计运营数据，挖掘数据价值
-6. ......
+1. **缩短长链接字符数量，简洁美观**
+2. **降低营销短信字数，降低费用成本**
+3. **简化图形二维码生成复杂度**
+4. **隐藏链接业务参数，提高数据安全性**
+5. **方便统计运营数据，挖掘数据价值**
+6. **......**
 
 # 🚀项目架构
 
@@ -82,7 +82,6 @@ mini-link
 |---------------|--------|---------------------------------------------|
 | Docker        | 镜像容器   | https://www.docker.com/                     |
 | Kubernetes    | 容器编排工具 | https://kubernetes.io/                      |
-| Rancher       | K8S可视化 | https://github.com/rancher/rancher          |
 | Ingress-Nginx | 负载均衡器  | https://github.com/kubernetes/ingress-nginx |
 | Gitlab        | 代码仓库   | https://github.com/gitlabhq/gitlabhq        |
 | Harbor        | 镜像仓库   | https://github.com/axios/axios              |
@@ -102,4 +101,5 @@ mini-link
 |:---:|:-----------------------------:|:--------------------:|
 | 徐志斌 |   https://github.com/Binx98   | PARAVERSE TECHNOLOGY |
 | Joy | https://github.com/Joydevelop |          保密          |
+| 陈辰  |      https://github.com/      |       SBI BITS       |
 | 刘贤壮 |      https://github.com/      |        江苏中车数字        |
