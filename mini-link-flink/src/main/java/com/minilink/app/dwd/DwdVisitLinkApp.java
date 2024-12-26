@@ -28,9 +28,10 @@ public class DwdVisitLinkApp {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+//        env.setParallelism(1);
         FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(SOURCE_TOPIC, DWD_VISIT_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
-        jsonStrDS.print("DWD-接收到ODS队列消息");
+        jsonStrDS.print("----------DWD-接收到ODS队列消息----------");
 
         SingleOutputStreamOperator<JSONObject> jsonObjDS = jsonStrDS.flatMap(
                 new FlatMapFunction<String, JSONObject>() {
@@ -45,7 +46,7 @@ public class DwdVisitLinkApp {
         KeyedStream keyedStream = jsonObjDS.keyBy(
                 new KeySelector<JSONObject, String>() {
                     @Override
-                    public String getKey(JSONObject jsonStr) throws Exception {
+                    public String getKey(JSONObject jsonStr) {
                         return jsonStr.getStr("userAgent");
                     }
                 }

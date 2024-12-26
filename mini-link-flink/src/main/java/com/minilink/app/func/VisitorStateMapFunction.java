@@ -29,14 +29,9 @@ public class VisitorStateMapFunction extends RichMapFunction<JSONObject, String>
         String beforeTimeStr = visitorState.value();
         String nowTimeStr = jsonStr.getStr("visitTime");
         if (StringUtils.isNotEmpty(beforeTimeStr)) {
-            if (beforeTimeStr.equalsIgnoreCase(nowTimeStr)) {
-                jsonStr.set("visitState", VisitorStateEnum.OLD.getCode());
-            } else {
-                jsonStr.set("visitState", VisitorStateEnum.NEW.getCode());
-                visitorState.update(nowTimeStr);
-            }
+            jsonStr.set("visitorState", VisitorStateEnum.OLD.getCode());
         } else {
-            jsonStr.set("visitState", VisitorStateEnum.NEW.getCode());
+            jsonStr.set("visitorState", VisitorStateEnum.NEW.getCode());
             visitorState.update(nowTimeStr);
         }
         return JSONUtil.toJsonStr(jsonStr);

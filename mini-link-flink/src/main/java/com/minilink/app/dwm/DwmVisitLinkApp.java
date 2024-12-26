@@ -22,15 +22,17 @@ import org.apache.flink.util.Collector;
  */
 public class DwmVisitLinkApp {
     public static final String SOURCE_TOPIC = KafkaConstant.DWD_VISIT_LINK_TOPIC;
-    public static final String SINK_TOPIC = KafkaConstant.DWS_VISIT_LINK_TOPIC;
-    public static final String DWS_VISIT_LINK_GROUP = KafkaConstant.DWS_VISIT_LINK_GROUP;
+    public static final String SINK_TOPIC = KafkaConstant.DWM_VISIT_LINK_TOPIC;
+    public static final String DWS_VISIT_LINK_GROUP = KafkaConstant.DWM_VISIT_LINK_GROUP;
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+//        env.setParallelism(1);
         FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(SOURCE_TOPIC, DWS_VISIT_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
 
-        SingleOutputStreamOperator<VisitShortLinkMsgLog> msgLogDS = jsonStrDS.flatMap(
+        // 数据补齐：访问设备相关
+        SingleOutputStreamOperator<VisitShortLinkMsgLog> addDeviceDS = jsonStrDS.flatMap(
                 new FlatMapFunction<String, VisitShortLinkMsgLog>() {
                     @Override
                     public void flatMap(String jsonStr, Collector collector) {
@@ -41,12 +43,11 @@ public class DwmVisitLinkApp {
                         String osType = UserAgentUtil.getOsType(userAgentStr);
                         String deviceType = UserAgentUtil.getDeviceType(userAgentStr);
                         String visitTimeStamp = jsonObj.getStr("visitTime");
-                        String visitState = jsonObj.getStr("visitState");
-                        System.out.println(visitTimeStamp);
+                        String visitorState = jsonObj.getStr("visitorState");
 
                         VisitShortLinkMsgLog msgLog = new VisitShortLinkMsgLog();
                         msgLog.setIp(ip);
-                        msgLog.setVisitorState(visitState);
+                        msgLog.setVisitorState(visitorState);
                         msgLog.setBrowserType(browserType);
                         msgLog.setOsType(osType);
                         msgLog.setDeviceType(deviceType);
@@ -55,8 +56,17 @@ public class DwmVisitLinkApp {
                     }
                 }
         );
-        msgLogDS.print();
+        addDeviceDS.print("----------DWM-访问行为数据补充----------");
 
+//        // 数据补齐：访问地址相关
+//        SingleOutputStreamOperator<VisitShortLinkMsgLog> addRegionDS = addDeviceDS.flatMap(
+//                new FlatMapFunction<VisitShortLinkMsgLog, VisitShortLinkMsgLog>() {
+//                    @Override
+//                    public void flatMap(VisitShortLinkMsgLog jsonStr, Collector collector) {
+//
+//                    }
+//                }
+//        );
         env.execute();
     }
 }
