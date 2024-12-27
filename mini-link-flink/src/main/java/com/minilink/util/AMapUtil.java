@@ -3,6 +3,9 @@ package com.minilink.util;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-27  10:55
@@ -16,9 +19,13 @@ public class AMapUtil {
     /**
      * 根据 ip 地址获取地区
      */
-    public static JSONObject getLocationByIp(String ip) {
+    public static Map<String, String> getLocationByIp(String ip) {
         String restApi = String.format(IP_LOCATION_API, ip);
         String locationStr = OkHttpUtil.get(restApi);
-        return JSONUtil.toBean(locationStr, JSONObject.class);
+        JSONObject jsonObj = JSONUtil.toBean(locationStr, JSONObject.class);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("province", jsonObj.get("province") == null ? null : jsonObj.get("province").toString());
+        resultMap.put("city", jsonObj.get("city") == null ? null : jsonObj.get("city").toString());
+        return resultMap;
     }
 }

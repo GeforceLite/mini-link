@@ -8,13 +8,14 @@ import com.minilink.util.AMapUtil;
 import com.minilink.util.DateTimeUtil;
 import com.minilink.util.FlinkKafkaUtil;
 import com.minilink.util.UserAgentUtil;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
+
+import java.util.Map;
 
 /**
  * @Author: 徐志斌
@@ -28,6 +29,7 @@ public class DwmClickLinkApp {
     public static final String DWS_CLICK_LINK_GROUP = KafkaConstant.DWM_CLICK_LINK_GROUP;
 
     public static void main(String[] args) throws Exception {
+        // 接收上游数据 DWD
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         FlinkKafkaConsumer kafkaConsumer = FlinkKafkaUtil.getKafkaConsumer(SOURCE_TOPIC, DWS_CLICK_LINK_GROUP);
         DataStreamSource jsonStrDS = env.addSource(kafkaConsumer);
@@ -64,16 +66,20 @@ public class DwmClickLinkApp {
                 new FlatMapFunction<VisitShortLinkWideLog, VisitShortLinkWideLog>() {
                     @Override
                     public void flatMap(VisitShortLinkWideLog wideLog, Collector collector) {
-                        JSONObject locationJsonObj = AMapUtil.getLocationByIp(wideLog.getIp());
-                        String province = ObjectUtils.isEmpty(locationJsonObj.get("province")) ? null : (String) locationJsonObj.get("province");
-                        String city = ObjectUtils.isEmpty(locationJsonObj.get("city")) ? null : (String) locationJsonObj.get("city");
-                        wideLog.setProvince(province);
-                        wideLog.setCity(city);
+                        Map<String, String> locationMap = AMapUtil.getLocationByIp(wideLog.getIp());
+                        wideLog.setProvince(locationMap.get(locationMap.get("province")));
+                        wideLog.setCity(locationMap.get(locationMap.get("city")));
                         collector.collect(wideLog);
                     }
                 }
         );
         addRegionDS.print("----------DWM-访问地区数据补充----------");
+
+        // TODO 独立访客数据聚合
+
+
+        // TODO 数据推送到下游 DWS
+
         env.execute();
     }
 }
