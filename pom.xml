@@ -40,6 +40,7 @@
         <jsoup.version>1.14.3</jsoup.version>
         <minio.version>8.5.2</minio.version>
         <kafka.version>3.1.0</kafka.version>
+        <okhttp.version>4.9.1</okhttp.version>
     </properties>
 
     <dependencyManagement>
@@ -171,6 +172,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <!--OKHTTP-->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
