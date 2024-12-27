@@ -7,5 +7,5 @@ package com.minilink.constant;
  * @Version: 1.0
  */
 public class KafkaConstant {
-    public static final String ODS_VISIT_LINK_TOPIC = "ods_visit_link_topic";
+    public static final String ODS_CLICK_LINK_TOPIC = "ods_click_link_topic";
 }

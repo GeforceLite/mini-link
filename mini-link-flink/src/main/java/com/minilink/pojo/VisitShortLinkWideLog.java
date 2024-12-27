@@ -12,11 +12,21 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  */
 @Data
-public class VisitShortLinkMsgLog {
+public class VisitShortLinkWideLog {
     /**
      * ip
      */
     private String ip;
+
+    /**
+     * 省
+     */
+    private String province;
+
+    /**
+     * 市
+     */
+    private String city;
 
     /**
      * 设备类型

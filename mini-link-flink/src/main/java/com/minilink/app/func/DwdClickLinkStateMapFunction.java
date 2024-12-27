@@ -12,10 +12,10 @@ import org.apache.flink.configuration.Configuration;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2024-12-24  17:19
- * @Description: 新老访客-自定义函数
+ * @Description: DWD-新老访客-算子函数
  * @Version: 1.0
  */
-public class VisitorStateMapFunction extends RichMapFunction<JSONObject, String> {
+public class DwdClickLinkStateMapFunction extends RichMapFunction<JSONObject, String> {
     private ValueState<String> visitorState;
 
     @Override
