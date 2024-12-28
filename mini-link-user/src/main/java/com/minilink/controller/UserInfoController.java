@@ -32,7 +32,7 @@ public class UserInfoController {
     }
 
     @Operation(summary = "修改用户信息")
-    @PostMapping("/update")
+    @PostMapping("/updateUserInfo")
     public R updateUserInfo() {
         return R.out(BusinessCodeEnum.SUCCESS);
     }

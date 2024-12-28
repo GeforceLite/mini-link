@@ -7,3 +7,10 @@ server:
   port: 8001
   servlet:
     context-path: /user
+
+security-code:
+  aes:
+    key: b46750ad12e5c6ac
+    iv: aadc664821de1d01
+  password:
+    salt: 2008f845f8718bf51f9b352fb15061ce

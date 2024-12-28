@@ -47,10 +47,9 @@ public class UserFormController {
 
     @Operation(summary = "修改密码")
     @PostMapping("/updatePwd")
-    public R forget() {
+    public R updateUserPwd(String accountId, String oldPwd, String newPwd) {
         return R.out(BusinessCodeEnum.SUCCESS);
     }
-
     @NoLogin
     @Operation(summary = "找回密码")
     @PostMapping("/find")
