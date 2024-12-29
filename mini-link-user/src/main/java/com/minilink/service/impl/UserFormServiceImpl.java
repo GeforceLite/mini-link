@@ -11,16 +11,20 @@ import com.minilink.pojo.po.LinkUser;
 import com.minilink.service.UserAssistService;
 import com.minilink.service.UserFormService;
 import com.minilink.store.LinkUserStore;
-import com.minilink.util.EncryptUtil;
-import com.minilink.util.JwtUtil;
-import com.minilink.util.RandomUtil;
-import com.minilink.util.SnowFlakeUtil;
+import com.minilink.util.*;
+import com.minilink.util.properties.PasswordProperties;
+import com.minilink.util.resp.R;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.IvParameterSpec;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,12 +40,30 @@ import java.util.Map;
 @Slf4j
 @Service
 public class UserFormServiceImpl implements UserFormService {
+
     @Autowired
     private RedisTemplate redisTemplate;
+
     @Autowired
     private LinkUserStore userStore;
+
     @Autowired
     private UserAssistService assistService;
+
+    private static String salt;
+
+
+    /**
+     * 读取配置密码盐
+     *
+     * @param applicationContext
+     * @throws BeansException
+     */
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        PasswordProperties properties = applicationContext.getBean(PasswordProperties.class);
+        salt = properties.getSalt();
+    }
+
 
     @Override
     public void register(RegisterDTO registerDTO) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -82,4 +104,39 @@ public class UserFormServiceImpl implements UserFormService {
         resultMap.put("user", UserAdapter.buildUserVO(userPO));
         return resultMap;
     }
+
+    @Override
+    public R updateUserPwd(Long accountId, String oldPwd, String newPwd) throws Exception {
+
+        // 新旧密码一致
+        if (oldPwd.equals(newPwd)) {
+            return R.out(BusinessCodeEnum.PASSWORD_NO_EQUAL);
+        }
+
+        // 新旧密码加盐
+        String oldPwdWithSalt = oldPwd + salt;
+        String newPwdWithSalt = newPwd + salt;
+        String encryptOldPwdWithSalt = AESCipherUtil.encrypt(oldPwdWithSalt);
+        String encryptNewPwdWithSalt = AESCipherUtil.encrypt(newPwdWithSalt);
+
+        LinkUser userPO = userStore.getByAccountId(accountId);
+
+        // 新密码与DB旧密码一致
+        if (encryptOldPwdWithSalt.equals(userPO.getPassword())) {
+            return R.out(BusinessCodeEnum.PASSWORD_NO_EQUAL);
+        }
+
+        // 更新
+        boolean result = userStore.updatePwd(accountId, encryptNewPwdWithSalt);
+        // 更新成功
+        if (result) {
+            return R.out(BusinessCodeEnum.SUCCESS);
+        } else {
+            // 更新失败，日志输出
+            log.error("Password update error , Account Id is : {}", accountId);
+            return R.out(BusinessCodeEnum.FAIL);
+        }
+    }
+
+
 }

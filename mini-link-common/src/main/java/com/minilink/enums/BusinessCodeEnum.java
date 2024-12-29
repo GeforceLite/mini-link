@@ -35,6 +35,7 @@ public enum BusinessCodeEnum {
     ACCOUNT_PWD_ERROR(250003, "账号或密码错误"),
     ACCOUNT_NO_LOGIN(250004, "账号未登录"),
     PASSWORD_NO_EQUAL(250005, "两次密码输入不一致"),
+    PASSWORD_EQUAL(250006, "新旧密码不可一致"),
 
     /**
      * 短链接

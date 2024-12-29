@@ -47,13 +47,16 @@ public class UserFormController {
 
     @Operation(summary = "修改密码")
     @PostMapping("/updatePwd")
-    public R updateUserPwd(String accountId, String oldPwd, String newPwd) {
-        return R.out(BusinessCodeEnum.SUCCESS);
+    public R updateUserPwd(Long accountId, String oldPwd, String newPwd) throws Exception {
+        R result = formService.updateUserPwd(accountId, oldPwd, newPwd);
+        return result;
     }
+
     @NoLogin
     @Operation(summary = "找回密码")
     @PostMapping("/find")
     public R findBack() {
         return R.out(BusinessCodeEnum.SUCCESS);
     }
+
 }

@@ -35,4 +35,13 @@ public interface LinkUserStore extends IService<LinkUser> {
      * @return 用户信息
      */
     LinkUser getByAccountId(Long accountId);
+
+    /**
+     * 密码更新
+     * @param accountId 账号
+     * @param encryptNewPwdWithSalt 加盐后加密密码
+     * @return 更新结果
+     */
+    boolean updatePwd(Long accountId, String encryptNewPwdWithSalt);
+
 }

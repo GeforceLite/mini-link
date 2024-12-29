@@ -1,5 +1,6 @@
 package com.minilink.store.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.minilink.constant.RedisConstant;
 import com.minilink.mapper.LinkUserMapper;
@@ -38,4 +39,13 @@ public class LinkUserStoreImpl extends ServiceImpl<LinkUserMapper, LinkUser> imp
                 .eq(LinkUser::getAccountId, accountId)
                 .one();
     }
+
+    @Override
+    public boolean updatePwd(Long accountId, String encryptNewPwdWithSalt) {
+        LambdaUpdateWrapper<LinkUser> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(LinkUser::getPassword,encryptNewPwdWithSalt);
+        updateWrapper.eq(LinkUser::getAccountId, accountId);
+        return this.update(updateWrapper);
+    }
+
 }
